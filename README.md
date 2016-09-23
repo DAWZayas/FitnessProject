@@ -1,7 +1,7 @@
 # FitnessProject
 
 Group: Canis Lupus (Jacobo Cortina, Francisco Bustillo, Raúl Pavón)
-===================
+-------------
 
 Project to develop: 
 -------------
