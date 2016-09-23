@@ -10,7 +10,7 @@ Sport application with data register (Google Fit style oriented).
 
 Aims: 
 -------------
-The aim of the application is to provide a support when the user wants to do exercise. We can get this aim saving data like workout duration, distance walked or run (depending on the type of exercise), calories burned (approximately) and subsequently store them in a data history that will allow us to compare, analyze and improve user’s sport performance.
+The aim of the application is to provide a support when the user wants to do exercise. We can get this aim by saving data like workout duration, distance walked or run (depending on the type of exercise), calories burned (approximately) and subsequently store them in a data history that will allow us to compare, analyze and improve user’s sport performance.
 
 Basic Functionality: 
 -------------
