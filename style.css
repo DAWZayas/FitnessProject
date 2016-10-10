@@ -173,7 +173,7 @@ hr{
   
 }
 
-  @media screen and (min-width: 732px){
+  @media screen and (min-width: 990px){
    
     #logo {
       width:25vw;
@@ -259,7 +259,7 @@ hr{
     }
   }
 
-  @media screen and (min-width: 1000px){
+  @media screen and (min-width: 1440px){
 
     article.carrusell{
       width: 45%;
