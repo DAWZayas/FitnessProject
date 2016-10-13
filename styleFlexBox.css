@@ -48,223 +48,168 @@ table {
 
 
 
-.container{
-
-  
+.container{  
   background:url("images/bg02.jpg") repeat;
- 
+  box-sizing: border-box;
 }
+
 
 header{
   display: flex;
   background:url("images/bg02.jpg") repeat;
- 
-  overflow:hidden;
- 
-  
-  
+  overflow:hidden;   
 }
-header-container{
+.header-container{
   display:flex;
   flex-wrap: wrap;
- 
-}
-#logo {
+ }
+.logo{
   text-align:center;
   background-color:white;
   width:100vw;
 }
-
-#logo img{
+.logo img{
   width:50%;
 }
-
 .menu{
-  display:flex;
-  box-sizing: border-box;
+  display:flex;  
   background:url("images/bg02.jpg") repeat;
   border-radius: 1em;
   justify-content: flex-end;
 }
-
-.navMenu{
-  box-sizing: border-box;
-  
-  
-}
-
 .navMenu img{
   width:60%;
-
-
 }
-
-#dropdown{ 
+.dropdown{ 
+  position: absolute;
   display: none;
 }
 
+
 section{
+  font-size: 2.5em;
   display: flex;
-  flex-wrap: wrap;
- 
+  flex-wrap: wrap; 
   background:url("images/bg03.jpg") repeat;
-
-  box-sizing: border-box;
-  
   background-color: beige;
-
-  
 }
-
 article.carrusell{
-
-  
-  box-sizing: border-box;
-  
   background:url("images/bg04.png") repeat;
   text-align: center;
-
   /*box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.15);*/
 }
-
 .carrusell img{
-  box-sizing: border-box;
   width:100%;
-
-  
 }
-
 article.news{
-   margin: 20px;
-  padding: 10px;
-  box-sizing: border-box;
-
   background:url("images/bg04.png") repeat;
+  margin: 20px;
+  padding: 10px;
   text-align: justify;
-
 }
-
 article.news p{
+  padding: 15px;
   background:url("images/bg02.jpg") repeat;
-
   color: grey;
 }
 
-footer{
-  display: flex;
-  flex-direction:column;
-  background:url("images/linem.jpg") repeat;
-  
-  text-align:center;
-}
 
-footer a{
-  box-sizing: border-box;
- 
+footer{  
+  display: flex;
+  background:url("images/linem.jpg") repeat;
+  text-align:center;  
+}
+.footer-container{
+  display:flex;
+  width:100vw;
+  flex-direction:column;
+  font-size: 2.5em;
+}
+.last{
+  width:100%;
+}
+.last a{  
   text-decoration: none;
   color: grey;
-  
-
-
 }
-
+.last li{
+  padding:20px;
+}
 hr{
- 
+  margin:0 auto;
+  width:70%;
 }
-
-#copyright{
-  
-
+.copyright{
+  padding:20px;
   background:url("images/bg03.jpg") repeat;
-  
+  font-size: 0.5em;
 }
+
+
 
   @media screen and (min-width: 990px){
-   
-    #logo {
+    
+    .header-container{
+      display: flex;
+    }
+
+    .logo{
       width:25vw;
-      float: left;
     }
     .menu{  
+      display:flex;
       width: 65vw;
+      flex-wrap: wrap;
     }
     .navMenu{
       display:none;
     }
-    #dropdown {
-      float: right;
-      display: inline-block;
-      width: 100%;
-      overflow: hidden;
-      padding: 10px;
-      margin: auto 10px;
-      
+    .dropdown{
+      display: inline-flex;
+      flex-basis:30%;
+
     }
-    #dropdown li{
-      float: right;
-      width: 10vw;
-      padding:3%;
-      margin: 10px;
+    .dropdown li{      
       background:url("images/bg02.jpg") repeat;
       border-radius:1em;
-      
       -moz-box-shadow: inset 0px 0px 30px 0px rgba(255,255,255,1);
       box-shadow: inset 0px 0px 30px 0px rgba(255,255,255,1);
-      display: inline-block;
-      text-align: center;
+      
+  
     }
-    #dropdown a{
+    .dropdown a{
       text-decoration: none;
       color: beige;
     }
-
     section aside{
       overflow: hidden;
       width: 90%;
       margin: auto;
     }
-
     article.news{
       width: 45%;
-      float: left;
       margin: 0 2%;
       height:10%;
     }
-
     hr{
       display: none;
     }
-
     footer ul.last{
       overflow: hidden;
       padding: 10px 0px;
       width: 90%;
       margin: auto;
-
     }
-
     footer ul.last li{
-      float: left;
-      width: 45%;
+       width: 45%;
        margin: 10px 2%;
-      border-radius: 0.2em;
-      -moz-box-shadow:  inset 0px 0px 5px 0px white;
-      box-shadow: inset  0px 0px 5px 0px white;
+      
     }
-    footer ul.last li a{
-      -moz-box-shadow:   0px 0px 10px 0px white;
-      box-shadow:   0px 0px 10px 0px white;
-      border-radius: 0.2em;
-    }
-
-    #copyright{
+    .copyright{
       padding: 15px 0px;
-      clear: both;
+     
     }
-
-    footer{
-      clear: both;
-    }
+    
   }
 
   @media screen and (min-width: 1440px){
@@ -274,24 +219,19 @@ hr{
       float: left;
       margin: 0 2%;
     }
-
     article.news{
       width: 45%;
       float: left;
       margin: 0 2%;
     }
-
     hr{
       display: none;
     }
-
     footer ul.last{
       overflow: hidden;
       width: 90%;
       margin: auto;
-
     }
-
     footer ul.last li{
       float: left;
       width: 20%;
@@ -299,16 +239,13 @@ hr{
       border-radius: 0.2em;
       -moz-box-shadow:  inset 0px 0px 5px 0px white;
       box-shadow: inset  0px 0px 5px 0px white;
-
-     }
+    }
     footer ul.last li a{
       -moz-box-shadow:   0px 0px 10px 0px white;
       box-shadow:   0px 0px 10px 0px white;
       border-radius: 0.2em;
     }
-
     footer{
       clear: both;
     }
-
   }
