@@ -1,0 +1,15 @@
+{
+  "name": "fitnessproject",
+  "version": "1.0.0",
+  "description": "Proyectos DAW",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "js",
+    "canislupus"
+  ],
+  "author": "canislupus",
+  "license": "ISC"
+}
