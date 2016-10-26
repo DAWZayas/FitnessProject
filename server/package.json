@@ -1,7 +1,7 @@
 {
   "name": "fitnessproject",
   "version": "1.0.0",
-  "description": "Proyectos DAW",
+  "description": "Proyecto creado para trabajo de clase.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,10 @@
     "js",
     "canislupus"
   ],
-  "author": "canislupus",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DAWZayas/FitnessProject"
+  }
+  "author": "CanisLupus",
   "license": "ISC"
 }
