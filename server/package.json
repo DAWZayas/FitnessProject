@@ -12,5 +12,13 @@
     "experts"
   ],
   "author": "Jacobo Cortina",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jacobocg/fitnessTest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jacobocg/fitnessTest/issues"
+  },
+  "homepage": "https://github.com/Jacobocg/fitnessTest#readme"
 }
