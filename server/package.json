@@ -4,7 +4,9 @@
   "description": "experts REST backend",
   "main": "index.js",
   "scripts": {
-    "test": "eslint src/"
+    "start": "babel-node src/index.js",
+    "eslint": "eslint src/",
+    "test": "eslint src/ && babel-node test/"
   },
   "keywords": [
     "rest",
@@ -22,6 +24,7 @@
   },
   "homepage": "https://github.com/Jacobocg/fitnessTest#readme",
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.18.0",
     "babel-eslint": "^7.1.0",
     "babel-preset-es2015-node": "^6.1.1",
@@ -37,5 +40,8 @@
       "es2015-node",
       "stage-0"
     ]
+  },
+  "dependencies": {
+    "express": "^4.14.0"
   }
 }
