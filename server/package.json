@@ -4,8 +4,7 @@
   "description": "experts REST backend",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node src/index.js",
-    "eslint": "eslint src/",
+    "start": "node index.js",
     "test": "eslint src/ && babel-node test/"
   },
   "keywords": [
@@ -45,6 +44,8 @@
   },
   "dependencies": {
     "body-parser": "^1.15.2",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "winston": "^2.2.0"
   }
 }
