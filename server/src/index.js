@@ -3,7 +3,7 @@ import app from './app';
 import {logger} from './util';
 
 // start server
-app.listen(8080, function() {
+app.listen(8080, function () {
   const host = this.address().address;
   const port = this.address().port;
   logger.info(`Shard listening at http://${host}:${port}`);

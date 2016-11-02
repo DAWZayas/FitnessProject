@@ -7,12 +7,12 @@ export const logger = new winston.Logger({
       colorize: true,
       timestamp: true,
       prettyPrint: true,
-      label: 'experts-server',
-    }),
-  ],
+      label: 'experts-server'
+    })
+  ]
 });
 
-// create stream for morgan
+//create stream for morgan
 logger.stream = {
-  write: message => logger.info(message),
+  write: message => logger.info(message)
 };
