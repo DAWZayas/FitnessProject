@@ -1,6 +1,14 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
+  "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "destructuring": true,
+          "jsx": true
+        }
+    },
   "rules": {
     "object-curly-spacing": ["warn", "never"],
     "func-names": "off",
