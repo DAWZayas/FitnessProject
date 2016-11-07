@@ -39,7 +39,6 @@
     "type": "range"
   },
   "_requiredBy": [
-    "/code-point-at",
     "/is-finite",
     "/is-fullwidth-code-point"
   ],
