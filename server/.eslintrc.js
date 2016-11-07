@@ -2,9 +2,11 @@ module.exports = {
   "parser": "babel-eslint",
   "extends": "airbnb",
   "rules": {
-   "object-curly-spacing": ["warn", "never"],
-  "func-names": "off",
-  "space-before-function-paren": ["error", "never"],
-   "max-len": ["error", 120, 4]
- }
+    "object-curly-spacing": ["warn", "never"],
+    "func-names": "off",
+    "space-before-function-paren": ["error", "never"],
+    "max-len": ["error", 120, 4],
+    "no-unused-vars": ["error", {"argsIgnorePattern": "next"}],
+    "import/prefer-default-export": "off"
+  }
 };
