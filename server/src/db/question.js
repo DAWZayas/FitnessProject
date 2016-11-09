@@ -8,7 +8,7 @@ export const Question = thinky.createModel('Question', {
   answers: thinky.type.array().schema(
     thinky.type.object().schema({
       user: thinky.type.string().required(),
-      answer: thinky.type.string().required()
+      answer: thinky.type.string().required(),
     })
-  )
+  ),
 });
