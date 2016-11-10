@@ -1,6 +1,6 @@
-import sport from './addSport';
+import addSport from './addSport';
 
 
 export default (app) => {
-  sport(app);
+  addSport(app);
 };
