@@ -9,6 +9,7 @@ export default (app) => {
     const sportSession = new SportSession({
       user,
       sport,
+      startTime: new Date(),
     });
     await sportSession.save();
 
