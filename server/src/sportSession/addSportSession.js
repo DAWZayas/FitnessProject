@@ -10,6 +10,7 @@ export default (app) => {
       user,
       sport,
       startTime: new Date(),
+      duration: {},
     });
     await sportSession.save();
 
