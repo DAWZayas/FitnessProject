@@ -69,3 +69,14 @@ export const register = action$ => action$
       Actions.addNotificationAction({text: registerErrorToMessage(error), alertType: 'danger'}),
     )),
   );
+
+export const logout = action$ => action$
+  .ofType(ActionTypes.DO_LOGOUT)
+  .switchMap(() => Observable.of(
+    {
+      type: ActionTypes.DO_LOGOUT_SUCCESS,
+    },
+    Actions.addNotificationAction(
+      {text: 'Logout success', alertType: 'info'},
+    ),
+  ));
