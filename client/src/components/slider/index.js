@@ -38,9 +38,9 @@ class Slider extends Component {
     const aux = [];
     for (let i = 0; i < this.state.slides.length; i++) {
       if (this.state.index === i) {
-        aux[i] = (<Slide image={this.state.slides[i]} active="active" animation="fadeIn" />);
+        aux[i] = (<Slide image={this.state.slides[i]} key={i} active="active" animation="fadeIn" />);
       } else {
-        aux[i] = (<Slide image={this.state.slides[i]} active="" animation="fadeOut" />);
+        aux[i] = (<Slide image={this.state.slides[i]} key={i} active="" animation="fadeOut" />);
       }
     }
     return aux;
