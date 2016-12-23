@@ -13,9 +13,9 @@ const mapStateToProps = (state) => ({
 
 const yesAuth = (route, userName) => (
   <div>
-    <ul className="nav navbar-nav navbar-right">
-      <li>
-        <p className="navbar-text">Welcome <b><Link to="/profile" className="navbar-link">{userName}</Link></b></p>
+    <ul className="nav navbar-nav float-xs-right">
+      <li className="nav-item">
+        <Link to="/profile" className="nav-link">Welcome {userName}</Link>
       </li>
       <Logout />
     </ul>
@@ -23,25 +23,26 @@ const yesAuth = (route, userName) => (
 );
 
 const noAuth = (route) => (
-  <ul className="nav navbar-nav navbar-right">
-    <li className={route === '/login' && 'active'}>
-      <Link to="/login"><span className="glyphicon glyphicon-log-in" aria-hidden="true" /> Login</Link>
+  <ul className="nav navbar-nav float-xs-right">
+    <li className={`nav-item ${route === '/login' && 'active'}`}>
+      <Link to="/login" className="nav-link"><span className="glyphicon glyphicon-log-in" aria-hidden="true" /> Login</Link>
     </li>
-    <li className={route === '/register' && 'active'}>
-      <Link to="/register">Register</Link>
+    <li className={`nav-item ${route === '/register' && 'active'}`}>
+      <Link to="/register" className="nav-link">Register</Link>
     </li>
   </ul>
 );
 
 const Navbar = ({route, authenticated, userName}) => (
-  <nav className="navbar navbar-default navbar-dark bg-primary animated slideInLeft">
-    <div className="container-fluid">
-      <div className="navbar-header">
-        <Link to="/" className="navbar-brand">Brand</Link>
-      </div>
+
+  <nav className="navbar navbar-light teal lighten-4">
+
+    <div className="container">
+      <a className="navbar-brand">FitRun</a>
       {authenticated ? yesAuth(route, userName) : noAuth(route)}
     </div>
   </nav>
+
 );
 
 export default connect(mapStateToProps, null)(Navbar);

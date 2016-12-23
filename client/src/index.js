@@ -7,7 +7,8 @@ import {syncHistoryWithStore} from 'react-router-redux';
 import {Provider} from 'react-redux';
 
 // styles
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'mdbootstrap/css/bootstrap.min.css';
+import 'mdbootstrap/css/mdb.min.css';
 
 // our packages
 import App from './app';
