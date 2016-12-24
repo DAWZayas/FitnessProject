@@ -9,8 +9,28 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Home = () => (
-  <div className="jumbotron">
-    <h1>home page (logged)</h1>
+  <div className="jumbotron animated fadeIn">
+
+    <div className="card">
+      <div className="card-block">
+        <h4 clclassNameass="card-title">Sport session</h4>
+        <Link to="/session" className="btn btn-default">Go!</Link>
+      </div>
+    </div>
+
+    <div className="card">
+      <div className="card-block">
+        <h4 clclassNameass="card-title">Exercise routine</h4>
+        <Link to="/routine" className="btn btn-default">Go!</Link>
+      </div>
+    </div>
+
+    <div className="card">
+      <div className="card-block">
+        <h4 clclassNameass="card-title">Exercise statistics</h4>
+        <Link to="/stats" className="btn btn-default">Go!</Link>
+      </div>
+    </div>
   </div>
 );
 
