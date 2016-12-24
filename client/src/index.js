@@ -22,6 +22,11 @@ import Login from './pages/login';
 import Register from './pages/register';
 import NotFound from './pages/notfound';
 
+import Routine from './pages/routine';
+import Stats from './pages/stats';
+import Session from './pages/session';
+import Profile from './pages/profile';
+
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -34,6 +39,10 @@ ReactDOM.render((
         <Route path="welcome" component={Welcome} />
         <Route path="login" component={Login} />
         <Route path="register" component={Register} />
+        <Route path="session" component={Session} />
+        <Route path="routine" component={Routine} />
+        <Route path="stats" component={Stats} />
+        <Route path="profile" component={Profile} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
