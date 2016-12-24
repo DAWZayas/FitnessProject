@@ -35,7 +35,7 @@ const noAuth = (route) => (
 
 const Navbar = ({route, authenticated, userName}) => (
 
-  <nav className="navbar navbar-light teal lighten-4" style={{marginBottom: '10px', marginTop: '10px'}}>
+  <nav className="navbar navbar-dark default-color" style={{marginBottom: '10px', marginTop: '10px'}}>
 
     <div className="container">
       <a className="navbar-brand">FitRun</a>

@@ -5,7 +5,7 @@ import {logoutAction} from '../../store/actions';
 
 const mapDispatchToProps = (dispatch) => ({
   onLogoutClick: () => dispatch(logoutAction()),
-  navToLogin: () => dispatch(push('/login')),
+  navToLogin: () => dispatch(push('/welcome')),
 });
 
 const Logout = ({onLogoutClick, navToLogin}) => {
