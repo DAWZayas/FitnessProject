@@ -13,21 +13,21 @@ const Home = () => (
 
     <div className="card">
       <div className="card-block">
-        <h4 clclassNameass="card-title">Sport session</h4>
+        <h4 className="card-title">Sport session</h4>
         <Link to="/session" className="btn btn-default">Go!</Link>
       </div>
     </div>
 
     <div className="card">
       <div className="card-block">
-        <h4 clclassNameass="card-title">Exercise routine</h4>
+        <h4 className="card-title">Exercise routine</h4>
         <Link to="/routine" className="btn btn-default">Go!</Link>
       </div>
     </div>
 
     <div className="card">
       <div className="card-block">
-        <h4 clclassNameass="card-title">Exercise statistics</h4>
+        <h4 className="card-title">Exercise statistics</h4>
         <Link to="/stats" className="btn btn-default">Go!</Link>
       </div>
     </div>
