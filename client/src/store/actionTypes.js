@@ -13,3 +13,8 @@ export const REGISTER_ERROR = 'REGISTER_ERROR';
 // notifications actions
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
+
+// session actions
+export const PREPARE_SESSION = 'PREPARE_SESSION';
+export const START_SESSION = 'START_SESSION';
+export const FINISH_SESSION = 'FINISH_SESSION';

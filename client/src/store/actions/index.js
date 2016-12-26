@@ -39,3 +39,15 @@ export const removeNotificationAction = notificationId => ({
   type: ActionTypes.REMOVE_NOTIFICATION,
   payload: {notificationId},
 });
+
+export const prepareSession = () => ({
+  type: ActionTypes.PREPARE_SESSION,
+});
+
+export const startSession = () => ({
+  type: ActionTypes.START_SESSION,
+});
+
+export const finishSession = () => ({
+  type: ActionTypes.FINISH_SESSION,
+});
