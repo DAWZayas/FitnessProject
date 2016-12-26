@@ -1,6 +1,6 @@
 import * as ActionTypes from '../actionTypes';
 
-const initialState = {state: 1};
+const initialState = {state: 0};
 export const session = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.PREPARE_SESSION:
