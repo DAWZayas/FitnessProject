@@ -68,7 +68,7 @@ class Timer extends Component {
 
   render() {
     return (
-      <div className="flex-center" style={timerStyle}>
+      <div className="animated fadeIn" style={timerStyle}>
         <div style={divStyle}>
           <span style={spanStyle}>{(this.state.hr < 10) ? "0" + this.state.hr : this.state.hr} :</span>
           <span style={spanStyle}>{(this.state.min < 10) ? "0" + this.state.min : this.state.min} :</span>

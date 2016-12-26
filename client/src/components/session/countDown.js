@@ -1,8 +1,19 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import {startSession} from '../../store/actions';
+
 const mapDispatchToProps = dispatch => ({
+  startSportSession: () => dispatch(startSession()),
 });
+
+const countDownStyle = {
+  fontFamily: 'sans-serif',
+  display: 'inline-block',
+  fontWeight: '100',
+  textAlign: 'center',
+  fontSize: '50px',
+};
 
 class CountDown extends Component {
 
@@ -18,8 +29,10 @@ class CountDown extends Component {
   }
 
   componentDidUpdate() {
+    const {startSportSession} = this.props;
     if (this.state.time === 0) {
       clearInterval(this.state.timer);
+      startSportSession();
     }
   }
 
@@ -29,8 +42,10 @@ class CountDown extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.time}
+      <div className="container">
+        <div className="text-center" style={countDownStyle}>
+          <span >{this.state.time}</span>
+        </div>
       </div>
     );
   }
