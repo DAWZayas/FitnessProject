@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
-import {CountDown, Timer} from '../../components/session';
+import {CountDown, Timer, Distance} from '../../components/session';
 import {finishSession} from '../../store/actions';
 
 const mapStateToProps = (state) => ({
@@ -21,6 +21,7 @@ const started = (onFinishSession) => {
   return (
     <div>
       <Timer />
+      <Distance />
       <button type="submit" className="btn btn-danger" onClick={handleClick}>Finish</button>
     </div>
   );
