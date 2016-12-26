@@ -38,7 +38,7 @@ const Navbar = ({route, authenticated, userName}) => (
   <nav className="navbar navbar-dark default-color" style={{marginBottom: '10px', marginTop: '10px'}}>
 
     <div className="container">
-      <a className="navbar-brand">FitRun</a>
+      <Link to="/" className="navbar-brand">FitRun</Link>
       {authenticated ? yesAuth(route, userName) : noAuth(route)}
     </div>
   </nav>

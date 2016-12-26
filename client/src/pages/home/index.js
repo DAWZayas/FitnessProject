@@ -14,7 +14,7 @@ const Home = () => (
     <div className="card">
       <div className="card-block">
         <h4 className="card-title">Sport session</h4>
-        <Link to="/session" className="btn btn-default">Go!</Link>
+        <Link to="/sessions" className="btn btn-default">Go!</Link>
       </div>
     </div>
 
