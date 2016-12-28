@@ -12,8 +12,7 @@ export default (app) => {
       startTime: new Date(),
       duration: {},
     });
-    await sportSession.save();
-
-    res.sendStatus(201);
+    const {id} = await sportSession.save();
+    res.send({id});
   }));
 };
