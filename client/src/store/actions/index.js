@@ -44,8 +44,9 @@ export const prepareSession = () => ({
   type: ActionTypes.PREPARE_SESSION,
 });
 
-export const startSession = () => ({
+export const startSession = (payload) => ({
   type: ActionTypes.START_SESSION,
+  payload,
 });
 
 export const finishSession = () => ({

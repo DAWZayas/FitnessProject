@@ -1,5 +1,6 @@
 import {login, register, logout} from './auth';
 import {addNotification} from './notifications';
+import {startSession} from './session';
 
 export default [
   // auth
@@ -7,4 +8,5 @@ export default [
   register,
   logout,
   addNotification,
+  startSession,
 ];
