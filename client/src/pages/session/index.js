@@ -7,16 +7,18 @@ import {finishSession} from '../../store/actions';
 
 const mapStateToProps = (state) => ({
   sessionState: state.session.state,
+  sessionId: state.session.id,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onFinishSession: () => dispatch(finishSession()),
+  onFinishSession: (payload) => dispatch(finishSession(payload)),
 });
 
-const started = (onFinishSession) => {
+const started = (onFinishSession, sessionId) => {
   const handleClick = (e) => {
     e.preventDefault();
-    onFinishSession();
+    console.log(sessionId);
+    onFinishSession({sessionId});
   };
   return (
     <div>
@@ -27,11 +29,11 @@ const started = (onFinishSession) => {
   );
 };
 
-const Session = ({sessionState, onFinishSession}) => (
+const Session = ({sessionState, onFinishSession, sessionId}) => (
   <div className="jumbotron animated fadeInRight">
     <h1>Session page</h1>
     {sessionState === 1 ? <CountDown /> : ''}
-    {sessionState === 2 ? started(onFinishSession) : ''}
+    {sessionState === 2 ? started(onFinishSession, sessionId) : ''}
     {sessionState === 3 ? 'finished' : ''}
   </div>
 );

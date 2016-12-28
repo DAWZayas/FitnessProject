@@ -49,6 +49,7 @@ export const startSession = (payload) => ({
   payload,
 });
 
-export const finishSession = () => ({
+export const finishSession = (payload) => ({
   type: ActionTypes.FINISH_SESSION,
+  payload,
 });

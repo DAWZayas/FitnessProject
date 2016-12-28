@@ -19,3 +19,21 @@ export const startSession = action$ => action$
       payload: {error},
     })),
   );
+
+export const finishSession = action$ => action$
+      .ofType(ActionTypes.FINISH_SESSION)
+      .switchMap(({payload}) => Observable
+        .ajax.post(`http://localhost:8080/api/sportSession/${payload.sessionId}`)
+        .map(res => res.response)
+        .mergeMap(session => Observable.of({
+          type: ActionTypes.FINISH_SESSION_SUCCESS,
+          payload: session,
+        },
+        Actions.addNotificationAction(
+          {text: 'Session finished', alertType: 'info'}),
+        ))
+        .catch(error => Observable.of({
+          type: ActionTypes.FINISH_SESSION_ERROR,
+          payload: {error},
+        })),
+      );
