@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
-import {CountDown, Timer, Distance} from '../../components/session';
+import {CountDown, Timer, Distance, SummarySession} from '../../components/session';
 import {finishSession} from '../../store/actions';
 
 const mapStateToProps = (state) => ({
@@ -34,7 +34,7 @@ const Session = ({sessionState, onFinishSession, sessionId}) => (
     <h1>Session page</h1>
     {sessionState === 1 ? <CountDown /> : ''}
     {sessionState === 2 ? started(onFinishSession, sessionId) : ''}
-    {sessionState === 3 ? 'finished' : ''}
+    {sessionState === 3 ? <SummarySession /> : ''}
   </div>
 );
 
