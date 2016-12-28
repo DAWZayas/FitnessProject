@@ -12,7 +12,10 @@ export const session = (state = initialState, action) => {
       return {...state, id: action.payload.id};
     }
     case ActionTypes.FINISH_SESSION:
-      return {...state, state: 3};
+      return {...state};
+    case ActionTypes.FINISH_SESSION_SUCCESS: {
+      return {state: 3, ...action.payload};
+    }
     default:
       return state;
   }
