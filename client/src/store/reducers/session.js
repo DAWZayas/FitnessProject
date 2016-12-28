@@ -8,8 +8,11 @@ export const session = (state = initialState, action) => {
     case ActionTypes.START_SESSION: {
       return {state: 2};
     }
+    case ActionTypes.START_SESSION_SUCCESS: {
+      return {...state, id: action.payload.id};
+    }
     case ActionTypes.FINISH_SESSION:
-      return {state: 3};
+      return {...state, state: 3};
     default:
       return state;
   }

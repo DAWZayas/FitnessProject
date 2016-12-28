@@ -7,8 +7,9 @@ export const startSession = action$ => action$
   .switchMap(({payload}) => Observable
     .ajax.post('http://localhost:8080/api/sportSession', payload)
     .map(res => res.response)
-    .mergeMap(() => Observable.of({
+    .mergeMap(id => Observable.of({
       type: ActionTypes.START_SESSION_SUCCESS,
+      payload: id,
     },
     Actions.addNotificationAction(
       {text: 'Session started', alertType: 'info'}),
