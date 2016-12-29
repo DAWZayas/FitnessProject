@@ -15,6 +15,7 @@ import setupUserRoutes from './user';
 import setupSportRoutes from './sport';
 import setupSportSessionRoutes from './sportSession';
 import setupExerciseRoutes from './exercise';
+import setupRoutineRoutes from './routine';
 
 // init app
 const app = express();
@@ -57,8 +58,9 @@ setupUserRoutes(app);
 setupSportRoutes(app);
 setupSportSessionRoutes(app);
 
-// setup exercise route
+// setup exercise and routine routes
 setupExerciseRoutes(app);
+setupRoutineRoutes(app);
 
 // catch all unhandled errors
 app.use((err, req, res, next) => {
