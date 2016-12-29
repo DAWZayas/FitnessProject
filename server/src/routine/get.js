@@ -11,7 +11,7 @@ export default (app) => {
     }
   }));
 
-  app.get('/api/routine/:user', asyncRequest(async (req, res) => {
+  app.get('/api/routine/user/:user', asyncRequest(async (req, res) => {
     try {
       const routines = await Routine.filter({user: req.params.user});
       res.send(routines);
