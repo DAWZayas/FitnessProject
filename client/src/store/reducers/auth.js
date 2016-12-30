@@ -35,6 +35,11 @@ export const auth = (state = initialState(), action) => {
     case ActionTypes.REGISTER_ERROR:
       // TODO: probably necessary in the future
       return state;
+    case ActionTypes.DO_UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+      };  
     default:
       return state;
   }

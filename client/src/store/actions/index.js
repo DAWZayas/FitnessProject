@@ -53,3 +53,8 @@ export const finishSession = (payload) => ({
   type: ActionTypes.FINISH_SESSION,
   payload,
 });
+
+export const updateProfile = payload => ({
+  type: ActionTypes.DO_UPDATE_PROFILE,
+  payload,
+});
