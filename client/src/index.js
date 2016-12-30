@@ -22,7 +22,7 @@ import Login from './pages/login';
 import Register from './pages/register';
 import NotFound from './pages/notfound';
 
-import Routine from './pages/routine';
+import {Routine, Exercise} from './pages/routine';
 import Stats from './pages/stats';
 import Session from './pages/session';
 import Sessions from './pages/sessions';
@@ -43,6 +43,7 @@ ReactDOM.render((
         <Route path="session" component={Session} />
         <Route path="sessions" component={Sessions} />
         <Route path="routine" component={Routine} />
+        <Route path="routine/exercise" component={Exercise} />
         <Route path="stats" component={Stats} />
         <Route path="profile" component={Profile} />
         <Route path="*" component={NotFound} />
