@@ -2,7 +2,7 @@ import {Observable} from 'rxjs/Observable';
 import * as ActionTypes from '../actionTypes';
 import * as Actions from '../actions';
 import {loginErrorToMessage, registerErrorToMessage} from '../../util';
-
+import {signRequest} from '../../util/signRequest';
 
 // ASCII diagram for Rx Streams (see: https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
 
@@ -80,3 +80,21 @@ export const logout = action$ => action$
       {text: 'Logout success', alertType: 'info'},
     ),
   ));
+
+export const updateProfile = action$ => action$
+  .ofType(ActionTypes.DO_UPDATE_PROFILE)
+  .map(signRequest)
+  .switchMap(({headers, payload}) => Observable
+    .ajax.post(`http://localhost:8080/api/user/${payload.id}`, payload, headers)
+    .map(res => res.response)
+    .map(response => ({
+      type: ActionTypes.DO_UPDATE_PROFILE_SUCCESS,
+      payload: response,
+    }))
+    .catch(err => Observable.of({
+      type: ActionTypes.DO_UPDATE_PROFILE_ERROR,
+      payload: {
+        error: err,
+      },
+    })),
+  );
