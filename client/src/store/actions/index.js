@@ -53,3 +53,8 @@ export const finishSession = (payload) => ({
   type: ActionTypes.FINISH_SESSION,
   payload,
 });
+
+export const createExercise = (payload) => ({
+  type: ActionTypes.CREATE_EXERCISE,
+  payload,
+});
