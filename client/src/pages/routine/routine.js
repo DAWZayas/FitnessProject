@@ -20,7 +20,7 @@ const Routine = () => (
     <div className="card">
       <div className="card-block">
         <h4 className="card-title">Create routine</h4>
-        <Link to="/routine/routine" className="btn btn-default">Create</Link>
+        <Link to="/routine/create" className="btn btn-default">Create</Link>
       </div>
     </div>
     <div className="card">
