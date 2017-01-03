@@ -1,7 +1,7 @@
 import {login, register, logout, updateProfile} from './auth';
 import {addNotification} from './notifications';
 import {startSession, finishSession} from './session';
-import {createExercise} from './routine';
+import {createExercise, createRoutine} from './routine';
 
 export default [
   // auth
@@ -13,4 +13,5 @@ export default [
   startSession,
   finishSession,
   createExercise,
+  createRoutine,
 ];
