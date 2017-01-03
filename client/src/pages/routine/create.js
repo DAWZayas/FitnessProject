@@ -1,35 +1,45 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {createRoutine, getExercises} from '../../store/actions';
 
 import styles from './radio.css';
 
 const mapStateToProps = state => ({
-  redirectToLogin: state.auth.redirectToLogin,
+  userName: state.auth.user.login,
+  exercises: state.routine.exercises,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCreateRoutineClick: payload => console.log(payload),
+  onCreateRoutineClick: payload => dispatch(createRoutine(payload)),
+  loadExercises: () => dispatch(getExercises()),
 });
 
-const Create = ({onCreateRoutineClick}) => {
+const Create = ({onCreateRoutineClick, loadExercises, userName, exercises}) => {
   let name;
   let level;
   let rest;
   let rounds;
   let restRounds;
-  // let image;
+  let routineExercises;
+  let index = 0;
+  let time;
 
   const handleClick = (e) => {
     e.preventDefault();
 
     onCreateRoutineClick({
+      user: userName,
       name: name.value,
       level,
       rest,
       rounds,
       restRounds,
-      // image: image.value,
     });
+  };
+
+  const handleClickExercise = (e) => {
+    e.preventDefault();
+    loadExercises();
   };
 
   const setLevel = (e) => {
@@ -170,12 +180,7 @@ const Create = ({onCreateRoutineClick}) => {
             </div>
           </div>
         </div>
-        <div className="form-group">
-          <label className="btn btn-primary" htmlFor="inputImage">
-            <input id="inputImage" type="file" style={{display: 'none'}} />
-            Browse image
-          </label>
-        </div>
+        <button type="submit" className="btn btn-primary" onClick={handleClickExercise}>Add exercise</button>
         <button type="submit" className="btn btn-default" onClick={handleClick}>Create</button>
       </form>
     </div>

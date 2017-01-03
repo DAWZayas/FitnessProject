@@ -59,6 +59,10 @@ export const createExercise = (payload) => ({
   payload,
 });
 
+export const getExercises = () => ({
+  type: ActionTypes.GET_EXERCISES,
+});
+
 export const createRoutine = (payload) => ({
   type: ActionTypes.CREATE_ROUTINE,
   payload,

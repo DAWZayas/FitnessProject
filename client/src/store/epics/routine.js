@@ -19,6 +19,23 @@ export const createExercise = action$ => action$
     })),
   );
 
+export const getExercises = action$ => action$
+    .ofType(ActionTypes.GET_EXERCISES)
+    .switchMap(({headers}) => Observable
+      .ajax.get('http://localhost:8080/api/exercise', headers)
+      .map(res => res.response)
+      .map(exercises => ({
+        type: ActionTypes.GET_EXERCISES_SUCCESS,
+        payload: {exercises},
+      }))
+      .catch(error => Observable.of(
+        {
+          type: ActionTypes.GET_EXERCISES_ERROR,
+          payload: {error},
+        },
+      )),
+    );
+
 export const createRoutine = action$ => action$
     .ofType(ActionTypes.CREATE_ROUTINE)
     .switchMap(({payload}) => Observable
