@@ -20,9 +20,8 @@ const Create = ({onCreateRoutineClick, loadExercises, userName, exercises}) => {
   let rest;
   let rounds;
   let restRounds;
-  let routineExercises;
-  let index = 0;
-  let time;
+  let routineExercises = [];
+  // let time;
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -34,12 +33,19 @@ const Create = ({onCreateRoutineClick, loadExercises, userName, exercises}) => {
       rest,
       rounds,
       restRounds,
+      exercises: JSON.stringify(routineExercises),
     });
   };
 
   const handleClickExercise = (e) => {
     e.preventDefault();
     loadExercises();
+  };
+
+  const handleAddExercise = (e) => {
+    e.preventDefault();
+    routineExercises = [...routineExercises, {name: e.target.innerHTML, image: 'image' + e.target.innerHTML, time: 20}]
+    console.log(routineExercises.map(ex => JSON.stringify(ex)));
   };
 
   const setLevel = (e) => {
@@ -180,7 +186,18 @@ const Create = ({onCreateRoutineClick, loadExercises, userName, exercises}) => {
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleClickExercise}>Add exercise</button>
+
+        {routineExercises.map(e => <div className="card col-xs-6">ex: {e.name}, time: {e.time}</div>)}
+
+        <button type="submit" className="btn btn-primary" onClick={handleClickExercise}>Show exercises</button>
+        <div className="form-group row">
+
+          {exercises.map(e =>
+            <button className="btn col-xs-5" onClick={handleAddExercise}>
+              {e.name}
+            </button>)
+          }
+        </div>
         <button type="submit" className="btn btn-default" onClick={handleClick}>Create</button>
       </form>
     </div>

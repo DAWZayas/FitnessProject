@@ -4,16 +4,16 @@ import {Routine} from '../db';
 export default (app) => {
   app.post('/api/routine', asyncRequest(async (req, res) => {
     const {user, name, level, rest, rounds, restRounds, exercises} = req.body;
-    const sport = new Routine({
+    const routine = new Routine({
       user,
       name,
       level,
       rest,
       rounds,
       restRounds,
-      exercises: exercises.map(exercise => JSON.parse(exercise)),
+      exercises: JSON.parse(exercises),
     });
-    await sport.save();
+    await routine.save();
 
     res.sendStatus(201);
   }));
