@@ -1,14 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {startSession} from '../../store/actions';
-
 const mapDispatchToProps = dispatch => ({
-  startSportSession: (payload) => dispatch(startSession(payload)),
-});
-
-const mapStateToProps = state => ({
-  user: state.auth.user.login,
+  actionToDispatch: (payload, action) => dispatch(action(payload)),
 });
 
 const countDownStyle = {
@@ -24,7 +18,7 @@ class CountDown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: 5,
+      time: this.props.time,
       timer: setInterval(
         () => this.setState({time: --this.state.time}),
         1000
@@ -33,10 +27,10 @@ class CountDown extends Component {
   }
 
   componentDidUpdate() {
-    const {startSportSession} = this.props;
+    const {actionToDispatch} = this.props;
     if (this.state.time === 0) {
       clearInterval(this.state.timer);
-      startSportSession({user: this.props.user, sport: 'Running'});
+      actionToDispatch(this.props.data, this.props.action);
     }
   }
 
@@ -54,4 +48,4 @@ class CountDown extends Component {
     );
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(CountDown);
+export default connect(null, mapDispatchToProps)(CountDown);
