@@ -1,6 +1,6 @@
 import * as ActionTypes from '../actionTypes';
 
-const initialState = {exercises: []};
+const initialState = {exercises: [], routines: []};
 export const routine = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.CREATE_EXERCISE:
@@ -11,6 +11,10 @@ export const routine = (state = initialState, action) => {
       return state;
     case ActionTypes.GET_EXERCISES_SUCCESS:
       return {...state, exercises: action.payload.exercises};
+    case ActionTypes.GET_ALL_ROUTINES:
+      return state;
+    case ActionTypes.GET_ALL_ROUTINES_SUCCESS:
+      return {...state, routines: action.payload.routines};
     default:
       return state;
   }

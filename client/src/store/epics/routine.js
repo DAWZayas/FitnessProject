@@ -52,3 +52,18 @@ export const createRoutine = action$ => action$
         payload: {error},
       })),
     );
+
+export const getAllRoutines = action$ => action$
+    .ofType(ActionTypes.GET_ALL_ROUTINES)
+    .switchMap(({headers}) => Observable
+      .ajax.get('http://localhost:8080/api/routine', headers)
+      .map(res => res.response)
+      .map(routines => ({
+        type: ActionTypes.GET_ALL_ROUTINES_SUCCESS,
+        payload: {routines},
+      }))
+      .catch(error => Observable.of({
+        type: ActionTypes.GET_ALL_ROUTINES_ERROR,
+        payload: {error},
+      })),
+    );
