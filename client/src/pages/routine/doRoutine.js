@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 
 import {getAllRoutines} from '../../store/actions';
 import {CountDown} from '../../components/routine';
@@ -31,13 +32,19 @@ class DoRoutine extends Component {
     this.props.fetchRoutines();
   }
 
+  // componentDidMount() {
+  //   if (this.state.round === this.state.routine.rounds) {
+  //     this.setState({round: 'FINAL'});
+  //   }
+  // }
+
   handleClick = (e) => {
     e.preventDefault();
     this.setState(
       {
         state: 1,
         routine: this.props.routines.filter(r => e.target.value === r.id)[0],
-        round: 1,
+        round: this.props.routines.filter(r => e.target.value === r.id)[0].rounds === 1 ? 'FINAL' : 1,
         exercise: 0,
       }
     );
@@ -62,7 +69,13 @@ class DoRoutine extends Component {
       }
     }
     if (this.state.state === 4) {
-      this.setState({state: 2, round: ++this.state.round});
+      if (this.state.round === this.state.routine.rounds - 1) {
+        this.setState({state: 2, round: 'FINAL'});
+      } else if (this.state.round === 'FINAL') {
+        this.setState({state: 5});
+      } else {
+        this.setState({state: 2, round: ++this.state.round});
+      }
     }
   };
 
@@ -89,9 +102,11 @@ class DoRoutine extends Component {
             : ''
           }
           {this.state.state === 2 ?
-            <div>
-              <h4>{this.state.routine.exercises[this.state.exercise].name}</h4>
-              <CountDown time={this.state.routine.exercises[this.state.exercise].time} action={this.nextAction} data={{}} />
+            <div className="card">
+              <div className="card-block">
+                <h4 className="card-title">{this.state.routine.exercises[this.state.exercise].name}</h4>
+                <CountDown time={this.state.routine.exercises[this.state.exercise].time} action={this.nextAction} data={{}} />
+              </div>
             </div>
             : ''
           }
@@ -106,6 +121,13 @@ class DoRoutine extends Component {
             <div>
               <h4>Round rest</h4>
               <CountDown time={this.state.routine.restRounds} action={this.nextAction} data={{}} />
+            </div>
+            : ''
+          }
+          {this.state.state === 5 ?
+            <div>
+              <h4>Congratulations, you finished the workout!!</h4>
+              <Link to="/routine" className="btn btn-default">Back</Link>
             </div>
             : ''
           }
