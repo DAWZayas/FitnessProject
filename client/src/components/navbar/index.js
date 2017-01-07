@@ -7,8 +7,8 @@ import {Logout} from '../logout';
 
 const mapStateToProps = (state) => ({
   route: state.routing.locationBeforeTransitions.pathname, // esto provoca el warning al logearse
-  authenticated: state.auth.token !== null,
-  userName: state.auth.user !== null && state.auth.user.login,
+  authenticated: state.auth.token ? true : false,
+  userName: state.auth.user ? state.auth.user.login : '',
 });
 
 const yesAuth = (route, userName) => (
