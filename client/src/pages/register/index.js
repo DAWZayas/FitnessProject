@@ -7,6 +7,8 @@ import {push} from 'react-router-redux';
 // our packages
 import {registerAction} from '../../store/actions';
 
+import styles from './register-login.css';
+
 const mapStateToProps = state => ({
   redirectToLogin: state.auth.redirectToLogin,
 });
@@ -38,11 +40,11 @@ const Register = ({onRegisterClick, navToLogin, redirectToLogin}) => {
 
   return (
     <div className="jumbotron">
-      <h2>Experts portal:</h2>
-      <p>Please register. Or <Link to="/login">login</Link></p>
-
       <form>
         <div className="form-group">
+          <div className={`${styles.login_register_header} z-depth-1`}>
+            <h3>Register</h3>
+          </div>
           <label htmlFor="inputUsername">Username:</label>
           <input
             type="text"
@@ -72,7 +74,12 @@ const Register = ({onRegisterClick, navToLogin, redirectToLogin}) => {
             ref={(i) => { passwordInputRepeat = i; }}
           />
         </div>
-        <button type="submit" className="btn btn-default" onClick={handleClick}>Register</button>
+
+        <div className={styles.login_register_footer}>
+          <button type="submit" className="btn btn-default" onClick={handleClick}>Register</button>
+          <br></br><br></br>
+          <p>Already have an account? <Link to="/login">login</Link></p>
+        </div>
       </form>
     </div>
   );

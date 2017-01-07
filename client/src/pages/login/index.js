@@ -7,6 +7,8 @@ import {push} from 'react-router-redux';
 // our packages
 import {loginAction} from '../../store/actions';
 
+import styles from './register-login.css';
+
 const mapStateToProps = state => ({
   token: state.auth.token,
 });
@@ -38,11 +40,21 @@ const Login = ({onLoginClick, navToHome, token}) => {
 
   return (
     <div className="jumbotron">
-      <h2>Experts portal:</h2>
-      <p>Please log in. Or <Link to="/register">register</Link></p>
-
       <form>
         <div className="form-group">
+          <div className={`${styles.login_register_header} z-depth-1`}>
+            <h3>Login</h3>
+          </div>
+          <div className={styles.social}>
+            <button type="button" className={`btn ${styles.github}`}>github</button>
+            <button type="button" className={`btn ${styles.google}`}>google</button>
+            <button type="button" className={`btn ${styles.facebook}`}>facebook</button>
+            <div className={styles.division}>
+              <div className={`${styles.line} ${styles.l}`}></div>
+              <span>or</span>
+              <div className={`${styles.line} ${styles.r}`}></div>
+            </div>
+          </div>
           <label htmlFor="inputUsername">Username:</label>
           <input
             type="text"
@@ -71,7 +83,11 @@ const Login = ({onLoginClick, navToHome, token}) => {
             /> Remember me
           </label>
         </div>
-        <button type="submit" className="btn btn-default" onClick={handleClick}>Login</button>
+        <div className={styles.login_register_footer}>
+          <button type="submit" className="btn btn-default" onClick={handleClick}>Login</button>
+          <br></br><br></br>
+          <p>Looking to <Link to="/register">register</Link>?</p>
+        </div>
       </form>
     </div>
   );

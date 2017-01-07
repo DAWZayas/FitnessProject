@@ -1,0 +1,18 @@
+.login_register_header {
+  color: #fff;
+  background: linear-gradient(135deg,#000 0,#2BBBAD 100%);
+  
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 2px;
+}
+
+.login_register_footer {
+  color: #797979;
+  margin-left: 0;
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+}

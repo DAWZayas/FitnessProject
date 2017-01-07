@@ -1,0 +1,76 @@
+.login_register_header {
+  color: #fff;
+  background: linear-gradient(135deg,#000 0,#2BBBAD 100%);
+
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border-radius: 2px;
+}
+
+.login_register_footer {
+  color: #797979;
+  margin-left: 0;
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+}
+
+.division {
+    float: none;
+    margin: 30px auto 20px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.division .line {
+    border-top: 1px solid #DFDFDF;
+    position: absolute;
+    top: 10px;
+    width: 34%;
+}
+
+.division .line.l {
+    left: 0;
+}
+
+.division .line.r {
+    right: 0;
+}
+
+.division span {
+    color: #424242;
+    font-size: 17px;
+}
+
+.social {
+  float: none;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.facebook{
+    background-color: #455CA8;
+    color: #FFFFFF;
+}
+.google{
+    background-color: #F74933;
+    color: #FFFFFF;
+}
+.github{
+    background-color: #403A3A;
+    color: #FFFFFF;
+}
+
+.facebook:hover{
+    background-color: #6E83CD;
+}
+.google:hover{
+    background-color: #FF7566;
+}
+.github:hover{
+    background-color: #4D4D4d;;
+}
