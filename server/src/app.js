@@ -16,6 +16,7 @@ import setupSportRoutes from './sport';
 import setupSportSessionRoutes from './sportSession';
 import setupExerciseRoutes from './exercise';
 import setupRoutineRoutes from './routine';
+import setupDiet from './diet';
 
 // init app
 const app = express();
@@ -61,6 +62,9 @@ setupSportSessionRoutes(app);
 // setup exercise and routine routes
 setupExerciseRoutes(app);
 setupRoutineRoutes(app);
+
+// setup diet
+setupDiet(app);
 
 // catch all unhandled errors
 app.use((err, req, res, next) => {
