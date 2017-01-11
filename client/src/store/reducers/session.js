@@ -5,8 +5,10 @@ export const session = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.PREPARE_SESSION:
       return {state: 1};
+    case ActionTypes.PREPARE_SESSION_SUCCESS:
+      return {state: 1, position: action.payload};
     case ActionTypes.START_SESSION: {
-      return {state: 2};
+      return {...state, state: 2};
     }
     case ActionTypes.START_SESSION_SUCCESS: {
       return {...state, id: action.payload.id};

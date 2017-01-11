@@ -1,4 +1,5 @@
 import {Observable} from 'rxjs/Observable';
+import Rx from 'rxjs/Rx';
 import * as ActionTypes from '../actionTypes';
 import * as Actions from '../actions';
 
@@ -37,3 +38,19 @@ export const finishSession = action$ => action$
           payload: {error},
         })),
       );
+
+export const prepareSession = action$ => action$
+      .ofType(ActionTypes.PREPARE_SESSION)
+      .mergeMap(() => Rx.Observable.create(subscriber =>
+        navigator.geolocation.getCurrentPosition(position => subscriber.next(position))
+      ))
+      .mergeMap(position => Observable.of(
+        {
+          type: ActionTypes.PREPARE_SESSION_SUCCESS,
+          payload: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          },
+        },
+        Actions.addNotificationAction({text: 'Session prepared', alertType: 'info'}),
+      ));

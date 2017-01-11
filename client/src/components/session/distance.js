@@ -1,16 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-// import {startSession} from '../../store/actions';
+import {Map} from '../../components/session';
 
 const mapDispatchToProps = dispatch => ({
 
+});
+
+const mapStateToProps = state => ({
+  session: state.session.position,
 });
 
 class Distance extends Component {
 
   constructor(props) {
     super(props);
+    console.log(this.props);
     this.state = {
       pos: [],
       distance: 0,
@@ -43,6 +48,7 @@ class Distance extends Component {
   render() {
     return (
       <div className="container">
+        <Map lat={this.props.session.lat} lng={this.props.session.lng} />
         <div className="text-center">
           {this.state.pos.map((pos) => (<div><span>Lat: {pos.lat}</span><span>Lon: {pos.lng}</span></div>))}
         </div>
@@ -50,4 +56,4 @@ class Distance extends Component {
     );
   }
 }
-export default connect(null, mapDispatchToProps)(Distance);
+export default connect(mapStateToProps, mapDispatchToProps)(Distance);

@@ -23,19 +23,24 @@ export default class Map extends React.Component {
       this.setState({
         map: new google.maps.Map(this.node, {
           zoom: 14,
-          center: {lat: 40.476938, lng: -3.857414},
+          center: {lat: this.props.lat, lng: this.props.lng},
         }),
         poly: new google.maps.Polyline({
           strokeColor: '#000000',
           strokeOpacity: 1.0,
           strokeWeight: 5,
         }),
+        marker: new google.maps.Marker({
+          position: new google.maps.LatLng(this.props.lat, this.props.lng),
+          title: 'Origin',
+        }),
       });
       this.state.poly.setMap(this.state.map);
-      const path = this.state.poly.getPath();
-      path.push(new google.maps.LatLng({lat: 40.476938, lng: -4.857414}));
-      path.push(new google.maps.LatLng({lat: 41.476938, lng: -5.857414}));
-      path.push(new google.maps.LatLng({lat: 42.476938, lng: -6.857414}));
+      this.state.marker.setMap(this.state.map);
+      // const path = this.state.poly.getPath();
+      // path.push(new google.maps.LatLng({lat: 40.476938, lng: -4.857414}));
+      // path.push(new google.maps.LatLng({lat: 41.476938, lng: -5.857414}));
+      // path.push(new google.maps.LatLng({lat: 42.476938, lng: -6.857414}));
     }, 0);
   }
 
