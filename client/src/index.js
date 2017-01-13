@@ -27,6 +27,7 @@ import Stats from './pages/stats';
 import Session from './pages/session';
 import Sessions from './pages/sessions';
 import Profile from './pages/profile';
+import UpdateUser from './pages/profile/updateUser';
 import UpdateProfile from './pages/profile/updateProfile';
 
 // Create an enhanced history that syncs navigation events with the store
@@ -49,7 +50,8 @@ ReactDOM.render((
         <Route path="routine/doRoutine" component={DoRoutine} />
         <Route path="stats" component={Stats} />
         <Route path="profile" component={Profile} />
-        <Route path="updateprofile" component={UpdateProfile} />
+        <Route path="updateUser" component={UpdateUser} />
+        <Route path="updateProfile" component={UpdateProfile} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

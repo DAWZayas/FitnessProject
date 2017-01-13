@@ -72,6 +72,11 @@ export const getAllRoutines = () => ({
   type: ActionTypes.GET_ALL_ROUTINES,
 });
 
+export const updateUser = payload => ({
+  type: ActionTypes.DO_UPDATE_USER,
+  payload,
+});
+
 export const updateProfile = payload => ({
   type: ActionTypes.DO_UPDATE_PROFILE,
   payload,

@@ -23,8 +23,8 @@ const Profile = ({user}) => (
         <strong>{user.login}</strong><br />
           Active Since {user.registrationDate}<br />
           <Link to="/" className="btn btn-default">Do Exercise!</Link><br />
-          <Link to="/updateprofile" className="btn btn-default">Edit
-          </Link>
+          <Link to="/updateUser" className="btn btn-default">Update User</Link>
+          <Link to="/updateProfile" className="btn btn-default">Update Profile</Link>
       </div>
     </div>
 
@@ -41,8 +41,12 @@ const Profile = ({user}) => (
                 <td>{user.surname}</td>
               </tr>
               <tr>
+                <td>Age:</td>
+                <td>{user.age}</td>
+              </tr>
+              <tr>
                 <td>Email:</td>
-                <td>{user.mail}</td>
+                <td>{user.email}</td>
               </tr>
               <tr>
                 <td>Country:</td>

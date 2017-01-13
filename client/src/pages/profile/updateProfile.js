@@ -19,17 +19,25 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onClick}) => {
-  let usernameInput;
-  let passwordInput;
-  let passwordInputRepeat;
+  let nameInput;
+  let surnameInput;
+  let ageInput;
+  let emailInput;
+  let countryInput;
+  let weightInput;
+  let heightInput;
 
   const handleClick = (e) => {
     e.preventDefault();
 
     onUpdateClick({
-      login: usernameInput.value,
-      password: passwordInput.value,
-      passwordRepeat: passwordInputRepeat.value,
+      name: nameInput.value,
+      surname: surnameInput.value,
+      age: ageInput.value,
+      email: emailInput.value,
+      country: countryInput.value,
+      weight: weightInput.value,
+      height: heightInput.value,
       id: user.id,
     });
   };
@@ -42,33 +50,73 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
   return (
       <form>
         <div className="form-group">
-          <label htmlFor="inputUsername">Username:</label>
+          <label htmlFor="inputName">Name:</label>
           <input
             type="text"
             className="form-control"
-            id="inputUsername"
-            placeholder="Username"
-            ref={(i) => { usernameInput = i; }}
+            id="inputName"
+            placeholder="Name"
+            ref={(i) => { nameInput = i; }}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="inputPassword">Password</label>
+          <label htmlFor="inputSurname">Surname:</label>
           <input
-            type="password"
+            type="text"
             className="form-control"
-            id="inputPassword"
-            placeholder="Password"
-            ref={(i) => { passwordInput = i; }}
+            id="inputSurname"
+            placeholder="Surname"
+            ref={(i) => { surnameInput = i; }}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="inputPasswordRepeat">Password</label>
+          <label htmlFor="inputAge">Age:</label>
           <input
-            type="password"
+            type="number"
             className="form-control"
-            id="inputPasswordRepeat"
-            placeholder="Repeat password"
-            ref={(i) => { passwordInputRepeat = i; }}
+            id="inputAge"
+            placeholder="Age"
+            ref={(i) => { ageInput = i; }}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="inputEmail">Email:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputEmail"
+            placeholder="Email"
+            ref={(i) => { emailInput = i; }}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="inputCountry">Country:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputCountry"
+            placeholder="Country"
+            ref={(i) => { countryInput = i; }}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="inputWeight">Weight:</label>
+          <input
+            type="number"
+            className="form-control"
+            id="inputWeight"
+            placeholder="Your Weight in Kilogrammes"
+            ref={(i) => { weightInput = i; }}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="inputHeight">Height:</label>
+          <input
+            type="number"
+            className="form-control"
+            id="inputHeight"
+            placeholder="Your Height in centimetres"
+            ref={(i) => { heightInput = i; }}
           />
         </div>
         <button type="submit" className="btn btn-default" onClick={handleClick}>Update</button>

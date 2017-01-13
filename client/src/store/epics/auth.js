@@ -81,20 +81,48 @@ export const logout = action$ => action$
     ),
   ));
 
-export const updateProfile = action$ => action$
-  .ofType(ActionTypes.DO_UPDATE_PROFILE)
+export const updateUser = action$ => action$
+  .ofType(ActionTypes.DO_UPDATE_USER)
   .map(signRequest)
   .switchMap(({headers, payload}) => Observable
     .ajax.post(`http://localhost:8080/api/user/${payload.id}`, payload, headers)
     .map(res => res.response)
-    .map(response => ({
-      type: ActionTypes.DO_UPDATE_PROFILE_SUCCESS,
-      payload: response,
-    }))
+    .mergeMap(response => Observable.of(
+      {
+        type: ActionTypes.DO_UPDATE_USER_SUCCESS,
+        payload: response,
+    },
+    Actions.addNotificationAction(
+      {text: 'Update success', alertType: 'info'},
+    ),
+  ))
     .catch(err => Observable.of({
-      type: ActionTypes.DO_UPDATE_PROFILE_ERROR,
+      type: ActionTypes.DO_UPDATE_USER_ERROR,
       payload: {
         error: err,
       },
     })),
   );
+
+  export const updateProfile = action$ => action$
+    .ofType(ActionTypes.DO_UPDATE_PROFILE)
+    .map(signRequest)
+    .switchMap(({headers, payload}) => Observable
+      .ajax.post(`http://localhost:8080/api/user/profile/${payload.id}`, payload, headers)
+      .map(res => res.response)
+      .mergeMap(response => Observable.of(
+        {
+          type: ActionTypes.DO_UPDATE_PROFILE_SUCCESS,
+          payload: response,
+      },
+      Actions.addNotificationAction(
+        {text: 'Update success', alertType: 'info'},
+      ),
+    ))
+      .catch(err => Observable.of({
+        type: ActionTypes.DO_UPDATE_PROFILE_ERROR,
+        payload: {
+          error: err,
+        },
+      })),
+    );
