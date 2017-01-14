@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import {distanceCoords} from '../../util/distanceCoords';
+
 import {Map} from '../../components/session';
 
 const mapDispatchToProps = dispatch => ({
@@ -15,9 +17,8 @@ class Distance extends Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
-      pos: [],
+      pos: [{lat: this.props.session.lat, lng: this.props.session.lng}],
       distance: 0,
       timer: setInterval(
         () => this.getActualPosition(),
@@ -28,7 +29,7 @@ class Distance extends Component {
   }
 
   componentDidUpdate() {
-
+    this.props.totalDistance(this.state.distance);
   }
 
   componentWillUnmount() {
@@ -41,7 +42,13 @@ class Distance extends Component {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
-      this.setState({pos: [...this.state.pos, pos]});
+      let distance = 0;
+      if (this.state.pos) {
+        const dist = distanceCoords(this.state.pos[this.state.pos.length - 1], pos);
+        // console.log(dist);
+        distance = !isNaN(dist) && Math.trunc(dist * 1000) / 1000;
+      }
+      this.setState({pos: [...this.state.pos, pos], distance: this.state.distance + distance}); // warning setState con unmounted component
     });
   }
 
@@ -49,6 +56,7 @@ class Distance extends Component {
     return (
       <div className="container">
         <Map lat={this.props.session.lat} lng={this.props.session.lng} />
+        <span>Distance: {this.state.distance} km</span>
         <div className="text-center">
           {this.state.pos.map((pos) => (<div><span>Lat: {pos.lat}</span><span>Lon: {pos.lng}</span></div>))}
         </div>

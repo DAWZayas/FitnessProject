@@ -11,5 +11,5 @@ export const SportSession = thinky.createModel('SportSession', {
     seconds: thinky.type.number().integer().min(0),
   }).required(),
   calories: thinky.type.number().integer().min(0),
-  distance: thinky.type.number().integer().min(0),
+  distance: thinky.type.number().min(0),
 });

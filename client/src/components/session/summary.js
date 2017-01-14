@@ -22,6 +22,7 @@ const SummarySession = ({session}) => (
           {session.duration.minutes < 10 ? '0' + session.duration.minutes : session.duration.minutes}&nbsp;m&nbsp;
           {session.duration.seconds < 10 ? '0' + session.duration.seconds : session.duration.seconds}&nbsp;s
         </li>
+        <li className="list-group-item">Distance: {session.distance} km</li>
       </ul>
       <Link to="/" className="btn btn-default">Back to home</Link>
     </div>

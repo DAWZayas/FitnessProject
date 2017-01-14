@@ -30,7 +30,7 @@ class CountDown extends Component {
     const {actionToDispatch} = this.props;
     if (this.state.time === 0) {
       clearInterval(this.state.timer);
-      actionToDispatch(this.props.data, this.props.action);
+      actionToDispatch({...this.props.data, startDate: new Date()}, this.props.action);
     }
   }
 

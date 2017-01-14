@@ -24,7 +24,7 @@ export const startSession = action$ => action$
 export const finishSession = action$ => action$
       .ofType(ActionTypes.FINISH_SESSION)
       .switchMap(({payload}) => Observable
-        .ajax.post(`http://localhost:8080/api/sportSession/${payload.sessionId}`)
+        .ajax.post(`http://localhost:8080/api/sportSession/${payload.sessionId}`, payload)
         .map(res => res.response)
         .mergeMap(session => Observable.of({
           type: ActionTypes.FINISH_SESSION_SUCCESS,

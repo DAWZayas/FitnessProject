@@ -18,15 +18,17 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const started = (onFinishSession, sessionId) => {
+  let totalDistance = 0;
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(sessionId);
-    onFinishSession({sessionId});
+    // console.log(sessionId);
+    onFinishSession({sessionId, totalDistance, finishDate: new Date()});
   };
+  const distanceFunction = dist => totalDistance = dist;
   return (
     <div>
       <Timer />
-      <Distance />
+      <Distance totalDistance={distanceFunction} />
       <button type="submit" className="btn btn-danger" onClick={handleClick}>Finish</button>
     </div>
   );

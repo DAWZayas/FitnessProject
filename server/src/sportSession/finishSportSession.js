@@ -15,10 +15,14 @@ const calculateTimeBetween = (secondsEndTime, secondsStartTime) => {
 export default (app) => {
   app.post('/api/sportSession/:id', asyncRequest(async (req, res) => {
     const sportSession = await SportSession.get(req.params.id);
-    sportSession.endTime = new Date();
+
+    sportSession.endTime = new Date(req.body.finishDate);
+    sportSession.distance = Number(req.body.totalDistance);
+
     const secondsEndTime = (sportSession.endTime.getHours() * 3600) + (sportSession.endTime.getMinutes() * 60) + sportSession.endTime.getSeconds();
     const secondsStartTime = (sportSession.startTime.getHours() * 3600) + (sportSession.startTime.getMinutes() * 60) + sportSession.startTime.getSeconds();
     const time = calculateTimeBetween(secondsEndTime, secondsStartTime);
+
     sportSession.duration.hours = time.hours;
     sportSession.duration.minutes = time.minutes;
     sportSession.duration.seconds = time.seconds;
