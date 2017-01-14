@@ -10,7 +10,7 @@ thinky.dbReady().then(() => {
   app.listen(8080, function() {
     const host = this.address().address;
     const port = this.address().port;
-    logger.info(`Experts-server is listening at http://${host}:${port}`);
+    logger.info(`FitRun-server is listening at http://${host}:${port}`);
   });
 });
 

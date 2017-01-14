@@ -7,7 +7,7 @@ export const logger = new winston.Logger({
       colorize: true,
       timestamp: true,
       prettyPrint: true,
-      label: 'experts-server'
+      label: 'FitRun-server'
     })
   ]
 });
