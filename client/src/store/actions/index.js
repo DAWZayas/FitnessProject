@@ -81,3 +81,8 @@ export const updateProfile = payload => ({
   type: ActionTypes.DO_UPDATE_PROFILE,
   payload,
 });
+
+export const getImages = payload => ({
+  type: ActionTypes.GET_IMAGES,
+  payload,
+});
