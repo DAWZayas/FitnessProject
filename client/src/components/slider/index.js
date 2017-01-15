@@ -3,19 +3,24 @@ import {connect} from 'react-redux';
 
 import Slide from './slide';
 
+import {getImages} from '../../store/actions';
+
+const mapStateToProps = state => ({
+  images: state.images.images,
+  state: state.images.state,
+});
+
 const mapDispatchToProps = dispatch => ({
+  getCarouselImages: params => dispatch(getImages(params)),
 });
 
 class Slider extends Component {
 
   constructor(props) {
     super(props);
+    this.props.getCarouselImages({folder: 'carousel'});
     this.state = {
-      slides: [
-        'http://mdbootstrap.com/img/Photos/Slides/img%20(18).jpg',
-        'http://mdbootstrap.com/img/Photos/Slides/img%20(19).jpg',
-        'http://mdbootstrap.com/img/Photos/Slides/img%20(20).jpg',
-      ],
+      slides: null,
       index: 0,
       timer: setInterval(
         () => this.setState({index: this.state.index >= this.state.slides.length - 1 ? 0 : ++this.state.index}),
@@ -28,6 +33,9 @@ class Slider extends Component {
   }
 
   componentDidUpdate() {
+    if (!this.state.slides && this.props.state === 'done') {
+      this.setState({slides: this.props.images.map(img => 'http://localhost:8080/static/images/carousel/' + img)});
+    }
   }
 
   componentWillUnmount() {
@@ -69,20 +77,24 @@ class Slider extends Component {
   }
 
   render() {
-    const slides = this.updateSlider();
     return (
-      <div id="carousel-example-1" className="carousel slide carousel-fade" data-ride="carousel">
-        <div className="carousel-inner" role="listbox">
-          {slides}
-        </div>
-        <a className="left carousel-control" href="#carousel-example-1" role="button" onClick={this.handlePrevious}>
-          <span className="icon-prev" aria-hidden="true"></span>
-        </a>
-        <a className="right carousel-control" href="#carousel-example-1" role="button" onClick={this.handleNext}>
-          <span className="icon-next" aria-hidden="true"></span>
-        </a>
+      <div>
+        {this.state.slides ?
+          <div id="carousel-example-1" className="carousel slide carousel-fade" data-ride="carousel">
+            <div className="carousel-inner" role="listbox">
+              {this.updateSlider()}
+            </div>
+            <a className="left carousel-control" href="#carousel-example-1" role="button" onClick={this.handlePrevious}>
+              <span className="icon-prev" aria-hidden="true"></span>
+            </a>
+            <a className="right carousel-control" href="#carousel-example-1" role="button" onClick={this.handleNext}>
+              <span className="icon-next" aria-hidden="true"></span>
+            </a>
+          </div>
+        : ''
+        }
       </div>
     );
   }
 }
-export default connect(null, mapDispatchToProps)(Slider);
+export default connect(mapStateToProps, mapDispatchToProps)(Slider);
