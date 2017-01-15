@@ -17,9 +17,13 @@ import setupSportSessionRoutes from './sportSession';
 import setupExerciseRoutes from './exercise';
 import setupRoutineRoutes from './routine';
 import setupDiet from './diet';
+import setupImages from './images';
 
 // init app
 const app = express();
+
+// setup static files service
+app.use('/static', express.static('public'));
 
 // setup logging
 app.use(morgan('combined', {stream: logger.stream}));
@@ -65,6 +69,8 @@ setupRoutineRoutes(app);
 
 // setup diet
 setupDiet(app);
+
+setupImages(app);
 
 // catch all unhandled errors
 app.use((err, req, res, next) => {
