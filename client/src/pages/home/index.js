@@ -31,6 +31,13 @@ const Home = () => (
         <Link to="/stats" className="btn btn-default">Go!</Link>
       </div>
     </div>
+
+    <div className="card">
+      <div className="card-block">
+        <h4 className="card-title">Athletes nearby</h4>
+        <Link to="/athletes" className="btn btn-default">Go!</Link>
+      </div>
+    </div>
   </div>
 );
 

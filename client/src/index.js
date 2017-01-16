@@ -29,6 +29,7 @@ import Sessions from './pages/sessions';
 import Profile from './pages/profile';
 import UpdateUser from './pages/profile/updateUser';
 import UpdateProfile from './pages/profile/updateProfile';
+import Athletes from './pages/athletes';
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
@@ -49,6 +50,7 @@ ReactDOM.render((
         <Route path="routine/create" component={Create} />
         <Route path="routine/doRoutine" component={DoRoutine} />
         <Route path="stats" component={Stats} />
+        <Route path="athletes" component={Athletes} />
         <Route path="profile" component={Profile} />
         <Route path="updateUser" component={UpdateUser} />
         <Route path="updateProfile" component={UpdateProfile} />
