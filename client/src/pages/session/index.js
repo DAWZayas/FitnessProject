@@ -27,9 +27,13 @@ const started = (onFinishSession, sessionId) => {
   const distanceFunction = dist => totalDistance = dist;
   return (
     <div>
-      <Timer />
+      <div className="card card-block text-xs-center">
+        <Timer />
+      </div>
       <Distance totalDistance={distanceFunction} />
-      <button type="submit" className="btn btn-danger" onClick={handleClick}>Finish</button>
+      <div className="card card-block text-xs-center">
+        <button type="submit" className="btn btn-deep-orange btn-block" onClick={handleClick}>Finish</button>
+      </div>
     </div>
   );
 };

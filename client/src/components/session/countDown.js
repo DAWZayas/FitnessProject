@@ -10,7 +10,7 @@ const countDownStyle = {
   display: 'inline-block',
   fontWeight: '100',
   textAlign: 'center',
-  fontSize: '50px',
+  fontSize: '100px',
 };
 
 class CountDown extends Component {
@@ -40,8 +40,8 @@ class CountDown extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="text-center" style={countDownStyle}>
+      <div className="container text-xs-center">
+        <div className="" style={countDownStyle}>
           <span >{this.state.time}</span>
         </div>
       </div>

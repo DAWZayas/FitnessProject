@@ -57,9 +57,13 @@ class Distance extends Component {
 
   render() {
     return (
-      <div className="container">
-        <Map lat={this.props.session.lat} lng={this.props.session.lng} />
-        <span>Distance: {this.state.distance} km</span>
+      <div>
+        <div className="card card-block text-xs-center">
+          <Map lat={this.props.session.lat} lng={this.props.session.lng} />
+        </div>
+        <div className="card card-block text-xs-center">
+          <h2>Distance: {this.state.distance} km</h2>
+        </div>
         <div className="text-center">
           {this.state.pos.map((pos) => (<div><span>Lat: {pos.lat}</span><span>Lon: {pos.lng}</span></div>))}
         </div>
