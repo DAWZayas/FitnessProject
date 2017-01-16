@@ -39,6 +39,18 @@ export const finishSession = action$ => action$
         })),
       );
 
+export const updateSessionPosition = action$ => action$
+        .ofType(ActionTypes.UPDATE_SESSION_POSITION)
+        .switchMap(({payload}) => Observable
+          .ajax.post(`http://localhost:8080/api/sportSession/updatePosition/${payload.sessionId}`, payload)
+          .map(res => res.response)
+          .mergeMap(session => Observable.of({
+            type: ActionTypes.UPDATE_SESSION_POSITION_SUCCESS,
+            payload: session,
+          }
+          ))
+        );
+
 export const prepareSession = action$ => action$
       .ofType(ActionTypes.PREPARE_SESSION)
       .mergeMap(() => Rx.Observable.create(subscriber =>

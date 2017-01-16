@@ -2,15 +2,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import {distanceCoords} from '../../util/distanceCoords';
+import {updateSessionPosition} from '../../store/actions';
 
 import {Map} from '../../components/session';
 
 const mapDispatchToProps = dispatch => ({
-
+  updatePosition: payload => dispatch(updateSessionPosition(payload)),
 });
 
 const mapStateToProps = state => ({
   session: state.session.position,
+  sessionId: state.session.id,
 });
 
 class Distance extends Component {
@@ -48,6 +50,7 @@ class Distance extends Component {
         // console.log(dist);
         distance = !isNaN(dist) && Math.trunc(dist * 1000) / 1000;
       }
+      this.props.updatePosition({sessionId: this.props.sessionId, pos: JSON.stringify(pos)});
       this.setState({pos: [...this.state.pos, pos], distance: this.state.distance + distance}); // warning setState con unmounted component
     });
   }

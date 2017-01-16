@@ -11,6 +11,7 @@ export default (app) => {
       sport,
       startTime: new Date(startDate),
       duration: {},
+      pos: {},
     });
     const {id} = await sportSession.save();
     res.send({id});

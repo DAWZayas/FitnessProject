@@ -54,6 +54,12 @@ export const finishSession = (payload) => ({
   payload,
 });
 
+export const updateSessionPosition = (payload) => ({
+  type: ActionTypes.UPDATE_SESSION_POSITION,
+  payload,
+});
+
+
 export const createExercise = (payload) => ({
   type: ActionTypes.CREATE_EXERCISE,
   payload,
