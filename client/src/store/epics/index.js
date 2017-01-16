@@ -3,6 +3,7 @@ import {addNotification} from './notifications';
 import {startSession, finishSession, prepareSession, updateSessionPosition} from './session';
 import {createExercise, getExercises, createRoutine, getAllRoutines} from './routine';
 import {getImages} from './images';
+import {addObservable} from './realtime';
 
 export default [
   // auth
@@ -21,4 +22,5 @@ export default [
   createRoutine,
   getAllRoutines,
   getImages,
+  addObservable,
 ];
