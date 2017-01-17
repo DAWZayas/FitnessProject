@@ -22,8 +22,8 @@ class Distance extends Component {
     this.state = {
       pos: [{lat: this.props.session.lat, lng: this.props.session.lng}],
       distance: 0,
-      prueba: 0.01,
-      prueba2: 0.01,
+      prueba: 0.001,
+      prueba2: 0.001,
       timer: setInterval(
         () => this.getActualPosition(),
         3000
@@ -50,10 +50,10 @@ class Distance extends Component {
       if (this.state.pos) {
         const dist = distanceCoords(this.state.pos[this.state.pos.length - 1], pos);
         // console.log(dist);
-        distance = !isNaN(dist) && Math.trunc(dist * 1000) / 1000;
+        distance = !isNaN(dist) && Math.trunc(dist * 1000);
       }
       this.props.updatePosition({sessionId: this.props.sessionId, pos: JSON.stringify(pos)});
-      this.setState({pos: [...this.state.pos, pos], distance: this.state.distance + distance, prueba: this.state.prueba + Math.random() * 0.01, prueba2: this.state.prueba2 + Math.random() * 0.01}); // warning setState con unmounted component
+      this.setState({pos: [...this.state.pos, pos], distance: this.state.distance + distance, prueba: this.state.prueba + Math.random() * 0.001, prueba2: this.state.prueba2 + Math.random() * 0.001}); // warning setState con unmounted component
     });
   }
 
@@ -61,10 +61,10 @@ class Distance extends Component {
     return (
       <div>
         <div className="card card-block text-xs-center">
-          <Map lat={this.props.session.lat} lng={this.props.session.lng} pos={this.state.pos[this.state.pos.length - 1]} />
+          <Map lat={this.props.session.lat} lng={this.props.session.lng} pos={this.state.pos[this.state.pos.length - 1]} line />
         </div>
         <div className="card card-block text-xs-center">
-          <h2>Distance: {this.state.distance} km</h2>
+          <h2>Distance: {this.state.distance} m.</h2>
         </div>
         <div className="text-center">
           {this.state.pos.map((pos) => (<div><span>Lat: {pos.lat}</span><span>Lon: {pos.lng}</span></div>))}

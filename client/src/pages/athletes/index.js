@@ -33,12 +33,14 @@ class Athletes extends Component {
   }
 
   render() {
-    const pos = this.athletesPos === null ? {lat: 40.479111499999995, lng: -3.8553606000000005} : {lat: this.athletesPos.pos.lat, lng: this.athletesPos.pos.lng};
+    // console.log(this.props.marker);
+    // console.log(this.props.athletesPos);
+    const pos = Object.keys(this.props.athletesPos).length === 0 ? {} : {lat: this.props.athletesPos.lat, lng: this.props.athletesPos.lng};
     return (
       <div className="card">
         <div className="card-block">
           <h4 className="card-title">Real time</h4>
-          <Map lat={40.479111499999995} lng={-3.8553606000000005} pos={pos} />
+          <Map lat={40.479111499999995} lng={-3.8553606000000005} pos={pos} athletes />
         </div>
       </div>
     );

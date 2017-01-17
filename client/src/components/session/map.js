@@ -9,6 +9,7 @@ export default class Map extends React.Component {
       map: null,
       loaded: false,
       poly: null,
+      marker: null,
     };
     // this.initMap = this.initMap.bind(this);
     this.loadMap = this.loadMap.bind(this);
@@ -21,11 +22,18 @@ export default class Map extends React.Component {
   componentWillReceiveProps(nextProps) {
     const path = this.state.poly.getPath();
     path.push(new google.maps.LatLng({lat: nextProps.pos.lat, lng: nextProps.pos.lng}));
-    const marker = new google.maps.Marker({
-      position: new google.maps.LatLng({lat: nextProps.pos.lat, lng: nextProps.pos.lng}),
-      title: '#' + path.getLength(),
-      map: this.state.map,
-    });
+
+    if (this.props.athletes) {
+
+      if (this.state.marker) { this.state.marker.setMap(null); }
+
+      const marker = new google.maps.Marker({
+        position: new google.maps.LatLng({lat: nextProps.pos.lat, lng: nextProps.pos.lng}),
+        title: '#' + path.getLength(),
+        map: this.state.map,
+      });
+      this.setState({marker});
+    }
   }
 
   loadMap() {
@@ -40,13 +48,15 @@ export default class Map extends React.Component {
           strokeOpacity: 1.0,
           strokeWeight: 5,
         }),
-        marker: new google.maps.Marker({
+        markerOrigin: new google.maps.Marker({
           position: new google.maps.LatLng(this.props.lat, this.props.lng),
           title: 'Origin',
         }),
       });
-      this.state.poly.setMap(this.state.map);
-      this.state.marker.setMap(this.state.map);
+
+      if (this.props.line) { this.state.poly.setMap(this.state.map); }
+
+      this.state.markerOrigin.setMap(this.state.map);
     }, 0);
   }
 
