@@ -4,8 +4,11 @@ import {connect} from 'react-redux';
 import {addObservable, removeObservable} from '../../store/actions';
 import {registerSessionsObservable} from '../../store/realtime';
 
-const mapStateToProps = state => ({
+import {Map} from '../../components/session';
 
+const mapStateToProps = state => ({
+  session: state.session.position,
+  athletesPos: state.realtime.pos,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -30,10 +33,12 @@ class Athletes extends Component {
   }
 
   render() {
+    const pos = this.athletesPos === null ? {lat: 40.479111499999995, lng: -3.8553606000000005} : {lat: this.athletesPos.pos.lat, lng: this.athletesPos.pos.lng};
     return (
       <div className="card">
         <div className="card-block">
           <h4 className="card-title">Real time</h4>
+          <Map lat={40.479111499999995} lng={-3.8553606000000005} pos={pos} />
         </div>
       </div>
     );

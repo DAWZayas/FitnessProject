@@ -3,6 +3,7 @@ import {notifications} from './notifications';
 import {session} from './session';
 import {routine} from './routine';
 import {images} from './images';
+import {realtime} from './realtime';
 
 export default {
   auth,
@@ -10,4 +11,5 @@ export default {
   session,
   routine,
   images,
+  realtime,
 };

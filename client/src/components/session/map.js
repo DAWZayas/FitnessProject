@@ -18,6 +18,16 @@ export default class Map extends React.Component {
     this.loadMap(this.node);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const path = this.state.poly.getPath();
+    path.push(new google.maps.LatLng({lat: nextProps.pos.lat, lng: nextProps.pos.lng}));
+    const marker = new google.maps.Marker({
+      position: new google.maps.LatLng({lat: nextProps.pos.lat, lng: nextProps.pos.lng}),
+      title: '#' + path.getLength(),
+      map: this.state.map,
+    });
+  }
+
   loadMap() {
     setTimeout(() => {
       this.setState({
@@ -37,10 +47,6 @@ export default class Map extends React.Component {
       });
       this.state.poly.setMap(this.state.map);
       this.state.marker.setMap(this.state.map);
-      // const path = this.state.poly.getPath();
-      // path.push(new google.maps.LatLng({lat: 40.476938, lng: -4.857414}));
-      // path.push(new google.maps.LatLng({lat: 41.476938, lng: -5.857414}));
-      // path.push(new google.maps.LatLng({lat: 42.476938, lng: -6.857414}));
     }, 0);
   }
 
