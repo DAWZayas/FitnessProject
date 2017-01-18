@@ -5,6 +5,11 @@ const mapDispatchToProps = dispatch => ({
   actionToDispatch: (payload, action) => dispatch(action(payload)),
 });
 
+const mapStateToProps = state => ({
+  pos: state.session.position,
+  sessionId: state.session.id,
+});
+
 const countDownStyle = {
   fontFamily: 'sans-serif',
   display: 'inline-block',
@@ -30,7 +35,7 @@ class CountDown extends Component {
     const {actionToDispatch} = this.props;
     if (this.state.time === 0) {
       clearInterval(this.state.timer);
-      actionToDispatch({...this.props.data, startDate: new Date()}, this.props.action);
+      actionToDispatch({...this.props.data, startDate: new Date(), pos: JSON.stringify(this.props.pos)}, this.props.action);
     }
   }
 
@@ -48,4 +53,4 @@ class CountDown extends Component {
     );
   }
 }
-export default connect(null, mapDispatchToProps)(CountDown);
+export default connect(mapStateToProps, mapDispatchToProps)(CountDown);
