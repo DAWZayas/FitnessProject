@@ -6,7 +6,7 @@ import Slide from './slide';
 import {getImages} from '../../store/actions';
 
 const mapStateToProps = state => ({
-  images: state.images.images,
+  images: state.images.carousel,
   state: state.images.state,
 });
 
