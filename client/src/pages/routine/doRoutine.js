@@ -5,6 +5,8 @@ import {Link} from 'react-router';
 import {getAllRoutines} from '../../store/actions';
 import {CountDown} from '../../components/routine';
 
+import modal from './modal.css';
+
 const mapDispatchToProps = dispatch => ({
   fetchRoutines: () => dispatch(getAllRoutines()),
 });
@@ -40,6 +42,7 @@ class DoRoutine extends Component {
 
   handleClick = (e) => {
     e.preventDefault();
+    console.log(e.target.value);
     this.setState(
       {
         state: 1,
@@ -48,7 +51,6 @@ class DoRoutine extends Component {
         exercise: 0,
       }
     );
-    console.log(e.target.value);
   };
 
   nextAction = () => {
@@ -82,12 +84,46 @@ class DoRoutine extends Component {
   render() {
     return (
       <div className="container">
-        <div className="text-center">
+        <div className="jumbotron text-xs-center">
+          <h1>Routines</h1>
+        </div>
+        <div className="text-xs-center">
           {this.state.state === 0 ?
-            this.props.routines.map(e =>
-              <button className="btn col-xs-5" onClick={this.handleClick} value={e.id}>
-                {e.name}
-              </button>)
+            this.props.routines.map(routine =>
+              <div key={routine.id}>
+                <div className="card col-xs-6">
+                  <div className="view overlay hm-white-slight">
+                    <img src="http://localhost:8080/static/images/exercises/04.png" className="img-fluid" alt="" />
+                    <a className="mask" href={`#${routine.id}`} />
+                  </div>
+                  <div className="card-block">
+                    <h4 className="card-title">{routine.name}</h4>
+                    <hr />
+                    <p className="card-text">{routine.description}</p>
+                  </div>
+                </div>
+                <div id={routine.id} className={modal.overlay}>
+                  <div className={modal.popup}>
+                    <h2>{routine.name}</h2>
+                    <a className={modal.close} href="#a">&times;</a>
+                    <div className={modal.content}>
+                      <hr />
+                      <ul className="list-group">
+                        <li className="list-group-item">Created by: {routine.user}</li>
+                        <li className="list-group-item">Level: {routine.level}</li>
+                        <li className="list-group-item">Rounds: {routine.rounds}</li>
+                        <li className="list-group-item">Rest: {routine.rest} s.</li>
+                        <li className="list-group-item">Round rest: {routine.restRounds} s.</li>
+                        <li className="list-group-item list-group-item-info">Exercises: {routine.exercises.length}</li>
+                        {routine.exercises.map((ex, key) =>
+                          (<li className="list-group-item" key={key}>{ex.name}: {ex.time} s.</li>))}
+                      </ul>
+                      <button type="submit" className="btn btn-default" onClick={this.handleClick} value={routine.id} >Do it!</button>
+                    </div>
+                  </div>
+                </div>
+              </div>)
+
             : ''
           }
           {this.state.state !== 0 ?
