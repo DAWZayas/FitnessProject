@@ -2,12 +2,15 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
+import Loader from '../../components/loader';
+
 import {createExercise, getImages} from '../../store/actions';
 
 import modal from './modal.css';
 
 const mapStateToProps = state => ({
   images: state.images.exercises,
+  statusImages: state.images.state,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -17,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
 
 let image;
 
-const Exercise = ({onCreateExerciseClick, onSelectImages, images}) => {
+const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages}) => {
   let name;
   let kind;
   let description;
@@ -98,11 +101,12 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images}) => {
             <a className={modal.close} href="#a">&times;</a>
             <div className={modal.content}>
               <hr />
-              {images ? images.map(img =>
+              {statusImages && statusImages === 'done' ? images.map(img =>
                 <a href="#a">
                   <img src={'http://localhost:8080/static/images/exercises/' + img} onClick={selectImage} width="50px" height="50px" alt="" />
                 </a>
-                ) : ''}
+              ) : <div className="text-xs-center"><Loader /></div>}
+              <hr />
             </div>
           </div>
         </div>

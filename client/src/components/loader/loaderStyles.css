@@ -1,6 +1,7 @@
 .loader {
   // margin: 0 auto;
   width: 50px;        /*anchura del loader*/
+  display: inline-block;
 }
 
 /*

@@ -5,6 +5,8 @@ import {Link} from 'react-router';
 import {getAllRoutines} from '../../store/actions';
 import {CountDown} from '../../components/routine';
 
+import Loader from '../../components/loader';
+
 import modal from './modal.css';
 
 const mapDispatchToProps = dispatch => ({
@@ -13,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   routines: state.routine.routines,
+  status: state.routine.routineStatus,
 });
 
 class DoRoutine extends Component {
@@ -88,7 +91,8 @@ class DoRoutine extends Component {
           <h1>Routines</h1>
         </div>
         <div className="text-xs-center">
-          {this.state.state === 0 ?
+          {this.state.state === 0 && this.props.status === 'loading' ? <Loader /> : ''}
+          {this.state.state === 0 && this.props.status === 'done' ?
             this.props.routines.map(routine =>
               <div key={routine.id}>
                 <div className="card col-xs-6">

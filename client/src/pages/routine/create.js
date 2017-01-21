@@ -2,11 +2,14 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {createRoutine, getExercises} from '../../store/actions';
 
+import Loader from '../../components/loader';
+
 import styles from './radio.css';
 
 const mapStateToProps = state => ({
   userName: state.auth.user.login,
   exercises: state.routine.exercises,
+  status: state.routine.exerciseStatus,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -218,8 +221,8 @@ class Create extends Component {
           </div>
           <button type="submit" className="btn btn-primary" onClick={this.handleClickExercise}>Show exercises</button>
           <div className="form-group row">
-
-            {this.props.exercises.map(ex =>
+            {this.props.status === 'loading' ? <div className="text-xs-center"><Loader /></div> :
+            this.props.exercises.map(ex =>
               <div className="card col-xs-6">
                 <div className="view overlay hm-white-slight">
                   <img src={ex.image} className="img-fluid" alt="" />
