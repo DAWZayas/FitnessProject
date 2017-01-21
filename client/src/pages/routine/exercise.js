@@ -2,17 +2,22 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
-import {createExercise} from '../../store/actions';
+import {createExercise, getImages} from '../../store/actions';
+
+import modal from './modal.css';
 
 const mapStateToProps = state => ({
-  redirectToLogin: state.auth.redirectToLogin,
+  images: state.images.exercises,
 });
 
 const mapDispatchToProps = dispatch => ({
   onCreateExerciseClick: payload => dispatch(createExercise(payload)),
+  onSelectImages: params => dispatch(getImages(params)),
 });
 
-const Exercise = ({onCreateExerciseClick}) => {
+let image;
+
+const Exercise = ({onCreateExerciseClick, onSelectImages, images}) => {
   let name;
   let kind;
   let description;
@@ -21,14 +26,22 @@ const Exercise = ({onCreateExerciseClick}) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-
     onCreateExerciseClick({
       name: name.value,
       kind: kind.value,
       description: description.value,
       calories: calories.value,
-      // image: image.value,
+      image: '' + image,
     });
+    image = '';
+  };
+
+  const handleImages = () => {
+    onSelectImages({folder: 'exercises'});
+  };
+
+  const selectImage = (e) => {
+    image = e.target.src;
   };
 
   return (
@@ -75,10 +88,23 @@ const Exercise = ({onCreateExerciseClick}) => {
           />
         </div>
         <div className="form-group">
-          <label className="btn btn-primary" htmlFor="inputImage">
-            <input id="inputImage" type="file" style={{display: 'none'}} />
-            Browse image
-          </label>
+          <a className="btn btn-info" href="#images" onClick={handleImages}>Select image</a>
+          {console.log(image)}
+          {image ? <img src={image} width="50px" height="50px" alt="" /> : ''}
+        </div>
+        <div id="images" className={modal.overlay}>
+          <div className={modal.popup}>
+            <h2>Images</h2>
+            <a className={modal.close} href="#a">&times;</a>
+            <div className={modal.content}>
+              <hr />
+              {images ? images.map(img =>
+                <a href="#a">
+                  <img src={'http://localhost:8080/static/images/exercises/' + img} onClick={selectImage} width="50px" height="50px" alt="" />
+                </a>
+                ) : ''}
+            </div>
+          </div>
         </div>
         <button type="submit" className="btn btn-default" onClick={handleClick}>Create</button>
       </form>

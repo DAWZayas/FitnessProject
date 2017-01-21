@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {createRoutine, getExercises} from '../../store/actions';
 
@@ -14,194 +14,232 @@ const mapDispatchToProps = dispatch => ({
   loadExercises: () => dispatch(getExercises()),
 });
 
-const Create = ({onCreateRoutineClick, loadExercises, userName, exercises}) => {
-  let name;
-  let level;
-  let rest;
-  let rounds;
-  let restRounds;
-  let routineExercises = [];
-  // let time;
+class Create extends Component {
 
-  const handleClick = (e) => {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      routineExercises: [],
+    };
+    this.handleClick = this.handleClick.bind(this);
+    this.handleClickExercise = this.handleClickExercise.bind(this);
+    this.handleAddExercise = this.handleAddExercise.bind(this);
+    this.setLevel = this.setLevel.bind(this);
+    this.setRest = this.setRest.bind(this);
+    this.setRounds = this.setRounds.bind(this);
+    this.setRestRounds = this.setRestRounds.bind(this);
+    this.setName = this.setName.bind(this);
+  }
+
+  handleClick = (e) => {
     e.preventDefault();
 
-    onCreateRoutineClick({
-      user: userName,
-      name: name.value,
-      level,
-      rest,
-      rounds,
-      restRounds,
-      exercises: JSON.stringify(routineExercises),
+    this.props.onCreateRoutineClick({
+      user: this.props.userName,
+      name: this.state.name,
+      level: this.state.level,
+      rest: this.state.rest,
+      rounds: this.state.rounds,
+      restRounds: this.state.restRounds,
+      exercises: JSON.stringify(this.state.routineExercises),
     });
   };
 
-  const handleClickExercise = (e) => {
+  handleClickExercise = (e) => {
     e.preventDefault();
-    loadExercises();
+    this.props.loadExercises();
   };
 
-  const handleAddExercise = (e) => {
+  handleAddExercise = (e) => {
     e.preventDefault();
-    routineExercises = [...routineExercises, {name: e.target.innerHTML, image: 'image' + e.target.innerHTML, time: 20}]
-    console.log(routineExercises.map(ex => JSON.stringify(ex)));
+    this.setState({
+      routineExercises: [...this.state.routineExercises,
+        {id: e.target.id,
+          image: this.props.exercises.filter(token => e.target.id === token.id)[0].image,
+          time: 20,
+          name: this.props.exercises.filter(token => e.target.id === token.id)[0].name,
+        }],
+    });
+    console.log(this.state.routineExercises.map(ex => JSON.stringify(ex)));
   };
 
-  const setLevel = (e) => {
-    level = e.target.value;
+  setName = (e) => {
+    console.log(e.target.value);
+    this.setState({name: e.target.value});
   };
 
-  const setRest = (e) => {
-    rest = e.target.value;
+  setLevel = (e) => {
+    this.setState({level: e.target.value});
   };
 
-  const setRounds = (e) => {
-    rounds = e.target.value;
+  setRest = (e) => {
+    this.setState({rest: e.target.value});
   };
 
-  const setRestRounds = (e) => {
-    restRounds = e.target.value;
+  setRounds = (e) => {
+    this.setState({rounds: e.target.value});
   };
 
-  return (
-    <div className="jumbotron animated fadeIn">
-      <h2>Create routine</h2>
-      <form>
-        <div className="form-group">
-          <label htmlFor="inputName">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputName"
-            placeholder="routine name"
-            ref={(i) => { name = i; }}
-          />
-        </div>
-        <div className="form-inline">
+  setRestRounds = (e) => {
+    this.setState({restRounds: e.target.value});
+  };
+
+  render() {
+    return (
+      <div className="jumbotron animated fadeIn">
+        <h2>Create routine</h2>
+        <form>
           <div className="form-group">
-            <label htmlFor="inputLevel">Level</label>
-            <div id="inputLevel" onChange={setLevel}>
-              <label className={styles.radio} htmlFor="g11"><input type="radio" name="group1" value="1" id="g11" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                1
-              </label>
-              <label className={styles.radio} htmlFor="g12"><input type="radio" name="group1" value="2" id="g12" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                2
-              </label>
-              <label className={styles.radio} htmlFor="g13"><input type="radio" name="group1" value="3" id="g13" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                3
-              </label>
-              <label className={styles.radio} htmlFor="g14"><input type="radio" name="group1" value="4" id="g14" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                4
-              </label>
-              <label className={styles.radio} htmlFor="g15"><input type="radio" name="group1" value="5" id="g15" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                5
-              </label>
+            <label htmlFor="inputName">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="inputName"
+              placeholder="routine name"
+              onChange={this.setName}
+            />
+          </div>
+          <div className="form-inline">
+            <div className="form-group">
+              <label htmlFor="inputLevel">Level</label>
+              <div id="inputLevel" onChange={this.setLevel}>
+                <label className={styles.radio} htmlFor="g11"><input type="radio" name="group1" value="1" id="g11" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  1
+                </label>
+                <label className={styles.radio} htmlFor="g12"><input type="radio" name="group1" value="2" id="g12" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  2
+                </label>
+                <label className={styles.radio} htmlFor="g13"><input type="radio" name="group1" value="3" id="g13" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  3
+                </label>
+                <label className={styles.radio} htmlFor="g14"><input type="radio" name="group1" value="4" id="g14" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  4
+                </label>
+                <label className={styles.radio} htmlFor="g15"><input type="radio" name="group1" value="5" id="g15" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  5
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="form-inline">
-          <div className="form-group">
-            <label htmlFor="inputRest">Rest</label>
-            <div id="inputRest" onChange={setRest}>
-              <label className={styles.radio} htmlFor="g21"><input type="radio" name="group2" value="5" id="g21" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                5
-              </label>
-              <label className={styles.radio} htmlFor="g22"><input type="radio" name="group2" value="10" id="g22" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                10
-              </label>
-              <label className={styles.radio} htmlFor="g23"><input type="radio" name="group2" value="15" id="g23" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                15
-              </label>
-              <label className={styles.radio} htmlFor="g24"><input type="radio" name="group2" value="20" id="g24" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                20
-              </label>
-              <label className={styles.radio} htmlFor="g25"><input type="radio" name="group2" value="25" id="g25" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                25
-              </label>
+          <div className="form-inline">
+            <div className="form-group">
+              <label htmlFor="inputRest">Rest</label>
+              <div id="inputRest" onChange={this.setRest}>
+                <label className={styles.radio} htmlFor="g21"><input type="radio" name="group2" value="5" id="g21" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  5
+                </label>
+                <label className={styles.radio} htmlFor="g22"><input type="radio" name="group2" value="10" id="g22" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  10
+                </label>
+                <label className={styles.radio} htmlFor="g23"><input type="radio" name="group2" value="15" id="g23" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  15
+                </label>
+                <label className={styles.radio} htmlFor="g24"><input type="radio" name="group2" value="20" id="g24" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  20
+                </label>
+                <label className={styles.radio} htmlFor="g25"><input type="radio" name="group2" value="25" id="g25" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  25
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="form-inline">
-          <div className="form-group">
-            <label htmlFor="inputRounds">Rounds</label>
-            <div id="inputRounds" onChange={setRounds}>
-              <label className={styles.radio} htmlFor="g31"><input type="radio" name="group3" value="1" id="g31" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                1
-              </label>
-              <label className={styles.radio} htmlFor="g32"><input type="radio" name="group3" value="2" id="g32" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                2
-              </label>
-              <label className={styles.radio} htmlFor="g33"><input type="radio" name="group3" value="3" id="g33" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                3
-              </label>
-              <label className={styles.radio} htmlFor="g34"><input type="radio" name="group3" value="4" id="g34" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                4
-              </label>
-              <label className={styles.radio} htmlFor="g35"><input type="radio" name="group3" value="5" id="g35" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                5
-              </label>
+          <div className="form-inline">
+            <div className="form-group">
+              <label htmlFor="inputRounds">Rounds</label>
+              <div id="inputRounds" onChange={this.setRounds}>
+                <label className={styles.radio} htmlFor="g31"><input type="radio" name="group3" value="1" id="g31" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  1
+                </label>
+                <label className={styles.radio} htmlFor="g32"><input type="radio" name="group3" value="2" id="g32" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  2
+                </label>
+                <label className={styles.radio} htmlFor="g33"><input type="radio" name="group3" value="3" id="g33" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  3
+                </label>
+                <label className={styles.radio} htmlFor="g34"><input type="radio" name="group3" value="4" id="g34" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  4
+                </label>
+                <label className={styles.radio} htmlFor="g35"><input type="radio" name="group3" value="5" id="g35" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  5
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="form-inline">
-          <div className="form-group">
-            <label htmlFor="inputRestRounds">Rounds Rest</label>
-            <div id="inputRestRounds" onChange={setRestRounds}>
-              <label className={styles.radio} htmlFor="g41"><input type="radio" name="group4" value="30" id="g41" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                30
-              </label>
-              <label className={styles.radio} htmlFor="g42"><input type="radio" name="group4" value="60" id="g42" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                60
-              </label>
-              <label className={styles.radio} htmlFor="g43"><input type="radio" name="group4" value="90" id="g43" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                90
-              </label>
-              <label className={styles.radio} htmlFor="g44"><input type="radio" name="group4" value="120" id="g44" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                120
-              </label>
-              <label className={styles.radio} htmlFor="g45"><input type="radio" name="group4" value="150" id="g45" />
-                <span className={styles.outer}><span className={styles.inner} /></span>
-                150
-              </label>
+          <div className="form-inline">
+            <div className="form-group">
+              <label htmlFor="inputRestRounds">Rounds Rest</label>
+              <div id="inputRestRounds" onChange={this.setRestRounds}>
+                <label className={styles.radio} htmlFor="g41"><input type="radio" name="group4" value="30" id="g41" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  30
+                </label>
+                <label className={styles.radio} htmlFor="g42"><input type="radio" name="group4" value="60" id="g42" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  60
+                </label>
+                <label className={styles.radio} htmlFor="g43"><input type="radio" name="group4" value="90" id="g43" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  90
+                </label>
+                <label className={styles.radio} htmlFor="g44"><input type="radio" name="group4" value="120" id="g44" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  120
+                </label>
+                <label className={styles.radio} htmlFor="g45"><input type="radio" name="group4" value="150" id="g45" />
+                  <span className={styles.outer}><span className={styles.inner} /></span>
+                  150
+                </label>
+              </div>
             </div>
           </div>
-        </div>
+          <div>
+            {this.state.routineExercises.map(e =>
+              <div className="card row">
+                <img className="img-fluid col-xs-6"src={e.image} alt="" />
+                <span className="col-xs-6">ex: {e.name}, time: {e.time}</span>
+              </div>
+            )}
+          </div>
+          <button type="submit" className="btn btn-primary" onClick={this.handleClickExercise}>Show exercises</button>
+          <div className="form-group row">
 
-        {routineExercises.map(e => <div className="card col-xs-6">ex: {e.name}, time: {e.time}</div>)}
-
-        <button type="submit" className="btn btn-primary" onClick={handleClickExercise}>Show exercises</button>
-        <div className="form-group row">
-
-          {exercises.map(e =>
-            <button className="btn col-xs-5" onClick={handleAddExercise}>
-              {e.name}
-            </button>)
-          }
-        </div>
-        <button type="submit" className="btn btn-default" onClick={handleClick}>Create</button>
-      </form>
-    </div>
-  );
-};
+            {this.props.exercises.map(ex =>
+              <div className="card col-xs-6">
+                <div className="view overlay hm-white-slight">
+                  <img src={ex.image} className="img-fluid" alt="" />
+                  <a className="mask" id={ex.id} href={`#${ex.id}`} onClick={this.handleAddExercise} />
+                </div>
+                <div className="card-block">
+                  <h4 className="card-title">{ex.name}</h4>
+                  <hr />
+                  <p className="card-text">{ex.kind}</p>
+                  <p className="card-text">{ex.calories}</p>
+                  <p className="card-text">{ex.description}</p>
+                </div>
+              </div>
+            )}
+          </div>
+          <button type="submit" className="btn btn-default" onClick={this.handleClick}>Create</button>
+        </form>
+      </div>
+    );
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Create);

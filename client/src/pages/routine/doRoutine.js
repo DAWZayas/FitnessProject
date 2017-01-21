@@ -141,6 +141,7 @@ class DoRoutine extends Component {
             <div className="card">
               <div className="card-block">
                 <h4 className="card-title">{this.state.routine.exercises[this.state.exercise].name}</h4>
+                <img src={this.state.routine.exercises[this.state.exercise].image} className="img-fluid" alt="" />
                 <CountDown time={this.state.routine.exercises[this.state.exercise].time} action={this.nextAction} data={{}} />
               </div>
             </div>
