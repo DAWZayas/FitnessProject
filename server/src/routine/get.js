@@ -22,7 +22,9 @@ export default (app) => {
 
   app.get('/api/routine/', asyncRequest(async (req, res) => {
     try {
-      const routines = await r.table('Routine');
+      const skip = parseInt(req.query.skip, 10) || 0;
+      const limit = parseInt(req.query.limit, 10) || 6;
+      const routines = await r.table('Routine').skip(skip).limit(limit);
       res.send(routines);
     } catch (e) {
       res.status(400).send({error: 'Routine not in the database'});

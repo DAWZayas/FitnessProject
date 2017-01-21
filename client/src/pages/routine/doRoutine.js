@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import InfiniteScroll from 'redux-infinite-scroll';
 
 import {getAllRoutines} from '../../store/actions';
 import {CountDown} from '../../components/routine';
@@ -10,12 +11,13 @@ import Loader from '../../components/loader';
 import modal from './modal.css';
 
 const mapDispatchToProps = dispatch => ({
-  fetchRoutines: () => dispatch(getAllRoutines()),
+  fetchRoutines: payload => dispatch(getAllRoutines(payload)),
 });
 
 const mapStateToProps = state => ({
   routines: state.routine.routines,
-  status: state.routine.routineStatus,
+  hasMore: state.routine.hasMoreRoutines,
+  loadingMore: state.routine.routineStatus === 'loading',
 });
 
 class DoRoutine extends Component {
@@ -27,15 +29,16 @@ class DoRoutine extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.nextAction = this.nextAction.bind(this);
+    this.onLoadMore = this.onLoadMore.bind(this);
   }
 
   componentDidUpdate() {
 
   }
 
-  componentWillMount() {
-    this.props.fetchRoutines();
-  }
+  // componentWillMount() {
+  //   this.props.fetchRoutines();
+  // }
 
   // componentDidMount() {
   //   if (this.state.round === this.state.routine.rounds) {
@@ -55,6 +58,11 @@ class DoRoutine extends Component {
       }
     );
   };
+
+  onLoadMore = () => this.props.fetchRoutines({
+    skip: this.props.routines.length,
+    limit: 6,
+  });
 
   nextAction = () => {
     if (this.state.state === 1) {
@@ -91,45 +99,53 @@ class DoRoutine extends Component {
           <h1>Routines</h1>
         </div>
         <div className="text-xs-center">
-          {this.state.state === 0 && this.props.status === 'loading' ? <Loader /> : ''}
-          {this.state.state === 0 && this.props.status === 'done' ?
-            this.props.routines.map(routine =>
-              <div key={routine.id}>
-                <div className="card col-xs-6">
-                  <div className="view overlay hm-white-slight">
-                    <img src="http://localhost:8080/static/images/exercises/04.png" className="img-fluid" alt="" />
-                    <a className="mask" href={`#${routine.id}`} />
-                  </div>
-                  <div className="card-block">
-                    <h4 className="card-title">{routine.name}</h4>
-                    <hr />
-                    <p className="card-text">{routine.description}</p>
-                  </div>
-                </div>
-                <div id={routine.id} className={modal.overlay}>
-                  <div className={modal.popup}>
-                    <h2>{routine.name}</h2>
-                    <a className={modal.close} href="#a">&times;</a>
-                    <div className={modal.content}>
+          {!this.props.hasMore && this.props.routines.length === 0 ?
+            <div>No Routines yet!</div> :
+            <InfiniteScroll
+              elementIsScrollable={false}
+              loadMore={this.onLoadMore}
+              hasMore={this.props.hasMore}
+              loadingMore={this.props.loadingMore}
+              loader={<Loader />}
+            >
+              {this.props.routines.map(routine =>
+                <div key={routine.id}>
+                  <div className="card col-xs-6">
+                    <div className="view overlay hm-white-slight">
+                      <img src="http://localhost:8080/static/images/exercises/04.png" className="img-fluid" alt="" />
+                      <a className="mask" href={`#${routine.id}`} />
+                    </div>
+                    <div className="card-block">
+                      <h4 className="card-title">{routine.name}</h4>
                       <hr />
-                      <ul className="list-group">
-                        <li className="list-group-item">Created by: {routine.user}</li>
-                        <li className="list-group-item">Level: {routine.level}</li>
-                        <li className="list-group-item">Rounds: {routine.rounds}</li>
-                        <li className="list-group-item">Rest: {routine.rest} s.</li>
-                        <li className="list-group-item">Round rest: {routine.restRounds} s.</li>
-                        <li className="list-group-item list-group-item-info">Exercises: {routine.exercises.length}</li>
-                        {routine.exercises.map((ex, key) =>
-                          (<li className="list-group-item" key={key}>{ex.name}: {ex.time} s.</li>))}
-                      </ul>
-                      <button type="submit" className="btn btn-default" onClick={this.handleClick} value={routine.id} >Do it!</button>
+                      <p className="card-text">{routine.description}</p>
                     </div>
                   </div>
-                </div>
-              </div>)
-
-            : ''
+                  <div id={routine.id} className={modal.overlay}>
+                    <div className={modal.popup}>
+                      <h2>{routine.name}</h2>
+                      <a className={modal.close} href="#a">&times;</a>
+                      <div className={modal.content}>
+                        <hr />
+                        <ul className="list-group">
+                          <li className="list-group-item">Created by: {routine.user}</li>
+                          <li className="list-group-item">Level: {routine.level}</li>
+                          <li className="list-group-item">Rounds: {routine.rounds}</li>
+                          <li className="list-group-item">Rest: {routine.rest} s.</li>
+                          <li className="list-group-item">Round rest: {routine.restRounds} s.</li>
+                          <li className="list-group-item list-group-item-info">Exercises: {routine.exercises.length}</li>
+                          {routine.exercises.map((ex, key) =>
+                            (<li className="list-group-item" key={key}>{ex.name}: {ex.time} s.</li>))}
+                        </ul>
+                        <button type="submit" className="btn btn-default" onClick={this.handleClick} value={routine.id} >Do it!</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>)
+              }
+            </InfiniteScroll>
           }
+
           {this.state.state !== 0 ?
             <h4>Round: {this.state.round}</h4>
             : ''

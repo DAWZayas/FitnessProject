@@ -55,8 +55,9 @@ export const createRoutine = action$ => action$
 
 export const getAllRoutines = action$ => action$
     .ofType(ActionTypes.GET_ALL_ROUTINES)
-    .switchMap(({headers}) => Observable
-      .ajax.get('http://localhost:8080/api/routine', headers)
+    .mergeMap(({headers, payload}) => Observable
+      .ajax.get(`http://localhost:8080/api/routine?skip=${payload.skip || 0}&limit=${payload.limit || 6}`, headers)
+      .delay(2000)
       .map(res => res.response)
       .map(routines => ({
         type: ActionTypes.GET_ALL_ROUTINES_SUCCESS,

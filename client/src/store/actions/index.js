@@ -74,8 +74,9 @@ export const createRoutine = (payload) => ({
   payload,
 });
 
-export const getAllRoutines = () => ({
+export const getAllRoutines = payload => ({
   type: ActionTypes.GET_ALL_ROUTINES,
+  payload,
 });
 
 export const updateUser = payload => ({
