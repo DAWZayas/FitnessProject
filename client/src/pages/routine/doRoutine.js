@@ -99,7 +99,8 @@ class DoRoutine extends Component {
           <h1>Routines</h1>
         </div>
         <div className="text-xs-center">
-          {!this.props.hasMore && this.props.routines.length === 0 ?
+        {this.state.state === 0 ?
+          !this.props.hasMore && this.props.routines.length === 0 ?
             <div>No Routines yet!</div> :
             <InfiniteScroll
               elementIsScrollable={false}
@@ -144,7 +145,8 @@ class DoRoutine extends Component {
                 </div>)
               }
             </InfiniteScroll>
-          }
+          : ''
+        }
 
           {this.state.state !== 0 ?
             <h4>Round: {this.state.round}</h4>

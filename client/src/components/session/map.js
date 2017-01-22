@@ -20,8 +20,10 @@ export default class Map extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const path = this.state.poly.getPath();
-    path.push(new google.maps.LatLng({lat: nextProps.pos.lat, lng: nextProps.pos.lng}));
+    if (this.props.line) {
+      const path = this.state.poly.getPath();
+      path.push(new google.maps.LatLng({lat: nextProps.pos.lat, lng: nextProps.pos.lng}));
+    }
 
     if (this.props.athletes) {
 
