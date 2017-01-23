@@ -123,6 +123,7 @@ class DoRoutine extends Component {
                     </div>
                   </div>
                   <div id={routine.id} className={modal.overlay}>
+                    <a className={modal.cancel} href="#a"></a>
                     <div className={modal.popup}>
                       <h2>{routine.name}</h2>
                       <a className={modal.close} href="#a">&times;</a>
