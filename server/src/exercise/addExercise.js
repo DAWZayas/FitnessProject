@@ -13,6 +13,6 @@ export default (app) => {
     });
     await sport.save();
 
-    res.sendStatus(201);
+    res.send(sport);
   }));
 };

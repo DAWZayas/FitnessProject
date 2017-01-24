@@ -5,8 +5,12 @@ export const routine = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.CREATE_EXERCISE:
       return state;
+    case ActionTypes.CREATE_EXERCISE_SUCCESS:
+      return {...state, exercises: [...state.exercises, action.payload]};
     case ActionTypes.CREATE_ROUTINE:
       return state;
+    case ActionTypes.CREATE_ROUTINE_SUCCESS:
+      return {...state, routines: [...state.routines, action.payload]};
     case ActionTypes.GET_EXERCISES:
       return {...state, exerciseStatus: 'loading'};
     case ActionTypes.GET_EXERCISES_SUCCESS:

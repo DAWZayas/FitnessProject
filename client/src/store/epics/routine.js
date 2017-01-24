@@ -7,8 +7,9 @@ export const createExercise = action$ => action$
   .switchMap(({payload}) => Observable
     .ajax.post('http://localhost:8080/api/exercise', payload)
     .map(res => res.response)
-    .mergeMap(() => Observable.of({
+    .mergeMap(exercise => Observable.of({
       type: ActionTypes.CREATE_EXERCISE_SUCCESS,
+      payload: exercise,
     },
     Actions.addNotificationAction(
       {text: 'Exercise created', alertType: 'info'}),
@@ -41,8 +42,9 @@ export const createRoutine = action$ => action$
     .switchMap(({payload}) => Observable
       .ajax.post('http://localhost:8080/api/routine', payload)
       .map(res => res.response)
-      .mergeMap(() => Observable.of({
+      .mergeMap(routine => Observable.of({
         type: ActionTypes.CREATE_ROUTINE_SUCCESS,
+        payload: routine,
       },
       Actions.addNotificationAction(
         {text: 'Routine created', alertType: 'info'}),

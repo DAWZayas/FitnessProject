@@ -15,6 +15,6 @@ export default (app) => {
     });
     await routine.save();
 
-    res.sendStatus(201);
+    res.send(routine);
   }));
 };
