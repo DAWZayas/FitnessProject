@@ -18,7 +18,6 @@ class Slider extends Component {
 
   constructor(props) {
     super(props);
-    this.props.getCarouselImages({folder: 'carousel'});
     this.state = {
       slides: null,
       index: 0,
@@ -36,6 +35,10 @@ class Slider extends Component {
     if (!this.state.slides && this.props.state === 'done') {
       this.setState({slides: this.props.images.map(img => 'http://localhost:8080/static/images/carousel/' + img)});
     }
+  }
+
+  componentWillMount() {
+    this.props.getCarouselImages({folder: 'carousel'});
   }
 
   componentWillUnmount() {
