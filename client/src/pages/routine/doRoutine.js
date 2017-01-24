@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import InfiniteScroll from 'redux-infinite-scroll';
 
 import {getAllRoutines} from '../../store/actions';
-import {CountDown} from '../../components/routine';
+import {CountDown, FilterRoutineBar} from '../../components/routine';
 
 import Loader from '../../components/loader';
 
@@ -26,10 +26,12 @@ class DoRoutine extends Component {
     super(props);
     this.state = {
       state: 0,
+      filterText: '',
     };
     this.handleClick = this.handleClick.bind(this);
     this.nextAction = this.nextAction.bind(this);
     this.onLoadMore = this.onLoadMore.bind(this);
+    this.handleUserInput = this.handleUserInput.bind(this);
   }
 
   componentDidUpdate() {
@@ -64,6 +66,12 @@ class DoRoutine extends Component {
     limit: 6,
   });
 
+  handleUserInput(filterText) {
+    this.setState({
+      filterText,
+    });
+  }
+
   nextAction = () => {
     if (this.state.state === 1) {
       this.setState({state: 2});
@@ -93,11 +101,15 @@ class DoRoutine extends Component {
   };
 
   render() {
+
+    const routines = this.props.routines.filter(r => r.name.indexOf(this.state.filterText) !== -1);
+
     return (
       <div className="container">
         <div className="jumbotron text-xs-center">
           <h1>Routines</h1>
         </div>
+        <FilterRoutineBar onUserInput={this.handleUserInput} />
         <div className="text-xs-center">
         {this.state.state === 0 ?
           !this.props.hasMore && this.props.routines.length === 0 ?
@@ -109,7 +121,7 @@ class DoRoutine extends Component {
               loadingMore={this.props.loadingMore}
               loader={<Loader />}
             >
-              {this.props.routines.map(routine =>
+              {routines.map(routine =>
                 <div key={routine.id}>
                   <div className="card col-xs-6">
                     <div className="view overlay hm-white-slight">
