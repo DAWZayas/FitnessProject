@@ -4,16 +4,16 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 
-import Hello from 'hellojs';
+import hello from 'hellojs';
 
 // our packages
 import {loginAction} from '../../store/actions';
 
 import styles from './register-login.css';
 
-Hello.init(
-  {github: 'e43b56d1024cd4cc415f'},
-  {redirect_uri: 'http://localhost:3000/redirect.html'}
+hello.init(
+  {github: '0fe29a5dc637d03bac23'},
+  {redirect_uri: 'http://localhost:8080/api/github/callback'}
 );
 
 const mapStateToProps = state => ({
@@ -29,6 +29,7 @@ const Login = ({onLoginClick, navToHome, token}) => {
   let usernameInput;
   let passwordInput;
   let rememberInput;
+  let token2 = '';
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -46,13 +47,7 @@ const Login = ({onLoginClick, navToHome, token}) => {
   }
 
   const githubToken = () => {
-    Hello('github').login().then( function (x,y,z) {
-      debugger;
-      console.log(x,y,z)
-    }, function(e) {
-      debugger;
-      console.log(e)
-    });
+    hello('github').login();
   };
 
   return (
