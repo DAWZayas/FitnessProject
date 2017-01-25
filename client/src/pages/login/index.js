@@ -4,10 +4,17 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 
+import Hello from 'hellojs';
+
 // our packages
 import {loginAction} from '../../store/actions';
 
 import styles from './register-login.css';
+
+Hello.init(
+  {github: 'e43b56d1024cd4cc415f'},
+  {redirect_uri: 'http://localhost:3000/redirect.html'}
+);
 
 const mapStateToProps = state => ({
   token: state.auth.token,
@@ -38,6 +45,16 @@ const Login = ({onLoginClick, navToHome, token}) => {
     setImmediate(() => navToHome());
   }
 
+  const githubToken = () => {
+    Hello('github').login().then( function (x,y,z) {
+      debugger;
+      console.log(x,y,z)
+    }, function(e) {
+      debugger;
+      console.log(e)
+    });
+  };
+
   return (
     <div className="jumbotron">
       <form>
@@ -46,7 +63,7 @@ const Login = ({onLoginClick, navToHome, token}) => {
             <h3>Login</h3>
           </div>
           <div className={styles.social}>
-            <button type="button" className={`btn ${styles.github}`}>github</button>
+            <button type="button" className={`btn ${styles.github}`} onClick={githubToken}>github</button>
             <button type="button" className={`btn ${styles.google}`}>google</button>
             <button type="button" className={`btn ${styles.facebook}`}>facebook</button>
             <div className={styles.division}>

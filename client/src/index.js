@@ -10,6 +10,8 @@ import {Provider} from 'react-redux';
 import 'mdbootstrap/css/bootstrap.min.css';
 import 'mdbootstrap/css/mdb.min.css';
 
+import 'hellojs/dist/hello.all';
+
 // our packages
 import App from './app';
 import store from './store';

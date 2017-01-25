@@ -14,4 +14,30 @@ export default (app) => {
       res.status(401).send({error: 'Error logging in!'});
     }
   });
+
+  app.get('/api/github/login',
+    passport.authenticate('github', {
+      scope: authConfig.github.scope,
+      accessType: 'offline',
+      session: false,
+    }));
+
+  app.get('/api/github/callback',
+    passport.authenticate('github', {failureRedirect: '/login', session: false}),
+    (req, res) => {
+      if (req.user) {
+        const githubUser = req.user.profile;
+        const user = {
+          id: githubUser.id,
+          login: githubUser.username,
+          registrationDate: githubUser._json.created_at,
+          provider: githubUser.provider,
+          accessToken: req.user.accessToken,
+        };
+        const token = jwt.sign(user, authConfig.jwtSecret);
+        res.send({user, token});
+      } else {
+        res.status(401).send({error: 'Error logging in!'});
+      }
+    });
 };
