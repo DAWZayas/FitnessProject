@@ -1,8 +1,10 @@
 import {Observable} from 'rxjs/Observable';
+import Rx from 'rxjs/Rx';
 import * as ActionTypes from '../actionTypes';
 import * as Actions from '../actions';
 import {loginErrorToMessage, registerErrorToMessage} from '../../util';
 import {signRequest} from '../../util/signRequest';
+import hello from 'hellojs';
 
 // ASCII diagram for Rx Streams (see: https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
 
@@ -43,6 +45,33 @@ export const login = action$ => action$
       Actions.addNotificationAction({text: loginErrorToMessage(error), alertType: 'danger'}),
     )),
   );
+
+export const oauthLogin = action$ => action$
+    .ofType(ActionTypes.DO_OAUTH_LOGIN)
+    .mergeMap(() => Rx.Observable.create(subscriber =>
+      hello('google').login(token => subscriber.next({token: token.authResponse.access_token}))
+    ))
+    .switchMap(token => Observable
+      .ajax.post('http://localhost:8080/api/oauth/login', token)
+      .map(res => res.response)
+      .mergeMap(response => Observable.of(
+        {
+          type: ActionTypes.LOGIN_OAUTH_SUCCESS,
+          payload: response,
+        },
+        Actions.addNotificationAction(
+          {text: 'Login success', alertType: 'info'}),
+      ))
+      .catch(error => Observable.of(
+        {
+          type: ActionTypes.LOGIN_ERROR,
+          payload: {
+            error,
+          },
+        },
+        Actions.addNotificationAction({text: loginErrorToMessage(error), alertType: 'danger'}),
+      )),
+    );
 
 // Similar to login
 export const register = action$ => action$

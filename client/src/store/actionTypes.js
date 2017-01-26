@@ -4,6 +4,9 @@ export const DO_LOGIN = 'DO_LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 
+export const DO_OAUTH_LOGIN = 'DO_OAUTH_LOGIN';
+export const LOGIN_OAUTH_SUCCESS = 'LOGIN_OAUTH_SUCCESS';
+
 export const DO_LOGOUT = 'DO_LOGOUT';
 export const DO_LOGOUT_SUCCESS = 'DO_LOGOUT_SUCCESS';
 

@@ -1,4 +1,4 @@
-import {login, register, logout, updateUser, updateProfile} from './auth';
+import {login, oauthLogin, register, logout, updateUser, updateProfile} from './auth';
 import {addNotification} from './notifications';
 import {startSession, finishSession, prepareSession, updateSessionPosition} from './session';
 import {createExercise, getExercises, createRoutine, getAllRoutines} from './routine';
@@ -8,6 +8,7 @@ import {addObservable} from './realtime';
 export default [
   // auth
   login,
+  oauthLogin,
   register,
   updateUser,
   updateProfile,

@@ -27,6 +27,12 @@ export const auth = (state = initialState(), action) => {
       return {
         ...action.payload,
       };
+    case ActionTypes.LOGIN_OAUTH_SUCCESS:
+      localStorage.setItem('user.token', action.payload.token);
+      localStorage.setItem('user.data', JSON.stringify(action.payload.user));
+      return {
+        ...action.payload,
+      };
     case ActionTypes.DO_LOGOUT:
       localStorage.removeItem('user.token');
       localStorage.removeItem('user.data');

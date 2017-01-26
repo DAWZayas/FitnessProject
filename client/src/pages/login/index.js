@@ -7,7 +7,7 @@ import {push} from 'react-router-redux';
 import hello from 'hellojs';
 
 // our packages
-import {loginAction} from '../../store/actions';
+import {loginAction, loginOauthAction} from '../../store/actions';
 
 import styles from './register-login.css';
 
@@ -18,13 +18,13 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onLoginClick: params => dispatch(loginAction(params)),
   navToHome: () => location.assign('/'),
+  oauthLogin: payload => dispatch(loginOauthAction(payload)),
 });
 
-const Login = ({onLoginClick, navToHome, token}) => {
+const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
   let usernameInput;
   let passwordInput;
   let rememberInput;
-  let token2 = '';
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -46,19 +46,7 @@ const Login = ({onLoginClick, navToHome, token}) => {
       {google: '907309639379-aoppqn9rh4b02uoi3r07rtv19nh4jd4j.apps.googleusercontent.com'},
       {redirect_uri: 'http://localhost:3000/redirect.html'}
     );
-
-    hello('google').login(() => {
-      console.log(hello('google').getAuthResponse().access_token);
-      const token = hello('google').getAuthResponse().access_token;
-      let myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer " + token);
-      const myInit = {method: 'GET',
-        headers: myHeaders,
-      };
-      const myRequest = new Request('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', myInit);
-      fetch(myRequest)
-      .then(response => response.json().then((json) => console.log(json)));
-    })
+    oauthLogin();
   };
 
   return (

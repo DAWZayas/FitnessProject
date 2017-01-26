@@ -5,6 +5,11 @@ export const loginAction = payload => ({
   payload,
 });
 
+export const loginOauthAction = payload => ({
+  type: ActionTypes.DO_OAUTH_LOGIN,
+  payload,
+});
+
 export const logoutAction = () => ({
   type: ActionTypes.DO_LOGOUT,
 });
