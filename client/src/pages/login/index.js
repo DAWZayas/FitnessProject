@@ -11,11 +11,6 @@ import {loginAction} from '../../store/actions';
 
 import styles from './register-login.css';
 
-hello.init(
-  {github: '0fe29a5dc637d03bac23'},
-  {redirect_uri: 'http://localhost:8080/api/github/callback'}
-);
-
 const mapStateToProps = state => ({
   token: state.auth.token,
 });
@@ -46,8 +41,24 @@ const Login = ({onLoginClick, navToHome, token}) => {
     setImmediate(() => navToHome());
   }
 
-  const githubToken = () => {
-    hello('github').login();
+  const googleToken = () => {
+    hello.init(
+      {google: '907309639379-aoppqn9rh4b02uoi3r07rtv19nh4jd4j.apps.googleusercontent.com'},
+      {redirect_uri: 'http://localhost:3000/redirect.html'}
+    );
+
+    hello('google').login(() => {
+      console.log(hello('google').getAuthResponse().access_token);
+      const token = hello('google').getAuthResponse().access_token;
+      let myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer " + token);
+      const myInit = {method: 'GET',
+        headers: myHeaders,
+      };
+      const myRequest = new Request('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', myInit);
+      fetch(myRequest)
+      .then(response => response.json().then((json) => console.log(json)));
+    })
   };
 
   return (
@@ -58,8 +69,8 @@ const Login = ({onLoginClick, navToHome, token}) => {
             <h3>Login</h3>
           </div>
           <div className={styles.social}>
-            <button type="button" className={`btn ${styles.github}`} onClick={githubToken}>github</button>
-            <button type="button" className={`btn ${styles.google}`}>google</button>
+            <button type="button" className={`btn ${styles.github}`}>github</button>
+            <button type="button" className={`btn ${styles.google}`} onClick={googleToken} >google</button>
             <button type="button" className={`btn ${styles.facebook}`}>facebook</button>
             <div className={styles.division}>
               <div className={`${styles.line} ${styles.l}`}></div>
