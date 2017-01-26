@@ -1,6 +1,7 @@
 // npm packages
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
+import fetch from 'node-fetch';
 
 // our packages
 import {auth as authConfig} from '../../config';
@@ -21,6 +22,20 @@ export default (app) => {
       accessType: 'offline',
       session: false,
     }));
+
+  app.post('/api/oauth/login', (req, res) => {
+    const options = {
+      method: 'GET',
+      headers: {Authorization: 'Bearer ' + req.body.token},
+    };
+    fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', options)
+      .then(response => response.json())
+      .then((googleUser) => {
+        const token = jwt.sign(googleUser, authConfig.jwtSecret);
+        res.send({user: {login: googleUser.given_name}, token});
+      })
+      .catch(() => res.status(401).send({error: 'Error logging in!'}));
+  });
 
   app.get('/api/github/callback',
     passport.authenticate('github', {failureRedirect: '/login', session: false}),
