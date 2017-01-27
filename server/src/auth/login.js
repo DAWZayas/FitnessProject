@@ -24,17 +24,24 @@ export default (app) => {
     }));
 
   app.post('/api/oauth/login', (req, res) => {
-    const options = {
-      method: 'GET',
-      headers: {Authorization: 'Bearer ' + req.body.token},
-    };
-    fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', options)
-      .then(response => response.json())
-      .then((googleUser) => {
-        const token = jwt.sign(googleUser, authConfig.jwtSecret);
-        res.send({user: {login: googleUser.given_name}, token});
-      })
-      .catch(() => res.status(401).send({error: 'Error logging in!'}));
+    switch (req.body.provider) {
+      case 'google': {
+        const options = {
+          method: 'GET',
+          headers: {Authorization: 'Bearer ' + req.body.token},
+        };
+        fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', options)
+          .then(response => response.json())
+          .then((googleUser) => {
+            const token = jwt.sign(googleUser, authConfig.jwtSecret);
+            res.send({user: {login: googleUser.given_name}, token});
+          })
+          .catch(() => res.status(401).send({error: 'Error logging in!'}));
+        break;
+      }
+      default:
+        res.status(401).send({error: 'Error logging in!'});
+    }
   });
 
   app.get('/api/github/callback',

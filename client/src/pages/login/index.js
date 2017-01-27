@@ -46,7 +46,7 @@ const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
       {google: '907309639379-aoppqn9rh4b02uoi3r07rtv19nh4jd4j.apps.googleusercontent.com'},
       {redirect_uri: 'http://localhost:3000/redirect.html'}
     );
-    oauthLogin();
+    oauthLogin({provider: 'google'});
   };
 
   return (
