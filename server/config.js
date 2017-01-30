@@ -1,7 +1,17 @@
-export const db = {
-  host: 'localhost',
-  port: 28015,
-  db: 'expertsdb',
+exports.db = {
+  host: process.env.FITRUN_DB_URL || 'localhost',
+  port: process.env.FITRUN_DB_PORT || 28015,
+  db: 'FitRunDB',
+};
+
+exports.server = {
+  host: process.env.FITRUN_SERVER_URL || 'localhost',
+  port: process.env.FITRUN_SERVER_PORT || 8080,
+};
+
+exports.client = {
+  host: process.env.FITRUN_CLIENT_URL || 'localhost',
+  port: process.env.FITRUN_CLIENT_PORT || 3000,
 };
 
 export const auth = {

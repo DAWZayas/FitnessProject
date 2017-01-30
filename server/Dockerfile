@@ -11,4 +11,6 @@ RUN npm install
 # Copy application files
 COPY . /app
 
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
+
+EXPOSE 8080

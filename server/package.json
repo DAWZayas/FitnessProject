@@ -1,24 +1,24 @@
 {
-  "name": "fitnessproject",
+  "name": "FitRun",
   "version": "1.0.0",
-  "description": "Proyecto creado para trabajo de clase.",
+  "description": "Web App for to do sport and exercises routines.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "db:start": "docker run -d -p 28015:28015 -p 8090:8080 -v $PWD/db:/data --name expertsdb rethinkdb",
-    "db:stop": "docker stop expertsdb",
-    "db:rm": "docker rm expertsdb",
+    "db:start": "docker run -d -p 28015:28015 -p 8090:8080 -v $PWD/db:/data --name FitRunDB rethinkdb",
+    "db:stop": "docker stop FitRunDB",
+    "db:rm": "docker rm FitRunDB",
     "test": "eslint src/ && babel-node test/"
   },
   "keywords": [
     "js",
-    "canislupus"
+    "sport"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/DAWZayas/FitnessProject"
   },
-  "author": "CanisLupus",
+  "author": "Jacobo Cortina",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.18.0",
