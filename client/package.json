@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node serve.js",
     "dist": "webpack -p --config webpack.production.config.js",
-    "start-prod": "npm run dist -- && pushstate-server .",
     "start-prod": "pushstate-server ."
   },
   "repository": {
