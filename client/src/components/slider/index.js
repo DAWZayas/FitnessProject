@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {server as serverConfig} from '../../../config';
 
 import Slide from './slide';
 
@@ -33,7 +34,7 @@ class Slider extends Component {
 
   componentDidUpdate() {
     if (!this.state.slides && this.props.state === 'done') {
-      this.setState({slides: this.props.images.map(img => 'http://localhost:8080/static/images/carousel/' + img)});
+      this.setState({slides: this.props.images.map(img => `http://${serverConfig.host}:${serverConfig.port}/static/images/carousel/` + img)});
     }
   }
 

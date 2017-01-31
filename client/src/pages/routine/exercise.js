@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import {server as serverConfig} from '../../../config';
 
 import Loader from '../../components/loader';
 
@@ -92,7 +93,6 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
         </div>
         <div className="form-group">
           <a className="btn btn-info" href="#images" onClick={handleImages}>Select image</a>
-          {console.log(image)}
           {image ? <img src={image} width="50px" height="50px" alt="" /> : ''}
         </div>
         <div id="images" className={modal.overlay}>
@@ -103,7 +103,7 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
               <hr />
               {statusImages && statusImages === 'done' ? images.map(img =>
                 <a href="#a">
-                  <img src={'http://localhost:8080/static/images/exercises/' + img} onClick={selectImage} width="50px" height="50px" alt="" />
+                  <img src={`http://${serverConfig.host}:${serverConfig.port}/static/images/exercises/` + img} onClick={selectImage} width="50px" height="50px" alt="" />
                 </a>
               ) : <div className="text-xs-center"><Loader /></div>}
               <hr />
