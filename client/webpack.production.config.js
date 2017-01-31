@@ -65,6 +65,8 @@ module.exports = {
         NODE_ENV: JSON.stringify('production'),
         FITRUN_SERVER_URL: JSON.stringify('server1-fitrun.44fs.preview.openshiftapps.com'),
         FITRUN_SERVER_PORT: JSON.stringify('80'),
+        FITRUN_CLIENT_URL: JSON.stringify('client021-fitrun.44fs.preview.openshiftapps.com'),
+        FITRUN_CLIENT_PORT: JSON.stringify('9000'),
       },
     }),
     new webpack.optimize.UglifyJsPlugin({

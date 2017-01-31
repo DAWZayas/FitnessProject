@@ -3,6 +3,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
+import {client as clientConfig} from '../../../config';
 
 import hello from 'hellojs';
 
@@ -44,7 +45,7 @@ const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
   const googleToken = () => {
     hello.init(
       {google: '907309639379-aoppqn9rh4b02uoi3r07rtv19nh4jd4j.apps.googleusercontent.com'},
-      {redirect_uri: 'http://localhost:3000/redirect.html'}
+      {redirect_uri: `http://${clientConfig.host}/redirect.html`}
     );
     oauthLogin({provider: 'google'});
   };
