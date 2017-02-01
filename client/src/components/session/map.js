@@ -31,34 +31,36 @@ export default class Map extends React.Component {
 
       const marker = new google.maps.Marker({
         position: new google.maps.LatLng({lat: nextProps.pos.lat, lng: nextProps.pos.lng}),
-        title: '#' + path.getLength(),
+        title: '#',
         map: this.state.map,
       });
       this.setState({marker});
     }
   }
 
-  loadMap() {
+  loadMap(node) {
     setTimeout(() => {
-      this.setState({
-        map: new google.maps.Map(this.node, {
-          zoom: 14,
-          center: {lat: this.props.lat, lng: this.props.lng},
-        }),
-        poly: new google.maps.Polyline({
-          strokeColor: '#000000',
-          strokeOpacity: 1.0,
-          strokeWeight: 5,
-        }),
-        markerOrigin: new google.maps.Marker({
-          position: new google.maps.LatLng(this.props.lat, this.props.lng),
-          title: 'Origin',
-        }),
-      });
+      if (this.node) {
+        this.setState({
+          map: new google.maps.Map(this.node, {
+            zoom: 14,
+            center: {lat: this.props.lat, lng: this.props.lng},
+          }),
+          poly: new google.maps.Polyline({
+            strokeColor: '#000000',
+            strokeOpacity: 1.0,
+            strokeWeight: 5,
+          }),
+          markerOrigin: new google.maps.Marker({
+            position: new google.maps.LatLng(this.props.lat, this.props.lng),
+            title: 'Origin',
+          }),
+        });
 
-      if (this.props.line) { this.state.poly.setMap(this.state.map); }
+        if (this.props.line) { this.state.poly.setMap(this.state.map); }
 
-      this.state.markerOrigin.setMap(this.state.map);
+        this.state.markerOrigin.setMap(this.state.map);
+      }
     }, 0);
   }
 

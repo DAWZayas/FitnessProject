@@ -63,10 +63,12 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
-        FITRUN_SERVER_URL: JSON.stringify('server1-fitrun.44fs.preview.openshiftapps.com'),
-        FITRUN_SERVER_PORT: JSON.stringify('80'),
-        FITRUN_CLIENT_URL: JSON.stringify('client021-fitrun.44fs.preview.openshiftapps.com'),
+        FITRUN_SERVER_URL: JSON.stringify('server-fitrun.44fs.preview.openshiftapps.com'),
+        FITRUN_SERVER_PORT: JSON.stringify('443'),
+        FITRUN_SERVER_PROTOCOL: JSON.stringify('https'),
+        FITRUN_CLIENT_URL: JSON.stringify('client-fitrun.44fs.preview.openshiftapps.com'),
         FITRUN_CLIENT_PORT: JSON.stringify('9000'),
+        FITRUN_CLIENT_PROTOCOL: JSON.stringify('https'),
       },
     }),
     new webpack.optimize.UglifyJsPlugin({

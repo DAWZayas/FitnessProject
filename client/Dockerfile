@@ -6,19 +6,12 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # Cache npm dependencies
-COPY package.json /app/
-RUN npm install
+RUN npm install pushstate-server
 
 # Copy application files
-COPY . /app
+COPY index.html /app
+COPY dist /app/dist
 
-# Set permissions
-RUN chgrp -R 0 /app
-RUN chmod -R g+rw /app
-RUN find /app -type d -exec chmod g+x {} +
-
-RUN npm run dist
-
-CMD npm run start-prod
+CMD node_modules/.bin/pushstate-server .
 
 EXPOSE 9000
