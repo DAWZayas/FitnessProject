@@ -6,7 +6,7 @@ import {server as serverConfig} from '../../../config';
 export const createExercise = action$ => action$
   .ofType(ActionTypes.CREATE_EXERCISE)
   .switchMap(({payload}) => Observable
-    .ajax.post(`http://${serverConfig.host}:${serverConfig.port}/api/exercise`, payload)
+    .ajax.post(`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/api/exercise`, payload)
     .map(res => res.response)
     .mergeMap(exercise => Observable.of({
       type: ActionTypes.CREATE_EXERCISE_SUCCESS,
@@ -24,7 +24,7 @@ export const createExercise = action$ => action$
 export const getExercises = action$ => action$
     .ofType(ActionTypes.GET_EXERCISES)
     .switchMap(({headers}) => Observable
-      .ajax.get(`http://${serverConfig.host}:${serverConfig.port}/api/exercise`, headers)
+      .ajax.get(`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/api/exercise`, headers)
       .map(res => res.response)
       .map(exercises => ({
         type: ActionTypes.GET_EXERCISES_SUCCESS,
@@ -41,7 +41,7 @@ export const getExercises = action$ => action$
 export const createRoutine = action$ => action$
     .ofType(ActionTypes.CREATE_ROUTINE)
     .switchMap(({payload}) => Observable
-      .ajax.post(`http://${serverConfig.host}:${serverConfig.port}/api/routine`, payload)
+      .ajax.post(`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/api/routine`, payload)
       .map(res => res.response)
       .mergeMap(routine => Observable.of({
         type: ActionTypes.CREATE_ROUTINE_SUCCESS,
@@ -59,7 +59,7 @@ export const createRoutine = action$ => action$
 export const getAllRoutines = action$ => action$
     .ofType(ActionTypes.GET_ALL_ROUTINES)
     .mergeMap(({headers, payload}) => Observable
-      .ajax.get(`http://${serverConfig.host}:${serverConfig.port}/api/routine?skip=${payload.skip || 0}&limit=${payload.limit || 6}`, headers)
+      .ajax.get(`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/api/routine?skip=${payload.skip || 0}&limit=${payload.limit || 6}`, headers)
       .map(res => res.response)
       .map(routines => ({
         type: ActionTypes.GET_ALL_ROUTINES_SUCCESS,

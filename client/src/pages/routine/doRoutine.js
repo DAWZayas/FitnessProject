@@ -5,6 +5,7 @@ import InfiniteScroll from 'redux-infinite-scroll';
 
 import {getAllRoutines} from '../../store/actions';
 import {CountDown, FilterRoutineBar} from '../../components/routine';
+import {server as serverConfig} from '../../../config';
 
 import Loader from '../../components/loader';
 
@@ -125,7 +126,7 @@ class DoRoutine extends Component {
                 <div key={routine.id}>
                   <div className="card col-xs-6">
                     <div className="view overlay hm-white-slight">
-                      <img src="http://localhost:8080/static/images/exercises/04.png" className="img-fluid" alt="" />
+                      <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/04.png`} className="img-fluid" alt="" />
                       <a className="mask" href={`#${routine.id}`} />
                     </div>
                     <div className="card-block">

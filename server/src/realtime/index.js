@@ -6,6 +6,7 @@ const options = {
   httpPath: '/realtime',
   dbHost: dbConfig.host,
   dbPort: dbConfig.port,
+  secure: true,
   db: dbConfig.db,
   unsafelyAllowAnyQuery: true,
 };

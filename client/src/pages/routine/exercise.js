@@ -103,7 +103,7 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
               <hr />
               {statusImages && statusImages === 'done' ? images.map(img =>
                 <a href="#a">
-                  <img src={`http://${serverConfig.host}:${serverConfig.port}/static/images/exercises/` + img} onClick={selectImage} width="50px" height="50px" alt="" />
+                  <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/` + img} onClick={selectImage} width="50px" height="50px" alt="" />
                 </a>
               ) : <div className="text-xs-center"><Loader /></div>}
               <hr />

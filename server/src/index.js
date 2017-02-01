@@ -1,4 +1,5 @@
 import http from 'http';
+import https from 'https';
 
 // our packages
 import app from './app';
@@ -11,13 +12,23 @@ import {server as serverConfig} from '../config';
 thinky.dbReady().then(() => {
   logger.info('Database ready, starting server...');
   // start server
-  const httpServer = http.createServer(app);
-  realtime(httpServer);
-  httpServer.listen(serverConfig.port, function() {
-    const host = this.address().address;
-    const port = this.address().port;
-    logger.info(`FitRun-server is listening at http://${host}:${port}`);
-  });
+  if (serverConfig.protocol === 'http') {
+    const httpServer = http.createServer(app);
+    realtime(httpServer);
+    httpServer.listen(serverConfig.port, function() {
+      const host = this.address().address;
+      const port = this.address().port;
+      logger.info(`FitRun-server is listening at ${serverConfig.protocol}://${host}:${port}`);
+    });
+  } else {
+    const httpsServer = https.createServer(app);
+    realtime(httpsServer);
+    httpsServer.listen(serverConfig.port, function() {
+      const host = this.address().address;
+      const port = this.address().port;
+      logger.info(`FitRun-server is listening at ${serverConfig.protocol}://${host}:${port}`);
+    });
+  }
 });
 
 // output all uncaught exceptions

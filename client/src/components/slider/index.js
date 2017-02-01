@@ -34,7 +34,7 @@ class Slider extends Component {
 
   componentDidUpdate() {
     if (!this.state.slides && this.props.state === 'done') {
-      this.setState({slides: this.props.images.map(img => `http://${serverConfig.host}:${serverConfig.port}/static/images/carousel/` + img)});
+      this.setState({slides: this.props.images.map(img => `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/carousel/` + img)});
     }
   }
 

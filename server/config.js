@@ -7,11 +7,13 @@ exports.db = {
 exports.server = {
   host: process.env.FITRUN_SERVER_URL || process.env.BPWJS_SERVER_SERVICE_HOST || 'localhost',
   port: process.env.FITRUN_SERVER_PORT || process.env.BPWJS_SERVER_PORT_8080_TCP_PORT || 8080,
+  protocol: process.env.FITRUN_SERVER_PROTOCOL || process.env.BPWJS_SERVER_PROTOCOL_HTTP || 'http',
 };
 
 exports.client = {
   host: process.env.FITRUN_CLIENT_URL || process.env.BPWJS_CLIENT_SERVICE_HOST || 'localhost',
   port: process.env.FITRUN_CLIENT_PORT || process.env.BPWJS_CLIENT_PORT_9000_TCP_PORT || 3000,
+  protocol: process.env.FITRUN_CLIENT_PROTOCOL || process.env.BPWJS_CLIENT_PROTOCOL_HTTP || 'http',
 };
 
 export const auth = {

@@ -13,7 +13,7 @@ const Profile = ({user}) => (
   <div className="jumbotron animated fadeInLeft">
       <div className="card-block">
       <div className="col-xs-12 col-sm-4">
-        <img src="http://2.gravatar.com/avatar/e9de252843e9ff541060127dac7126ed?s=150&d=mm&r=g"
+        <img src="https://2.gravatar.com/avatar/e9de252843e9ff541060127dac7126ed?s=150&d=mm&r=g"
           className="img-fluid rounded-circle z-depth-2"
           style={{display:"inlineBlock", margin:"auto", marginBottom:20}} />
       </div>

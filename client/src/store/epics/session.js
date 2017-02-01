@@ -7,7 +7,7 @@ import {server as serverConfig} from '../../../config';
 export const startSession = action$ => action$
   .ofType(ActionTypes.START_SESSION)
   .switchMap(({payload}) => Observable
-    .ajax.post(`http://${serverConfig.host}:${serverConfig.port}/api/sportSession`, payload)
+    .ajax.post(`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/api/sportSession`, payload)
     .map(res => res.response)
     .mergeMap(id => Observable.of({
       type: ActionTypes.START_SESSION_SUCCESS,
@@ -25,7 +25,7 @@ export const startSession = action$ => action$
 export const finishSession = action$ => action$
       .ofType(ActionTypes.FINISH_SESSION)
       .switchMap(({payload}) => Observable
-        .ajax.post(`http://${serverConfig.host}:${serverConfig.port}/api/sportSession/${payload.sessionId}`, payload)
+        .ajax.post(`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/api/sportSession/${payload.sessionId}`, payload)
         .map(res => res.response)
         .mergeMap(session => Observable.of({
           type: ActionTypes.FINISH_SESSION_SUCCESS,
@@ -43,7 +43,7 @@ export const finishSession = action$ => action$
 export const updateSessionPosition = action$ => action$
         .ofType(ActionTypes.UPDATE_SESSION_POSITION)
         .switchMap(({payload}) => Observable
-          .ajax.post(`http://${serverConfig.host}:${serverConfig.port}/api/sportSession/updatePosition/${payload.sessionId}`, payload)
+          .ajax.post(`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/api/sportSession/updatePosition/${payload.sessionId}`, payload)
           .map(res => res.response)
           .mergeMap(session => Observable.of({
             type: ActionTypes.UPDATE_SESSION_POSITION_SUCCESS,

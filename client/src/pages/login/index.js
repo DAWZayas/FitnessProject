@@ -45,7 +45,10 @@ const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
   const googleToken = () => {
     hello.init(
       {google: '907309639379-aoppqn9rh4b02uoi3r07rtv19nh4jd4j.apps.googleusercontent.com'},
-      {redirect_uri: `http://${clientConfig.host}/redirect.html`}
+      {redirect_uri: clientConfig.host === 'localhost' ?
+        `${clientConfig.protocol}://${clientConfig.host}:${clientConfig.port}/redirect.html` :
+        `${clientConfig.protocol}://${clientConfig.host}/redirect.html`,
+      }
     );
     oauthLogin({provider: 'google'});
   };
