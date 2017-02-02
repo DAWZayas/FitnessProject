@@ -1,3 +1,6 @@
+// package for run things when tab is in background
+import 'hacktimer';
+
 // npm packages
 import 'rxjs';
 import React from 'react';
