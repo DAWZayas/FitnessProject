@@ -2,6 +2,7 @@
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
+import oauthshim from 'oauth-shim';
 
 // our packages
 import {auth as authConfig} from '../../config';
@@ -15,13 +16,6 @@ export default (app) => {
       res.status(401).send({error: 'Error logging in!'});
     }
   });
-
-  app.get('/api/github/login',
-    passport.authenticate('github', {
-      scope: authConfig.github.scope,
-      accessType: 'offline',
-      session: false,
-    }));
 
   app.post('/api/oauth/login', (req, res) => {
     switch (req.body.provider) {
@@ -39,27 +33,30 @@ export default (app) => {
           .catch(() => res.status(401).send({error: 'Error logging in!'}));
         break;
       }
+      case 'github': {
+        const options = {
+          method: 'GET',
+          headers: {Authorization: 'token ' + req.body.token},
+        };
+        fetch('https://api.github.com/user', options)
+          .then(response => response.json())
+          .then((githubUser) => {
+            const token = jwt.sign(githubUser, authConfig.jwtSecret);
+            res.send({user: {login: githubUser.login}, token});
+          })
+          .catch(() => res.status(401).send({error: 'Error logging in!'}));
+        break;
+      }
       default:
         res.status(401).send({error: 'Error logging in!'});
     }
   });
 
-  app.get('/api/github/callback',
-    passport.authenticate('github', {failureRedirect: '/login', session: false}),
-    (req, res) => {
-      if (req.user) {
-        const githubUser = req.user.profile;
-        const user = {
-          id: githubUser.id,
-          login: githubUser.username,
-          registrationDate: githubUser._json.created_at,
-          provider: githubUser.provider,
-          accessToken: req.user.accessToken,
-        };
-        const token = jwt.sign(user, authConfig.jwtSecret);
-        res.send({user, token});
-      } else {
-        res.status(401).send({error: 'Error logging in!'});
-      }
-    });
+  app.all('/oauthproxy', oauthshim);
+  oauthshim.init([{
+    client_id: authConfig.github.clientID,
+    client_secret: authConfig.github.clientSecret,
+    grant_url: authConfig.github.grantURL,
+    domain: authConfig.github.domain,
+  }]);
 };

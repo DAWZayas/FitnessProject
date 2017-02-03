@@ -3,7 +3,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
-import {client as clientConfig} from '../../../config';
+import {client as clientConfig, server as serverConfig, auth as authConfig} from '../../../config';
 
 import hello from 'hellojs';
 
@@ -44,7 +44,7 @@ const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
 
   const googleToken = () => {
     hello.init(
-      {google: '907309639379-aoppqn9rh4b02uoi3r07rtv19nh4jd4j.apps.googleusercontent.com'},
+      {google: authConfig.googleClientID},
       {redirect_uri: clientConfig.host === 'localhost' ?
         `${clientConfig.protocol}://${clientConfig.host}:${clientConfig.port}/redirect.html` :
         `${clientConfig.protocol}://${clientConfig.host}/redirect.html`,
@@ -55,16 +55,14 @@ const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
 
   const githubToken = () => {
     hello.init(
-      {github: '0fe29a5dc637d03bac23'},
-      {oauth_proxy: 'https://auth-server.herokuapp.com/',
-        redirect_uri: 'http://localhost:3000/redirect.html',
+      {github: authConfig.githubClientID},
+      {oauth_proxy: `${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/oauthproxy`,
+        redirect_uri: clientConfig.host === 'localhost' ?
+        `${clientConfig.protocol}://${clientConfig.host}:${clientConfig.port}/redirect.html` :
+        `${clientConfig.protocol}://${clientConfig.host}/redirect.html`,
       }
     );
-    hello('github').login(() => {
-      const token2 = hello('github').getAuthResponse().access_token;
-      console.log(token2);
-    });
-    // oauthLogin({provider: 'github'});
+    oauthLogin({provider: 'github'});
   };
 
 

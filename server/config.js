@@ -26,9 +26,8 @@ export const auth = {
   github: {
     clientID: process.env.GITHUB_CLIENT_ID || '0fe29a5dc637d03bac23',
     clientSecret: process.env.GITHUB_CLIENT_SECRET || '6ab8236d13352bd767c6a691c51701b9019ca1d7',
-    callbackURL: process.env.GITHUB_CALLBACK_URL ||
-                `http://${process.env.BPWJS_SERVER_SERVICE_HOST}:${process.env.BPWJS_SERVER_PORT_8080_TCP_PORT}/api/github/callback` ||
-                'http://localhost:8080/api/github/callback',
+    grantURL: process.env.GITHUB_GRANT_URL || 'https://github.com/login/oauth/access_token',
+    domain: process.env.GITHUB_DOMAIN || 'http://localhost:3000',
     scope: process.env.GITHUB_SCOPE || 'user:email',
   },
 };

@@ -9,3 +9,8 @@ exports.server = {
   port: process.env.FITRUN_SERVER_PORT || 8080,
   protocol: process.env.FITRUN_SERVER_PROTOCOL || 'http',
 };
+
+exports.auth = {
+  googleClientID: '907309639379-aoppqn9rh4b02uoi3r07rtv19nh4jd4j.apps.googleusercontent.com',
+  githubClientID: '0fe29a5dc637d03bac23',
+};
