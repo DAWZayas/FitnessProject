@@ -6,7 +6,7 @@ const options = {
   host: serverConfig.host, // hostname of the websocket server
   port: serverConfig.port,        // port number of the websocket server
   path: '/realtime',       // HTTP path to websocket route
-  secure: true,     // set true to use secure TLS websockets
+  secure: serverConfig.host === 'localhost' ? false : true,     // set true to use secure TLS websockets
   db: 'FitRunDB',        // default database, passed to rethinkdb.connect
 };
 
