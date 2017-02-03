@@ -53,6 +53,21 @@ const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
     oauthLogin({provider: 'google'});
   };
 
+  const githubToken = () => {
+    hello.init(
+      {github: '0fe29a5dc637d03bac23'},
+      {oauth_proxy: 'https://auth-server.herokuapp.com/',
+        redirect_uri: 'http://localhost:3000/redirect.html',
+      }
+    );
+    hello('github').login(() => {
+      const token2 = hello('github').getAuthResponse().access_token;
+      console.log(token2);
+    });
+    // oauthLogin({provider: 'github'});
+  };
+
+
   return (
     <div className="jumbotron">
       <form>
@@ -61,7 +76,7 @@ const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
             <h3>Login</h3>
           </div>
           <div className={styles.social}>
-            <button type="button" className={`btn ${styles.github}`}>github</button>
+            <button type="button" className={`btn ${styles.github}`} onClick={githubToken}>github</button>
             <button type="button" className={`btn ${styles.google}`} onClick={googleToken} >google</button>
             <button type="button" className={`btn ${styles.facebook}`}>facebook</button>
             <div className={styles.division}>
