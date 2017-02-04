@@ -1,7 +1,7 @@
 import CountDown from './countDown';
-import FilterRoutineBar from './filterRoutineBar';
+import SearchBar from './searchBar';
 
 export {
   CountDown,
-  FilterRoutineBar,
+  SearchBar,
 };
