@@ -92,7 +92,7 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
           />
         </div>
         <div className="form-group">
-          <a className="btn btn-info" href="#images" onClick={handleImages}>Select image</a>
+          <a className="btn btn-info btn-sm" href="#images" onClick={handleImages}>Select image</a>
           {image ? <img src={image} width="50px" height="50px" alt="" /> : ''}
         </div>
         <div id="images" className={modal.overlay}>

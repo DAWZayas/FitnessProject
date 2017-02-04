@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {createRoutine, getExercises} from '../../store/actions';
+import {createRoutine, getExercises, getImages} from '../../store/actions';
+import {server as serverConfig} from '../../../config';
 
 import Loader from '../../components/loader';
 
@@ -11,12 +12,17 @@ const mapStateToProps = state => ({
   userName: state.auth.user.login,
   exercises: state.routine.exercises,
   status: state.routine.exerciseStatus,
+  statusImages: state.images.state,
+  images: state.images.exercises,
 });
 
 const mapDispatchToProps = dispatch => ({
   onCreateRoutineClick: payload => dispatch(createRoutine(payload)),
   loadExercises: () => dispatch(getExercises()),
+  onSelectImages: params => dispatch(getImages(params)),
 });
+
+let image;
 
 class Create extends Component {
 
@@ -38,6 +44,8 @@ class Create extends Component {
     this.setName = this.setName.bind(this);
     this.setExerciseTime = this.setExerciseTime.bind(this);
     this.resetExerciseTime = this.resetExerciseTime.bind(this);
+    this.handleImages = this.handleImages.bind(this);
+    this.selectImage = this.selectImage.bind(this);
   }
 
   handleClick = (e) => {
@@ -51,7 +59,9 @@ class Create extends Component {
       rounds: this.state.rounds,
       restRounds: this.state.restRounds,
       exercises: JSON.stringify(this.state.routineExercises),
+      image: '' + image,
     });
+    image = '';
   };
 
   handleClickExercise = (e) => {
@@ -105,6 +115,14 @@ class Create extends Component {
     this.setState({exerciseTime: 30});
   };
 
+  handleImages = () => {
+    this.props.onSelectImages({folder: 'exercises'});
+  };
+
+  selectImage = (e) => {
+    image = e.target.src;
+  };
+
   render() {
     return (
       <div className="jumbotron animated fadeIn">
@@ -119,6 +137,25 @@ class Create extends Component {
               placeholder="routine name"
               onChange={this.setName}
             />
+          </div>
+          <div className="form-group">
+            <a className="btn btn-info btn-sm" href="#images" onClick={this.handleImages}>Select image</a>
+            {image ? <img src={image} width="50px" height="50px" alt="" /> : ''}
+          </div>
+          <div id="images" className={modal.overlay}>
+            <div className={modal.popup}>
+              <h2>Images</h2>
+              <a className={modal.close} href="#a">&times;</a>
+              <div className={modal.content}>
+                <hr />
+                {this.props.statusImages && this.props.statusImages === 'done' ? this.props.images.map(img =>
+                  <a href="#a">
+                    <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/` + img} onClick={this.selectImage} width="50px" height="50px" alt="" />
+                  </a>
+                ) : <div className="text-xs-center"><Loader /></div>}
+                <hr />
+              </div>
+            </div>
           </div>
           <div className="form-inline">
             <div className="form-group">

@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import InfiniteScroll from 'redux-infinite-scroll';
 
 import {getAllRoutines} from '../../store/actions';
-import {CountDown, FilterRoutineBar} from '../../components/routine';
+import {CountDown, SearchBar} from '../../components/routine';
 import {server as serverConfig} from '../../../config';
 
 import Loader from '../../components/loader';
@@ -19,6 +19,7 @@ const mapStateToProps = state => ({
   routines: state.routine.routines,
   hasMore: state.routine.hasMoreRoutines,
   loadingMore: state.routine.routineStatus === 'loading',
+  user: state.auth.user.login,
 });
 
 class DoRoutine extends Component {
@@ -28,11 +29,13 @@ class DoRoutine extends Component {
     this.state = {
       state: 0,
       filterText: '',
+      showMine: false,
     };
     this.handleClick = this.handleClick.bind(this);
     this.nextAction = this.nextAction.bind(this);
     this.onLoadMore = this.onLoadMore.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
+    this.showMineOrAll = this.showMineOrAll.bind(this);
   }
 
   componentDidUpdate() {
@@ -73,6 +76,13 @@ class DoRoutine extends Component {
     });
   }
 
+  showMineOrAll = (e) => {
+    e.preventDefault();
+    this.setState({
+      showMine: !this.state.showMine,
+    });
+  }
+
   nextAction = () => {
     if (this.state.state === 1) {
       this.setState({state: 2});
@@ -102,15 +112,23 @@ class DoRoutine extends Component {
   };
 
   render() {
-
-    const routines = this.props.routines.filter(r => r.name.indexOf(this.state.filterText) !== -1);
-
+    let routines = this.props.routines.filter(r => r.name.indexOf(this.state.filterText) !== -1);
+    if (this.state.showMine) {
+      routines = routines.filter(r => r.user === this.props.user);
+    }
     return (
       <div className="container">
-        <div className="jumbotron text-xs-center">
+        <div className="card text-xs-center">
           <h1>Routines</h1>
         </div>
-        <FilterRoutineBar onUserInput={this.handleUserInput} />
+        <nav className="navbar navbar-default card">
+          <div className="container-fluid">
+            <button type="submit" className="btn btn-sm btn-default" onClick={this.showMineOrAll}>{this.state.showMine ? 'All' : 'Mine'}</button>
+            <form className="navbar-form navbar-right col-xs-6">
+              <SearchBar onUserInput={this.handleUserInput} />
+            </form>
+          </div>
+        </nav>
         <div className="text-xs-center">
         {this.state.state === 0 ?
           !this.props.hasMore && this.props.routines.length === 0 ?
@@ -124,9 +142,10 @@ class DoRoutine extends Component {
             >
               {routines.map(routine =>
                 <div key={routine.id}>
+                {console.log(routine)}
                   <div className="card col-xs-6">
                     <div className="view overlay hm-white-slight">
-                      <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/04.png`} className="img-fluid" alt="" />
+                      <img src={routine.image} className="img-fluid" alt="" />
                       <a className="mask" href={`#${routine.id}`} />
                     </div>
                     <div className="card-block">
