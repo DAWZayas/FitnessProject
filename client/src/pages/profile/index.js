@@ -25,6 +25,7 @@ const Profile = ({user}) => (
           <Link to="/" className="btn btn-default">Do Exercise!</Link><br />
           <Link to="/updateUser" className="btn btn-default">Update User</Link>
           <Link to="/updateProfile" className="btn btn-default">Update Profile</Link>
+          <Link to="/objectives" className="btn btn-default">Objectives</Link>
       </div>
     </div>
 
@@ -64,13 +65,16 @@ const Profile = ({user}) => (
           </table>
       </div>
     </div>
-  <div className="card">
-    <div className="card-block">
-    <h3 className="h3-responsive text-xs-center">Last Session</h3>
+    <div className="card">
+      <div className="card-block">
+        <h4 className="h3-responsive text-xs-center">Objectives</h4>
+        <p>Kilometers per week: {user.objectives.weekRunKm}</p>
+        <p>Final weight: {user.objectives.finalWeight} kg</p>
+        <p>Active day time: {user.objectives.activeTimeDay} m</p>
+        <p>Exercises per week: {user.objectives.weekExercises}</p>
 
-
+      </div>
     </div>
-  </div>
   </div>
 
 

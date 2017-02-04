@@ -7,14 +7,31 @@ export default (app) => {
   app.post('/api/user/profile/:id', passport.authenticate('jwt', {session: false}), asyncRequest(async (req, res) => {
 
     const {name, surname, age, email, country, weight, height} = req.body;
+    const {weekRunKm, finalWeight, activeTimeDay, weekExercises} = req.body;
     const user = await User.get(req.params.id);
-
     if (req.user.id !== req.params.id) {
       res.status(403).send({error: 'Not enough rights to change other user profile!'});
       return;
     }
 
-    // update data
+    if (!user.objectives) {
+      user.objectives = {};
+    }
+    // Update objectives data
+    if (weekRunKm) {
+      user.objectives.weekRunKm = weekRunKm;
+    }
+    if (finalWeight) {
+      user.objectives.finalWeight = finalWeight;
+    }
+    if (activeTimeDay) {
+      user.objectives.activeTimeDay = activeTimeDay;
+    }
+    if (weekExercises) {
+      user.objectives.weekExercises = weekExercises;
+    }
+
+    // update profile data
     if (name) {
       user.name = name;
     }
