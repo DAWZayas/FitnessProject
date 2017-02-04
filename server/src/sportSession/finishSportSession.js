@@ -23,6 +23,9 @@ export default (app) => {
     const secondsStartTime = (sportSession.startTime.getHours() * 3600) + (sportSession.startTime.getMinutes() * 60) + sportSession.startTime.getSeconds();
     const time = calculateTimeBetween(secondsEndTime, secondsStartTime);
 
+    sportSession.velocity = (Number(req.body.totalDistance) /
+      (time.seconds + (time.minutes * 60) + (time.hours * 3600))) * 3.6;
+
     sportSession.duration.hours = time.hours;
     sportSession.duration.minutes = time.minutes;
     sportSession.duration.seconds = time.seconds;
