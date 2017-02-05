@@ -18,6 +18,7 @@ import setupExerciseRoutes from './exercise';
 import setupRoutineRoutes from './routine';
 import setupDiet from './diet';
 import setupImages from './images';
+import setupStats from './stats';
 
 // init app
 const app = express();
@@ -69,6 +70,9 @@ setupRoutineRoutes(app);
 
 // setup diet
 setupDiet(app);
+
+// setup stats
+setupStats(app);
 
 setupImages(app);
 
