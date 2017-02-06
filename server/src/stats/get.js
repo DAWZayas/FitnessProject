@@ -54,12 +54,12 @@ const isDateBetween = (date, start, end) =>
   date.valueOf() >= start.valueOf() && date.valueOf() <= end.valueOf();
 
 export default (app) => {
-  app.get('/api/stats/:id', asyncRequest(async (req, res) => {
+  app.post('/api/stats/', asyncRequest(async (req, res) => {
     try {
-      const user = await User.get(req.params.id)
+      const user = await User.get(req.body.userId)
         .without(['password'])
         .execute();
-      const actualDate = new Date("Sat Jan 28 2017 16:33:44 GMT+00:00");
+      const actualDate = new Date(req.body.actualDate);
       const objectives = user.objectives;
       const sessions = await SportSession.filter({user: user.login});
       const validSessions = sessions.filter(s => Object.getOwnPropertyNames(s.duration).length > 0);
@@ -71,6 +71,61 @@ export default (app) => {
       const monthSessions = validSessions.filter(s => isDateBetween(s.endTime, startEndMonth[0], startEndMonth[1]));
       const startEndYear = startEndDaysYear(actualDate);
       const yearSessions = validSessions.filter(s => isDateBetween(s.endTime, startEndYear[0], startEndYear[1]));
+
+      const weekSessionsRunning = weekSessions.filter(s => s.sport === 'Running');
+      const weekSessionsRunningNumber = weekSessionsRunning.length;
+      const weekDistanceRunning = weekSessions.reduce((a, b) => ({distance: a.distance + b.distance}));
+      const weekVelocityRunning = weekSessions.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / weekSessionsRunningNumber;
+      const weekTimeRunning = weekSessions.reduce(
+        (a, b) => ({
+          duration: {
+            hours: a.duration.hours + b.duration.hours,
+            minutes: a.duration.minutes + b.duration.minutes,
+            seconds: a.duration.seconds + b.duration.seconds,
+          },
+        }));
+
+      const monthSessionsRunning = monthSessions.filter(s => s.sport === 'Running');
+      const monthSessionsRunningNumber = monthSessionsRunning.length;
+      const monthDistanceRunning = monthSessions.reduce((a, b) => ({distance: a.distance + b.distance}));
+      const monthVelocityRunning = monthSessions.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / monthSessionsRunningNumber;
+      const monthTimeRunning = monthSessions.reduce(
+        (a, b) => ({
+          duration: {
+            hours: a.duration.hours + b.duration.hours,
+            minutes: a.duration.minutes + b.duration.minutes,
+            seconds: a.duration.seconds + b.duration.seconds,
+          },
+        }));
+
+      const yearSessionsRunning = yearSessions.filter(s => s.sport === 'Running');
+      const yearSessionsRunningNumber = yearSessionsRunning.length;
+      const yearDistanceRunning = yearSessions.reduce((a, b) => ({distance: a.distance + b.distance}));
+      const yearVelocityRunning = yearSessions.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / yearSessionsRunningNumber;
+      const yearTimeRunning = yearSessions.reduce(
+        (a, b) => ({
+          duration: {
+            hours: a.duration.hours + b.duration.hours,
+            minutes: a.duration.minutes + b.duration.minutes,
+            seconds: a.duration.seconds + b.duration.seconds,
+          },
+        }));
+
+      console.log('week sessions: ' + weekSessionsRunningNumber);
+      console.log('distance: ' + weekDistanceRunning.distance);
+      console.log('velocity: ' + weekVelocityRunning);
+      console.log('week time: ' + weekTimeRunning.duration.hours + ' ' + weekTimeRunning.duration.minutes + ' ' + weekTimeRunning.duration.seconds);
+
+      console.log('month sessions: ' + monthSessionsRunningNumber);
+      console.log('distance: ' + monthDistanceRunning.distance);
+      console.log('velocity: ' + monthVelocityRunning);
+      console.log('month time: ' + monthTimeRunning.duration.hours + ' ' + monthTimeRunning.duration.minutes + ' ' + monthTimeRunning.duration.seconds);
+
+      console.log('year sessions: ' + yearSessionsRunningNumber);
+      console.log('distance: ' + yearDistanceRunning.distance);
+      console.log('velocity: ' + yearVelocityRunning);
+      console.log('year time: ' + yearTimeRunning.duration.hours + ' ' + yearTimeRunning.duration.minutes + ' ' + yearTimeRunning.duration.seconds);
+
 
       res.send({valid: validSessions.length, week: weekSessions.length, month: monthSessions.length, year: yearSessions.length});
     } catch (e) {
