@@ -4,6 +4,7 @@ import {startSession, finishSession, prepareSession, updateSessionPosition} from
 import {createExercise, getExercises, createRoutine, getAllRoutines} from './routine';
 import {getImages} from './images';
 import {addObservable} from './realtime';
+import {getStats} from './stats';
 
 export default [
   // auth
@@ -24,4 +25,5 @@ export default [
   getAllRoutines,
   getImages,
   addObservable,
+  getStats,
 ];

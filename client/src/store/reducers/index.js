@@ -4,6 +4,7 @@ import {session} from './session';
 import {routine} from './routine';
 import {images} from './images';
 import {realtime} from './realtime';
+import {stats} from './stats';
 
 export default {
   auth,
@@ -12,4 +13,5 @@ export default {
   routine,
   images,
   realtime,
+  stats,
 };

@@ -108,3 +108,8 @@ export const removeObservable = observable => ({
   type: ActionTypes.REMOVE_OBSERVABLE,
   payload: observable,
 });
+
+export const retrieveStatsData = payload => ({
+  type: ActionTypes.RETRIEVE_STATS_DATA,
+  payload,
+});
