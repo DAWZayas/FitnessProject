@@ -62,7 +62,7 @@ class Stats extends Component {
     );
     this.props.fetchStatsData(
       {
-        type: this.state.tab,
+        type: e.target.textContent,
         userId: this.props.user,
         actualDate: new Date(),
       });
