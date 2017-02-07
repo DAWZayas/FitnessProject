@@ -1,8 +1,8 @@
 import {asyncRequest} from '../util';
 import {User, SportSession} from '../db';
 
-const startEndDaysWeek = (curr) => {
-  // const curr = new Date();  // change to a parameter date **************
+const startEndDaysWeek = (date) => {
+  const curr = new Date(date.getTime());
   let day = curr.getDay();
   // console.log(day);
   if (day === 0) { day = 7; }
@@ -22,11 +22,9 @@ const startEndDaysWeek = (curr) => {
   return [firstday, lastday];
 };
 
-const startEndDaysMonth = (curr) => {
-  // const curr = new Date();  // change to a parameter date **************
-  // console.log(curr);
+const startEndDaysMonth = (date) => {
+  const curr = new Date(date.getTime());
   const firstday = new Date(curr.setDate(1));
-  // console.log(firstday);
   firstday.setUTCHours(0);
   firstday.setUTCMinutes(0);
   firstday.setUTCSeconds(0);
@@ -36,7 +34,8 @@ const startEndDaysMonth = (curr) => {
   return [firstday, lastday];
 };
 
-const startEndDaysYear = (curr) => {
+const startEndDaysYear = (date) => {
+  const curr = new Date(date.getTime());
   // const curr = new Date();  // change to a parameter date **************
   // console.log(curr);
   const firstday = new Date(curr.setDate(1));
@@ -66,22 +65,34 @@ export default (app) => {
           weekDistanceRunning: 0,
           weekVelocityRunning: 0,
           weekTimeRunning: 0,
+          weekRunObj: 0,
+          weekRunObjDone: 0,
         },
         month: {
           monthSessionsRunningNumber: 0,
           monthDistanceRunning: 0,
           monthVelocityRunning: 0,
           monthTimeRunning: 0,
+          monthRunObj: 0,
+          monthRunObjDone: 0,
         },
         year: {
           yearSessionsRunningNumber: 0,
           yearDistanceRunning: 0,
           yearVelocityRunning: 0,
           yearTimeRunning: 0,
+          yearRunObj: 0,
+          yearRunObjDone: 0,
         },
       };
       const actualDate = new Date(req.body.actualDate);
       const sport = req.body.type;
+      const objectives = user.objectives;
+      if (objectives.weekRunKm && objectives.weekRunKm !== '') {
+        statsData.week.weekRunObj = Number(objectives.weekRunKm) * 1000;
+        statsData.month.monthRunObj = Number(objectives.weekRunKm) * 4330;
+        statsData.year.yearRunObj = Number(objectives.weekRunKm) * 52000;
+      }
 
       const sessions = await SportSession.filter({user: user.login});
       if (sessions.length <= 0) {
@@ -107,7 +118,7 @@ export default (app) => {
           return;
         } else {
           statsData.year.yearSessionsRunningNumber = yearSessionsRunning.length;
-          statsData.year.yearDistanceRunning = yearSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance}));
+          statsData.year.yearDistanceRunning = yearSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance})).distance;
           statsData.year.yearVelocityRunning = yearSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / statsData.year.yearSessionsRunningNumber;
           statsData.year.yearTimeRunning = yearSessionsRunning.reduce(
             (a, b) => ({
@@ -116,7 +127,10 @@ export default (app) => {
                 minutes: a.duration.minutes + b.duration.minutes,
                 seconds: a.duration.seconds + b.duration.seconds,
               },
-            }));
+            })).duration;
+          if (statsData.year.yearRunObj !== 0) {
+            statsData.year.yearRunObjDone = statsData.year.yearDistanceRunning / statsData.year.yearRunObj * 100;
+          }
         }
       }
       const startEndMonth = startEndDaysMonth(actualDate);
@@ -131,7 +145,7 @@ export default (app) => {
           return;
         } else {
           statsData.month.monthSessionsRunningNumber = monthSessionsRunning.length;
-          statsData.month.monthDistanceRunning = monthSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance}));
+          statsData.month.monthDistanceRunning = monthSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance})).distance;
           statsData.month.monthVelocityRunning = monthSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / statsData.month.monthSessionsRunningNumber;
           statsData.month.monthTimeRunning = monthSessionsRunning.reduce(
             (a, b) => ({
@@ -140,7 +154,10 @@ export default (app) => {
                 minutes: a.duration.minutes + b.duration.minutes,
                 seconds: a.duration.seconds + b.duration.seconds,
               },
-            }));
+            })).duration;
+          if (statsData.month.monthRunObj !== 0) {
+            statsData.month.monthRunObjDone = statsData.month.monthDistanceRunning / statsData.month.monthRunObj * 100;
+          }
         }
       }
 
@@ -156,7 +173,7 @@ export default (app) => {
           return;
         } else {
           statsData.week.weekSessionsRunningNumber = weekSessionsRunning.length;
-          statsData.week.weekDistanceRunning = weekSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance}));
+          statsData.week.weekDistanceRunning = weekSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance})).distance;
           statsData.week.weekVelocityRunning = weekSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / statsData.week.weekSessionsRunningNumber;
           statsData.week.weekTimeRunning = weekSessionsRunning.reduce(
             (a, b) => ({
@@ -165,7 +182,10 @@ export default (app) => {
                 minutes: a.duration.minutes + b.duration.minutes,
                 seconds: a.duration.seconds + b.duration.seconds,
               },
-            }));
+            })).duration;
+          if (statsData.week.weekRunObj !== 0) {
+            statsData.week.weekRunObjDone = statsData.week.weekDistanceRunning / statsData.week.weekRunObj * 100;
+          }
         }
       }
       res.send(statsData);

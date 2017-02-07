@@ -22,6 +22,8 @@ class Distance extends Component {
     this.state = {
       pos: [{lat: this.props.session.lat, lng: this.props.session.lng}],
       distance: 0,
+      prueba: 0.001,
+      prueba2: 0.001,
       timer: setInterval(
         () => this.getActualPosition(),
         3000
@@ -41,8 +43,8 @@ class Distance extends Component {
   getActualPosition = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
+        lat: position.coords.latitude + this.state.prueba,
+        lng: position.coords.longitude + this.state.prueba2,
       };
       let distance = 0;
       if (this.state.pos) {
@@ -51,7 +53,7 @@ class Distance extends Component {
         distance = !isNaN(dist) && Math.trunc(dist * 1000);
       }
       this.props.updatePosition({sessionId: this.props.sessionId, pos: JSON.stringify(pos)});
-      this.setState({pos: [...this.state.pos, pos], distance: this.state.distance + distance}); // warning setState con unmounted component
+      this.setState({pos: [...this.state.pos, pos], distance: this.state.distance + distance, prueba: this.state.prueba + Math.random() * 0.001, prueba2: this.state.prueba2 + Math.random() * 0.001}); // warning setState con unmounted component
     });
   }
 

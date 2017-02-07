@@ -1,18 +1,18 @@
 
 import * as ActionTypes from '../actionTypes';
 
-const initialState = [];
+const initialState = {sportStats: {}};
 export const stats = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.RETRIEVE_STATS_DATA:
-      return [
-        ...state,
-      ];
+      return {
+        sportStats: {},
+      };
     case ActionTypes.RETRIEVE_STATS_DATA_SUCCESS: {
-      return [
+      return {
         ...state,
-        action.payload,
-      ];
+        sportStats: action.payload.stats,
+      };
     }
     default:
       return state;

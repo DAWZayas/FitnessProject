@@ -7,6 +7,7 @@ import {retrieveStatsData} from '../../store/actions';
 import {server as serverConfig} from '../../../config';
 
 import Loader from '../../components/loader';
+import DonutChart from '../../components/stats';
 
 const mapDispatchToProps = dispatch => ({
   fetchStatsData: payload => dispatch(retrieveStatsData(payload)),
@@ -14,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   user: state.auth.user.id,
+  sportStats: state.stats.sportStats,
 });
 
 const style = {
@@ -93,6 +95,28 @@ class Stats extends Component {
             </li>
           </ul>
         </nav>
+        {Object.getOwnPropertyNames(this.props.sportStats).length > 0 ?
+          <div className="jumbotron" style={{overflow: 'hidden'}}>
+            <div className="card col-xs-6">
+              {this.props.sportStats.week.weekSessionsRunningNumber}
+            </div>
+            <div className="card col-xs-6">
+              {this.props.sportStats.week.weekVelocityRunning}
+            </div>
+            <div className="card col-xs-6">
+              {this.props.sportStats.week.weekTimeRunning.seconds}
+            </div>
+            <div className="card col-xs-6">
+              <DonutChart
+                key={this.state.tab}
+                canvasId="donut4"
+                data0={this.props.sportStats.week.weekRunObjDone !== 0 ? Math.round(this.props.sportStats.week.weekRunObjDone) + '%' : '100%'}
+                data1={{n: this.props.sportStats.week.weekDistanceRunning, color: '#008000'}}
+                data2={{n: this.props.sportStats.week.weekRunObj - this.props.sportStats.week.weekDistanceRunning, color: '#B22222'}}
+              />
+            </div>
+          </div>
+        : ''}
       </div>
     );
   }
