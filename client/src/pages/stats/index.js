@@ -96,27 +96,108 @@ class Stats extends Component {
           </ul>
         </nav>
         {Object.getOwnPropertyNames(this.props.sportStats).length > 0 ?
-          <div className="jumbotron" style={{overflow: 'hidden'}}>
-            <div className="card col-xs-6">
-              {this.props.sportStats.week.weekSessionsRunningNumber}
+          <div className="card" style={{overflow: 'hidden'}}>
+            <div className="card-header blue-grey darken-1 white-text">
+              Weekly stats
             </div>
-            <div className="card col-xs-6">
-              {this.props.sportStats.week.weekVelocityRunning}
+            <div className="card-block text-xs-center">
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Sessions</h4>
+                <hr />
+                {this.props.sportStats.week.weekSessionsRunningNumber}
+              </div>
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Velocity</h4>
+                <hr />
+                {this.props.sportStats.week.weekVelocityRunning} km/h
+              </div>
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Time</h4>
+                <hr />
+                {this.props.sportStats.week.weekTimeRunning.seconds}
+              </div>
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Distance</h4>
+                <hr />
+                {this.props.sportStats.week.weekDistanceRunning / 1000} km
+              </div>
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Remaining</h4>
+                <hr />
+                {(this.props.sportStats.week.weekRunObj - this.props.sportStats.week.weekDistanceRunning) / 1000} km
+              </div>
+              <div className="card-text col-xs-6">
+                <DonutChart
+                  key={this.state.tab}
+                  canvasId="donut1"
+                  data0={this.props.sportStats.week.weekRunObjDone !== 0 ? Math.round(this.props.sportStats.week.weekRunObjDone) + '%' : '100%'}
+                  data1={{n: this.props.sportStats.week.weekDistanceRunning, color: '#90EE90'}}
+                  data2={{
+                    n: this.props.sportStats.week.weekRunObjDone < 100 ?
+                      this.props.sportStats.week.weekRunObj - this.props.sportStats.week.weekDistanceRunning : 0,
+                    color: '#F36666'}}
+                />
+              </div>
             </div>
-            <div className="card col-xs-6">
-              {this.props.sportStats.week.weekTimeRunning.seconds}
+          </div>
+        : ''}
+        {Object.getOwnPropertyNames(this.props.sportStats).length > 0 ?
+          <div className="card" style={{overflow: 'hidden'}}>
+            <div className="card-header blue-grey darken-1 white-text">
+              Monthly stats
             </div>
-            <div className="card col-xs-6">
-              <DonutChart
-                key={this.state.tab}
-                canvasId="donut4"
-                data0={this.props.sportStats.week.weekRunObjDone !== 0 ? Math.round(this.props.sportStats.week.weekRunObjDone) + '%' : '100%'}
-                data1={{n: this.props.sportStats.week.weekDistanceRunning, color: '#008000'}}
-                data2={{
-                  n: this.props.sportStats.week.weekRunObjDone < 100 ?
-                    this.props.sportStats.week.weekRunObj - this.props.sportStats.week.weekDistanceRunning : 0,
-                  color: '#B22222'}}
-              />
+            <div className="card-block text-xs-center">
+              <div className="card col-xs-6">
+                {this.props.sportStats.month.monthSessionsRunningNumber}
+              </div>
+              <div className="card col-xs-6">
+                {this.props.sportStats.month.monthVelocityRunning}
+              </div>
+              <div className="card col-xs-6">
+                {this.props.sportStats.month.monthTimeRunning.seconds}
+              </div>
+              <div className="card col-xs-6">
+                <DonutChart
+                  key={this.state.tab}
+                  canvasId="donut2"
+                  data0={this.props.sportStats.month.monthRunObjDone !== 0 ? Math.round(this.props.sportStats.month.monthRunObjDone) + '%' : '100%'}
+                  data1={{n: this.props.sportStats.month.monthDistanceRunning, color: '#90EE90'}}
+                  data2={{
+                    n: this.props.sportStats.month.monthRunObjDone < 100 ?
+                      this.props.sportStats.month.monthRunObj - this.props.sportStats.month.monthDistanceRunning : 0,
+                    color: '#F36666'}}
+                />
+              </div>
+            </div>
+          </div>
+        : ''}
+        {Object.getOwnPropertyNames(this.props.sportStats).length > 0 ?
+          <div className="card" style={{overflow: 'hidden'}}>
+            <div className="card-header blue-grey darken-1 white-text">
+              Annual stats
+            </div>
+            <div className="card-block text-xs-center">
+              <div className="card col-xs-6">
+                {this.props.sportStats.year.yearSessionsRunningNumber}
+              </div>
+              <div className="card col-xs-6">
+                {this.props.sportStats.year.yearVelocityRunning}
+              </div>
+              <div className="card col-xs-6">
+                {this.props.sportStats.year.yearTimeRunning.seconds}
+              </div>
+              <div className="card col-xs-6">
+                <DonutChart
+                  key={this.state.tab}
+                  canvasId="donut3"
+                  data0={this.props.sportStats.year.yearRunObjDone !== 0 ? Math.round(this.props.sportStats.year.yearRunObjDone) + '%' : '100%'}
+                  data1={{n: this.props.sportStats.year.yearDistanceRunning, color: '#90EE90'}}
+                  data2={{
+                    n: this.props.sportStats.year.yearRunObjDone < 100 ?
+                      this.props.sportStats.year.yearRunObj - this.props.sportStats.year.yearDistanceRunning : 0,
+                    color: '#F36666'}}
+                />
+              </div>
             </div>
           </div>
         : ''}

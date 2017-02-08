@@ -89,9 +89,9 @@ export default (app) => {
       const sport = req.body.type;
       const objectives = user.objectives;
       if (sport === 'Running' && objectives.weekRunningKm && objectives.weekRunningKm !== '') {
-        statsData.week.weekRunObj = Number(objectives.weekRunKm) * 1000;
-        statsData.month.monthRunObj = Number(objectives.weekRunKm) * 4330;
-        statsData.year.yearRunObj = Number(objectives.weekRunKm) * 52000;
+        statsData.week.weekRunObj = Number(objectives.weekRunningKm) * 1000;
+        statsData.month.monthRunObj = Number(objectives.weekRunningKm) * 4330;
+        statsData.year.yearRunObj = Number(objectives.weekRunningKm) * 52000;
       }
       if (sport === 'Cycling' && objectives.weekCyclingKm && objectives.weekCyclingKm !== '') {
         statsData.week.weekRunObj = Number(objectives.weekCyclingKm) * 1000;

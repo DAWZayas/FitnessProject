@@ -23,9 +23,13 @@ class DonutChart extends Component {
 
   componentDidMount() {
     const data = {
+      labels: [
+        "Done",
+        "Needed",
+      ],
       datasets: [
         {
-          data: [this.props.data1.n, this.props.data2.n],
+          data: [this.props.data1.n / 1000, this.props.data2.n / 1000],
           backgroundColor: [
             this.props.data1.color,
             this.props.data2.color,
@@ -45,20 +49,22 @@ class DonutChart extends Component {
       data,
       options: {
         maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
         elements: {
           center: {
             text: this.props.data0,
-            z: console.log(this.props.data0),
             fontColor: '#000',
             fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-            fontSize: 24,
+            fontSize: 20,
             fontStyle: 'normal'
           },
         },
       }
     });
     Chart.pluginService.register({
-      afterDraw: (chart) => {
+      beforeDraw: (chart) => {
         if (chart.config.options.elements.center) {
           const helpers = Chart.helpers;
           const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
@@ -82,7 +88,7 @@ class DonutChart extends Component {
 
   render() {
     return (
-      <canvas id={this.props.canvasId} height="100" style={{border: "1px solid"}}></canvas>
+      <canvas id={this.props.canvasId} height="114" style={{border: "1px solid white"}}></canvas>
     );
   }
 }
