@@ -48,6 +48,7 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
   }
 
   return (
+    <div className="jumbotron animated fadeIn">
       <form>
         <div className="form-group">
           <label htmlFor="inputName">Name:</label>
@@ -119,8 +120,11 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
             ref={(i) => { heightInput = i; }}
           />
         </div>
-        <button type="submit" className="btn btn-default" onClick={handleClick}>Update</button>
+        <div className="text-xs-center">
+          <button type="submit" className="btn btn-default" onClick={handleClick}>Update</button>
+        </div>
       </form>
+    </div>
   );
 };
 

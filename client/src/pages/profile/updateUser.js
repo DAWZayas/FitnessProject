@@ -40,6 +40,7 @@ const UpdateUser = ({onUpdateClick, navToLogin, redirectToProfile, user, onClick
   }
 
   return (
+    <div className="jumbotron animated fadeIn">
       <form>
         <div className="form-group">
           <label htmlFor="inputUsername">Username:</label>
@@ -71,8 +72,11 @@ const UpdateUser = ({onUpdateClick, navToLogin, redirectToProfile, user, onClick
             ref={(i) => { passwordInputRepeat = i; }}
           />
         </div>
-        <button type="submit" className="btn btn-default" onClick={handleClick}>Update</button>
+        <div className="text-xs-center">
+          <button type="submit" className="btn btn-default" onClick={handleClick}>Update</button>
+        </div>
       </form>
+    </div>
   );
 };
 

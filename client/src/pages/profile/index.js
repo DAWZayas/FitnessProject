@@ -10,28 +10,25 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Profile = ({user}) => (
-  <div className="jumbotron animated fadeInLeft">
-      <div className="card-block">
+  <div className="jumbotron animated fadeIn">
+    <div className="card-block">
       <div className="col-xs-12 col-sm-4">
-        <img src="https://2.gravatar.com/avatar/e9de252843e9ff541060127dac7126ed?s=150&d=mm&r=g"
+        <img
+          src="https://2.gravatar.com/avatar/e9de252843e9ff541060127dac7126ed?s=150&d=mm&r=g"
           className="img-fluid rounded-circle z-depth-2"
-          style={{display:"inlineBlock", margin:"auto", marginBottom:20}} />
+          style={{display: "inlineBlock", margin: "auto", marginBottom: 20}}
+        />
       </div>
-
-
-      <div className="col-xs-12 col-sm-8 text-xs-center text-sm-left">
-        <strong>{user.login}</strong><br />
-          Active Since {user.registrationDate}<br />
-          <Link to="/" className="btn btn-default">Do Exercise!</Link><br />
-          <Link to="/updateUser" className="btn btn-default">Update User</Link>
-          <Link to="/updateProfile" className="btn btn-default">Update Profile</Link>
-          <Link to="/objectives" className="btn btn-default">Objectives</Link>
+      <div className="col-xs-12 col-sm-8 text-xs-center">
+        <strong>{user.login}</strong><hr />
+          Active Since {new Date(user.registrationDate).toLocaleDateString()}<hr />
       </div>
     </div>
 
-    <div className="card-block">
+    <div className="">
+      <h4 className="card-title text-xs-center">Profile info</h4>
       <div className="col-xs-12 col-sm-10">
-          <table className="table table-hover">
+          <table className="table">
             <tbody>
               <tr>
                 <td>Name</td>
@@ -61,14 +58,20 @@ const Profile = ({user}) => (
                 <td>Height:</td>
                 <td>{user.height}</td>
               </tr>
+              <tr><td></td><td></td></tr>
             </tbody>
           </table>
       </div>
     </div>
-    <div className="card">
+    <div className="col-xs-12 text-xs-center">
+      <Link to="/updateUser" className="btn btn-default">Update User</Link>
+      <Link to="/updateProfile" className="btn btn-default">Update Profile</Link>
+      <Link to="/objectives" className="btn btn-default">Objectives</Link>
+    </div>
+    <div className="card-block">
       {user.objectives ?
-        <div className="card-block">
-          <h4 className="h3-responsive text-xs-center">Objectives</h4>
+        <div className="">
+          <h4 className="text-xs-center">Objectives</h4>
           <p>Final weight: {user.objectives.finalWeight} kg</p>
           <p>Running Km per week: {user.objectives.weekRunningKm}</p>
           <p>Cycling Km per week: {user.objectives.weekCyclingKm}</p>

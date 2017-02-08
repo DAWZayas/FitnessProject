@@ -46,6 +46,7 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
   }
 
   return (
+    <div className="jumbotron animated fadeIn">
       <form>
         <h3>General objectives</h3>
         <div className="form-group">
@@ -110,8 +111,11 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
             ref={(i) => { weekExercises = i; }}
           />
         </div>
-        <button type="submit" className="btn btn-default" onClick={handleClick}>Update objectives</button>
+        <div className="text-xs-center">
+          <button type="submit" className="btn btn-default" onClick={handleClick}>Update objectives</button>
+        </div>
       </form>
+    </div>
   );
 };
 
