@@ -10,6 +10,7 @@ const COUNTDOWN_TIME = 3;
 const mapStateToProps = (state) => ({
   sessionState: state.session.state,
   sessionId: state.session.id,
+  sport: state.session.sport,
   user: state.auth.user.login,
 });
 
@@ -38,10 +39,10 @@ const started = (onFinishSession, sessionId) => {
   );
 };
 
-const Session = ({sessionState, onFinishSession, sessionId, user}) => (
+const Session = ({sessionState, onFinishSession, sessionId, user, sport}) => (
   <div className="jumbotron animated fadeInRight">
     <h1>Session page</h1>
-    {sessionState === 1 ? <CountDown time={COUNTDOWN_TIME} action={startSession} data={{user, sport: 'Running'}} /> : ''}
+    {sessionState === 1 ? <CountDown time={COUNTDOWN_TIME} action={startSession} data={{user, sport}} /> : ''}
     {sessionState === 2 ? started(onFinishSession, sessionId) : ''}
     {sessionState === 3 ? <SummarySession /> : ''}
   </div>

@@ -45,8 +45,9 @@ export const removeNotificationAction = notificationId => ({
   payload: {notificationId},
 });
 
-export const prepareSession = () => ({
+export const prepareSession = (payload) => ({
   type: ActionTypes.PREPARE_SESSION,
+  payload,
 });
 
 export const startSession = (payload) => ({

@@ -8,12 +8,18 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onPrepareSession: () => dispatch(prepareSession()),
+  onPrepareSession: (payload) => dispatch(prepareSession(payload)),
 });
 
 const Sessions = ({onPrepareSession}) => {
-  const handleClick = (e) => {
-    onPrepareSession();
+  const handleClickRunning = (e) => {
+    onPrepareSession('Running');
+  };
+  const handleClickCycling = (e) => {
+    onPrepareSession('Cycling');
+  };
+  const handleClickWalking = (e) => {
+    onPrepareSession('Walking');
   };
   return (
     <div className="jumbotron animated fadeIn">
@@ -21,7 +27,19 @@ const Sessions = ({onPrepareSession}) => {
       <div className="card">
         <div className="card-block">
           <h4 className="card-title">Running session</h4>
-          <Link to="/session" className="btn btn-default" onClick={handleClick}>Go!</Link>
+          <Link to="/session" className="btn btn-default" onClick={handleClickRunning}>Go!</Link>
+        </div>
+      </div>
+      <div className="card">
+        <div className="card-block">
+          <h4 className="card-title">Cycling session</h4>
+          <Link to="/session" className="btn btn-default" onClick={handleClickCycling}>Go!</Link>
+        </div>
+      </div>
+      <div className="card">
+        <div className="card-block">
+          <h4 className="card-title">Walking session</h4>
+          <Link to="/session" className="btn btn-default" onClick={handleClickWalking}>Go!</Link>
         </div>
       </div>
     </div>

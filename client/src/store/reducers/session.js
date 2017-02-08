@@ -4,9 +4,9 @@ const initialState = {state: 0};
 export const session = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.PREPARE_SESSION:
-      return {state: 1};
+      return {state: 1, sport: action.payload};
     case ActionTypes.PREPARE_SESSION_SUCCESS:
-      return {state: 1, position: action.payload};
+      return {...state, state: 1, position: action.payload};
     case ActionTypes.START_SESSION: {
       return {...state, state: 2};
     }
