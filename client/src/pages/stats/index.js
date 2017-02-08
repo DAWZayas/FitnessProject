@@ -112,7 +112,10 @@ class Stats extends Component {
                 canvasId="donut4"
                 data0={this.props.sportStats.week.weekRunObjDone !== 0 ? Math.round(this.props.sportStats.week.weekRunObjDone) + '%' : '100%'}
                 data1={{n: this.props.sportStats.week.weekDistanceRunning, color: '#008000'}}
-                data2={{n: this.props.sportStats.week.weekRunObj - this.props.sportStats.week.weekDistanceRunning, color: '#B22222'}}
+                data2={{
+                  n: this.props.sportStats.week.weekRunObjDone < 100 ?
+                    this.props.sportStats.week.weekRunObj - this.props.sportStats.week.weekDistanceRunning : 0,
+                  color: '#B22222'}}
               />
             </div>
           </div>

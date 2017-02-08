@@ -88,10 +88,20 @@ export default (app) => {
       const actualDate = new Date(req.body.actualDate);
       const sport = req.body.type;
       const objectives = user.objectives;
-      if (objectives.weekRunKm && objectives.weekRunKm !== '') {
+      if (sport === 'Running' && objectives.weekRunningKm && objectives.weekRunningKm !== '') {
         statsData.week.weekRunObj = Number(objectives.weekRunKm) * 1000;
         statsData.month.monthRunObj = Number(objectives.weekRunKm) * 4330;
         statsData.year.yearRunObj = Number(objectives.weekRunKm) * 52000;
+      }
+      if (sport === 'Cycling' && objectives.weekCyclingKm && objectives.weekCyclingKm !== '') {
+        statsData.week.weekRunObj = Number(objectives.weekCyclingKm) * 1000;
+        statsData.month.monthRunObj = Number(objectives.weekCyclingKm) * 4330;
+        statsData.year.yearRunObj = Number(objectives.weekCyclingKm) * 52000;
+      }
+      if (sport === 'Walking' && objectives.weekWalkingKm && objectives.weekWalkingKm !== '') {
+        statsData.week.weekRunObj = Number(objectives.weekWalkingKm) * 1000;
+        statsData.month.monthRunObj = Number(objectives.weekWalkingKm) * 4330;
+        statsData.year.yearRunObj = Number(objectives.weekWalkingKm) * 52000;
       }
 
       const sessions = await SportSession.filter({user: user.login});

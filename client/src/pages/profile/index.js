@@ -66,14 +66,17 @@ const Profile = ({user}) => (
       </div>
     </div>
     <div className="card">
-      <div className="card-block">
-        <h4 className="h3-responsive text-xs-center">Objectives</h4>
-        <p>Kilometers per week: {user.objectives.weekRunKm}</p>
-        <p>Final weight: {user.objectives.finalWeight} kg</p>
-        <p>Active day time: {user.objectives.activeTimeDay} m</p>
-        <p>Exercises per week: {user.objectives.weekExercises}</p>
-
-      </div>
+      {user.objectives ?
+        <div className="card-block">
+          <h4 className="h3-responsive text-xs-center">Objectives</h4>
+          <p>Final weight: {user.objectives.finalWeight} kg</p>
+          <p>Running Km per week: {user.objectives.weekRunningKm}</p>
+          <p>Cycling Km per week: {user.objectives.weekCyclingKm}</p>
+          <p>Walking Km per week: {user.objectives.weekWalkingKm}</p>
+          <p>Active day time: {user.objectives.activeTimeDay} m</p>
+          <p>Exercises per week: {user.objectives.weekExercises}</p>
+        </div>
+      : 'No objectives yet'}
     </div>
   </div>
 
