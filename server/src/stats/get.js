@@ -52,6 +52,16 @@ const startEndDaysYear = (date) => {
 const isDateBetween = (date, start, end) =>
   date.valueOf() >= start.valueOf() && date.valueOf() <= end.valueOf();
 
+const transformTimeDuration = ({seconds, minutes, hours}) => {
+  const total = seconds + (minutes * 60) + (hours * 3600);
+  const newHours = Math.floor(total / 3600);
+  let newMinutes = Math.floor((total % 3600) / 60);
+  let newSeconds = total % 60;
+  newMinutes = newMinutes < 10 ? '0' + newMinutes : newMinutes;
+  newSeconds = newSeconds < 10 ? '0' + newSeconds : newSeconds;
+  return {hours: newHours, minutes: newMinutes, seconds: newSeconds};
+};
+
 export default (app) => {
   app.post('/api/stats/', asyncRequest(async (req, res) => {
     try {
@@ -64,7 +74,11 @@ export default (app) => {
           weekSessionsRunningNumber: 0,
           weekDistanceRunning: 0,
           weekVelocityRunning: 0,
-          weekTimeRunning: 0,
+          weekTimeRunning: {
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+          },
           weekRunObj: 0,
           weekRunObjDone: 0,
         },
@@ -72,7 +86,11 @@ export default (app) => {
           monthSessionsRunningNumber: 0,
           monthDistanceRunning: 0,
           monthVelocityRunning: 0,
-          monthTimeRunning: 0,
+          monthTimeRunning: {
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+          },
           monthRunObj: 0,
           monthRunObjDone: 0,
         },
@@ -80,7 +98,11 @@ export default (app) => {
           yearSessionsRunningNumber: 0,
           yearDistanceRunning: 0,
           yearVelocityRunning: 0,
-          yearTimeRunning: 0,
+          yearTimeRunning: {
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+          },
           yearRunObj: 0,
           yearRunObjDone: 0,
         },
@@ -138,6 +160,7 @@ export default (app) => {
                 seconds: a.duration.seconds + b.duration.seconds,
               },
             })).duration;
+          statsData.year.yearTimeRunning = transformTimeDuration(statsData.year.yearTimeRunning);
           if (statsData.year.yearRunObj !== 0) {
             statsData.year.yearRunObjDone = statsData.year.yearDistanceRunning / statsData.year.yearRunObj * 100;
           }
@@ -165,6 +188,7 @@ export default (app) => {
                 seconds: a.duration.seconds + b.duration.seconds,
               },
             })).duration;
+          statsData.month.monthTimeRunning = transformTimeDuration(statsData.month.monthTimeRunning);
           if (statsData.month.monthRunObj !== 0) {
             statsData.month.monthRunObjDone = statsData.month.monthDistanceRunning / statsData.month.monthRunObj * 100;
           }
@@ -193,6 +217,7 @@ export default (app) => {
                 seconds: a.duration.seconds + b.duration.seconds,
               },
             })).duration;
+            statsData.week.weekTimeRunning = transformTimeDuration(statsData.week.weekTimeRunning);
           if (statsData.week.weekRunObj !== 0) {
             statsData.week.weekRunObjDone = statsData.week.weekDistanceRunning / statsData.week.weekRunObj * 100;
           }

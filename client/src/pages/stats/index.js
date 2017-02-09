@@ -109,22 +109,24 @@ class Stats extends Component {
               <div className="card card-block col-xs-6">
                 <h4 className="card-title">Velocity</h4>
                 <hr />
-                {this.props.sportStats.week.weekVelocityRunning} km/h
+                {this.props.sportStats.week.weekVelocityRunning.toFixed(1)} km/h
               </div>
               <div className="card card-block col-xs-6">
                 <h4 className="card-title">Time</h4>
                 <hr />
-                {this.props.sportStats.week.weekTimeRunning.seconds}
+                {this.props.sportStats.week.weekTimeRunning.hours + ' h, ' +
+                this.props.sportStats.week.weekTimeRunning.minutes + ' m, ' +
+                this.props.sportStats.week.weekTimeRunning.seconds + ' s'}
               </div>
               <div className="card card-block col-xs-6">
                 <h4 className="card-title">Distance</h4>
                 <hr />
-                {this.props.sportStats.week.weekDistanceRunning / 1000} km
+                {(this.props.sportStats.week.weekDistanceRunning / 1000).toFixed(2)} km
               </div>
               <div className="card card-block col-xs-6">
                 <h4 className="card-title">Remaining</h4>
                 <hr />
-                {(this.props.sportStats.week.weekRunObj - this.props.sportStats.week.weekDistanceRunning) / 1000} km
+                {((this.props.sportStats.week.weekRunObj - this.props.sportStats.week.weekDistanceRunning) / 1000).toFixed(2)} km
               </div>
               <div className="card-text col-xs-6">
                 <DonutChart
@@ -147,23 +149,41 @@ class Stats extends Component {
               Monthly stats
             </div>
             <div className="card-block text-xs-center">
-              <div className="card col-xs-6">
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Sessions</h4>
+                <hr />
                 {this.props.sportStats.month.monthSessionsRunningNumber}
               </div>
-              <div className="card col-xs-6">
-                {this.props.sportStats.month.monthVelocityRunning}
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Velocity</h4>
+                <hr />
+                {this.props.sportStats.month.monthVelocityRunning.toFixed(1)} km
               </div>
-              <div className="card col-xs-6">
-                {this.props.sportStats.month.monthTimeRunning.seconds}
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Time</h4>
+                <hr />
+                {this.props.sportStats.month.monthTimeRunning.hours + ' h, ' +
+                this.props.sportStats.month.monthTimeRunning.minutes + ' m, ' +
+                this.props.sportStats.month.monthTimeRunning.seconds + ' s'}
               </div>
-              <div className="card col-xs-6">
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Distance</h4>
+                <hr />
+                {(this.props.sportStats.month.monthDistanceRunning / 1000).toFixed(2)} km
+              </div>
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Remaining</h4>
+                <hr />
+                {((this.props.sportStats.month.monthRunObj - this.props.sportStats.month.monthDistanceRunning) / 1000).toFixed(2)} km
+              </div>
+              <div className="card-text col-xs-6">
                 <DonutChart
                   key={this.state.tab}
                   canvasId="donut2"
-                  data0={this.props.sportStats.month.monthRunObjDone !== 0 ? Math.round(this.props.sportStats.month.monthRunObjDone) + '%' : '100%'}
+                  data0={this.props.sportStats.month.monthRunObjDone !== 0 ? Math.round(this.props.sportStats.month.monthRunObjDone) + '%' : '0%'}
                   data1={{n: this.props.sportStats.month.monthDistanceRunning, color: '#90EE90'}}
                   data2={{
-                    n: this.props.sportStats.month.monthRunObjDone < 100 ?
+                    n: this.props.sportStats.month.monthRunObjDone < 100 && this.props.sportStats.month.monthRunObj !== 0 ?
                       this.props.sportStats.month.monthRunObj - this.props.sportStats.month.monthDistanceRunning : 0,
                     color: '#F36666'}}
                 />
@@ -177,16 +197,34 @@ class Stats extends Component {
               Annual stats
             </div>
             <div className="card-block text-xs-center">
-              <div className="card col-xs-6">
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Sessions</h4>
+                <hr />
                 {this.props.sportStats.year.yearSessionsRunningNumber}
               </div>
-              <div className="card col-xs-6">
-                {this.props.sportStats.year.yearVelocityRunning}
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Velocity</h4>
+                <hr />
+                {this.props.sportStats.year.yearVelocityRunning.toFixed(1)} km
               </div>
-              <div className="card col-xs-6">
-                {this.props.sportStats.year.yearTimeRunning.seconds}
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Time</h4>
+                <hr />
+                {this.props.sportStats.year.yearTimeRunning.hours + ' h, ' +
+                this.props.sportStats.year.yearTimeRunning.minutes + ' m, ' +
+                this.props.sportStats.year.yearTimeRunning.seconds + ' s'}
               </div>
-              <div className="card col-xs-6">
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Distance</h4>
+                <hr />
+                {(this.props.sportStats.year.yearDistanceRunning / 1000).toFixed(2)} km
+              </div>
+              <div className="card card-block col-xs-6">
+                <h4 className="card-title">Remaining</h4>
+                <hr />
+                {((this.props.sportStats.year.yearRunObj - this.props.sportStats.year.yearDistanceRunning) / 1000).toFixed(2)} km
+              </div>
+              <div className="card-text col-xs-6">
                 <DonutChart
                   key={this.state.tab}
                   canvasId="donut3"
