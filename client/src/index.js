@@ -28,7 +28,7 @@ import Register from './pages/register';
 import NotFound from './pages/notfound';
 
 import {Routine, Exercise, Create, DoRoutine} from './pages/routine';
-import Stats from './pages/stats';
+import {SportStats, StatsInfo} from './pages/stats';
 import Session from './pages/session';
 import Sessions from './pages/sessions';
 import Profile from './pages/profile';
@@ -55,7 +55,8 @@ ReactDOM.render((
         <Route path="routine/exercise" component={Exercise} />
         <Route path="routine/create" component={Create} />
         <Route path="routine/doRoutine" component={DoRoutine} />
-        <Route path="stats" component={Stats} />
+        <Route path="stats" component={SportStats} />
+        <Route path="stats/info" component={StatsInfo} />
         <Route path="athletes" component={Athletes} />
         <Route path="profile" component={Profile} />
         <Route path="updateUser" component={UpdateUser} />

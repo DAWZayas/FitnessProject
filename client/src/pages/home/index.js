@@ -31,20 +31,20 @@ const Home = () => (
     </div>
     <div className="card">
       <div className="card-block">
-        <Link to="/stats" className="float-xs-right">
+        <Link to="/stats/info" className="float-xs-right">
           <img className="rounded z-depth-1" src="http://localhost:8080/static/images/exercises/04.png" width="100px" height="100px" alt="Generic" />
         </Link>
         <h4 className="card-title">Exercise statistics</h4>
-        <Link to="/stats" className="btn btn-default">Go!</Link>
+        <Link to="/stats/info" className="btn btn-default">Go!</Link>
       </div>
     </div>
     <div className="card">
       <div className="card-block">
-        <Link to="/atlethes" className="float-xs-right">
+        <Link to="/athletes" className="float-xs-right">
           <img className="rounded z-depth-1" src="http://localhost:8080/static/images/exercises/04.png" width="100px" height="100px" alt="Generic" />
         </Link>
         <h4 className="card-title">Athletes nearby</h4>
-        <Link to="/atlethes" className="btn btn-default">Go!</Link>
+        <Link to="/athletes" className="btn btn-default">Go!</Link>
       </div>
     </div>
   </div>
