@@ -55,7 +55,7 @@ class DonutChart extends Component {
         elements: {
           center: {
             text: this.props.data0,
-            fontColor: '#000',
+            fontColor: '#424242',
             fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
             fontSize: 20,
             fontStyle: 'normal'

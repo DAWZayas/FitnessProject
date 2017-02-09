@@ -71,59 +71,60 @@ export default (app) => {
 
       const statsData = {
         week: {
-          weekSessionsRunningNumber: 0,
-          weekDistanceRunning: 0,
-          weekVelocityRunning: 0,
-          weekTimeRunning: {
+          numberSessions: 0,
+          distanceDone: 0,
+          velocity: 0,
+          time: {
             hours: 0,
             minutes: 0,
             seconds: 0,
           },
-          weekRunObj: 0,
-          weekRunObjDone: 0,
+          objective: 0,
+          objectiveDone: 0,
         },
         month: {
-          monthSessionsRunningNumber: 0,
-          monthDistanceRunning: 0,
-          monthVelocityRunning: 0,
-          monthTimeRunning: {
+          numberSessions: 0,
+          distanceDone: 0,
+          velocity: 0,
+          time: {
             hours: 0,
             minutes: 0,
             seconds: 0,
           },
-          monthRunObj: 0,
-          monthRunObjDone: 0,
+          objective: 0,
+          objectiveDone: 0,
         },
         year: {
-          yearSessionsRunningNumber: 0,
-          yearDistanceRunning: 0,
-          yearVelocityRunning: 0,
-          yearTimeRunning: {
+          numberSessions: 0,
+          distanceDone: 0,
+          velocity: 0,
+          time: {
             hours: 0,
             minutes: 0,
             seconds: 0,
           },
-          yearRunObj: 0,
-          yearRunObjDone: 0,
+          objective: 0,
+          objectiveDone: 0,
         },
       };
       const actualDate = new Date(req.body.actualDate);
       const sport = req.body.type;
-      const objectives = user.objectives;
+      const objectives = user.objectives || {};
+
       if (sport === 'Running' && objectives.weekRunningKm && objectives.weekRunningKm !== '') {
-        statsData.week.weekRunObj = Number(objectives.weekRunningKm) * 1000;
-        statsData.month.monthRunObj = Number(objectives.weekRunningKm) * 4330;
-        statsData.year.yearRunObj = Number(objectives.weekRunningKm) * 52000;
+        statsData.week.objective = Number(objectives.weekRunningKm) * 1000;
+        statsData.month.objective = Number(objectives.weekRunningKm) * 4330;
+        statsData.year.objective = Number(objectives.weekRunningKm) * 52000;
       }
       if (sport === 'Cycling' && objectives.weekCyclingKm && objectives.weekCyclingKm !== '') {
-        statsData.week.weekRunObj = Number(objectives.weekCyclingKm) * 1000;
-        statsData.month.monthRunObj = Number(objectives.weekCyclingKm) * 4330;
-        statsData.year.yearRunObj = Number(objectives.weekCyclingKm) * 52000;
+        statsData.week.objective = Number(objectives.weekCyclingKm) * 1000;
+        statsData.month.objective = Number(objectives.weekCyclingKm) * 4330;
+        statsData.year.objective = Number(objectives.weekCyclingKm) * 52000;
       }
       if (sport === 'Walking' && objectives.weekWalkingKm && objectives.weekWalkingKm !== '') {
-        statsData.week.weekRunObj = Number(objectives.weekWalkingKm) * 1000;
-        statsData.month.monthRunObj = Number(objectives.weekWalkingKm) * 4330;
-        statsData.year.yearRunObj = Number(objectives.weekWalkingKm) * 52000;
+        statsData.week.objective = Number(objectives.weekWalkingKm) * 1000;
+        statsData.month.objective = Number(objectives.weekWalkingKm) * 4330;
+        statsData.year.objective = Number(objectives.weekWalkingKm) * 52000;
       }
 
       const sessions = await SportSession.filter({user: user.login});
@@ -149,10 +150,10 @@ export default (app) => {
           res.send(statsData);
           return;
         } else {
-          statsData.year.yearSessionsRunningNumber = yearSessionsRunning.length;
-          statsData.year.yearDistanceRunning = yearSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance})).distance;
-          statsData.year.yearVelocityRunning = yearSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / statsData.year.yearSessionsRunningNumber;
-          statsData.year.yearTimeRunning = yearSessionsRunning.reduce(
+          statsData.year.numberSessions = yearSessionsRunning.length;
+          statsData.year.distanceDone = yearSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance})).distance;
+          statsData.year.velocity = yearSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / statsData.year.numberSessions;
+          statsData.year.time = yearSessionsRunning.reduce(
             (a, b) => ({
               duration: {
                 hours: a.duration.hours + b.duration.hours,
@@ -160,9 +161,9 @@ export default (app) => {
                 seconds: a.duration.seconds + b.duration.seconds,
               },
             })).duration;
-          statsData.year.yearTimeRunning = transformTimeDuration(statsData.year.yearTimeRunning);
-          if (statsData.year.yearRunObj !== 0) {
-            statsData.year.yearRunObjDone = statsData.year.yearDistanceRunning / statsData.year.yearRunObj * 100;
+          statsData.year.time = transformTimeDuration(statsData.year.time);
+          if (statsData.year.objective !== 0) {
+            statsData.year.objectiveDone = statsData.year.distanceDone / statsData.year.objective * 100;
           }
         }
       }
@@ -177,10 +178,10 @@ export default (app) => {
           res.send(statsData);
           return;
         } else {
-          statsData.month.monthSessionsRunningNumber = monthSessionsRunning.length;
-          statsData.month.monthDistanceRunning = monthSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance})).distance;
-          statsData.month.monthVelocityRunning = monthSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / statsData.month.monthSessionsRunningNumber;
-          statsData.month.monthTimeRunning = monthSessionsRunning.reduce(
+          statsData.month.numberSessions = monthSessionsRunning.length;
+          statsData.month.distanceDone = monthSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance})).distance;
+          statsData.month.velocity = monthSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / statsData.month.numberSessions;
+          statsData.month.time = monthSessionsRunning.reduce(
             (a, b) => ({
               duration: {
                 hours: a.duration.hours + b.duration.hours,
@@ -188,9 +189,9 @@ export default (app) => {
                 seconds: a.duration.seconds + b.duration.seconds,
               },
             })).duration;
-          statsData.month.monthTimeRunning = transformTimeDuration(statsData.month.monthTimeRunning);
-          if (statsData.month.monthRunObj !== 0) {
-            statsData.month.monthRunObjDone = statsData.month.monthDistanceRunning / statsData.month.monthRunObj * 100;
+          statsData.month.time = transformTimeDuration(statsData.month.time);
+          if (statsData.month.objective !== 0) {
+            statsData.month.objectiveDone = statsData.month.distanceDone / statsData.month.objective * 100;
           }
         }
       }
@@ -206,10 +207,10 @@ export default (app) => {
           res.send(statsData);
           return;
         } else {
-          statsData.week.weekSessionsRunningNumber = weekSessionsRunning.length;
-          statsData.week.weekDistanceRunning = weekSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance})).distance;
-          statsData.week.weekVelocityRunning = weekSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / statsData.week.weekSessionsRunningNumber;
-          statsData.week.weekTimeRunning = weekSessionsRunning.reduce(
+          statsData.week.numberSessions = weekSessionsRunning.length;
+          statsData.week.distanceDone = weekSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance})).distance;
+          statsData.week.velocity = weekSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / statsData.week.numberSessions;
+          statsData.week.time = weekSessionsRunning.reduce(
             (a, b) => ({
               duration: {
                 hours: a.duration.hours + b.duration.hours,
@@ -217,18 +218,18 @@ export default (app) => {
                 seconds: a.duration.seconds + b.duration.seconds,
               },
             })).duration;
-            statsData.week.weekTimeRunning = transformTimeDuration(statsData.week.weekTimeRunning);
-          if (statsData.week.weekRunObj !== 0) {
-            statsData.week.weekRunObjDone = statsData.week.weekDistanceRunning / statsData.week.weekRunObj * 100;
+            statsData.week.time = transformTimeDuration(statsData.week.time);
+          if (statsData.week.objective !== 0) {
+            statsData.week.objectiveDone = statsData.week.distanceDone / statsData.week.objective * 100;
           }
         }
       }
       res.send(statsData);
       // const weekSessionsRunning = weekSessions.filter(s => s.sport === sport);
-      // const weekSessionsRunningNumber = weekSessionsRunning.length;
-      // const weekDistanceRunning = weekSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance}));
-      // const weekVelocityRunning = weekSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / weekSessionsRunningNumber;
-      // const weekTimeRunning = weekSessionsRunning.reduce(
+      // const numberSessions = weekSessionsRunning.length;
+      // const distanceDone = weekSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance}));
+      // const velocity = weekSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / numberSessions;
+      // const time = weekSessionsRunning.reduce(
       //   (a, b) => ({
       //     duration: {
       //       hours: a.duration.hours + b.duration.hours,
@@ -238,10 +239,10 @@ export default (app) => {
       //   }));
       //
       // const monthSessionsRunning = monthSessions.filter(s => s.sport === sport);
-      // const monthSessionsRunningNumber = monthSessionsRunning.length;
-      // const monthDistanceRunning = monthSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance}));
-      // const monthVelocityRunning = monthSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / monthSessionsRunningNumber;
-      // const monthTimeRunning = monthSessionsRunning.reduce(
+      // const numberSessions = monthSessionsRunning.length;
+      // const distanceDone = monthSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance}));
+      // const velocity = monthSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / numberSessions;
+      // const time = monthSessionsRunning.reduce(
       //   (a, b) => ({
       //     duration: {
       //       hours: a.duration.hours + b.duration.hours,
@@ -252,20 +253,20 @@ export default (app) => {
 
 
       // console.log('--------------------------');
-      // console.log('week sessions: ' + weekSessionsRunningNumber);
-      // console.log('distance: ' + weekDistanceRunning.distance);
-      // console.log('velocity: ' + weekVelocityRunning);
-      // console.log('week time: ' + weekTimeRunning.duration.hours + ' ' + weekTimeRunning.duration.minutes + ' ' + weekTimeRunning.duration.seconds);
+      // console.log('week sessions: ' + numberSessions);
+      // console.log('distance: ' + distanceDone.distance);
+      // console.log('velocity: ' + velocity);
+      // console.log('week time: ' + time.duration.hours + ' ' + time.duration.minutes + ' ' + time.duration.seconds);
       // console.log('--------------------------');
-      // console.log('month sessions: ' + monthSessionsRunningNumber);
-      // console.log('distance: ' + monthDistanceRunning.distance);
-      // console.log('velocity: ' + monthVelocityRunning);
-      // console.log('month time: ' + monthTimeRunning.duration.hours + ' ' + monthTimeRunning.duration.minutes + ' ' + monthTimeRunning.duration.seconds);
+      // console.log('month sessions: ' + numberSessions);
+      // console.log('distance: ' + distanceDone.distance);
+      // console.log('velocity: ' + velocity);
+      // console.log('month time: ' + time.duration.hours + ' ' + time.duration.minutes + ' ' + time.duration.seconds);
       // console.log('--------------------------');
-      // console.log('year sessions: ' + yearSessionsRunningNumber);
-      // console.log('distance: ' + yearDistanceRunning.distance);
-      // console.log('velocity: ' + yearVelocityRunning);
-      // console.log('year time: ' + yearTimeRunning.duration.hours + ' ' + yearTimeRunning.duration.minutes + ' ' + yearTimeRunning.duration.seconds);
+      // console.log('year sessions: ' + numberSessions);
+      // console.log('distance: ' + distanceDone.distance);
+      // console.log('velocity: ' + velocity);
+      // console.log('year time: ' + time.duration.hours + ' ' + time.duration.minutes + ' ' + time.duration.seconds);
       // console.log('--------------------------');
     } catch (e) {
       res.status(400).send({error: 'User not exists'});
