@@ -84,7 +84,7 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
         <div className="form-group">
           <label htmlFor="inputCalories">Calories</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="inputCalories"
             placeholder="calories"

@@ -7,7 +7,7 @@ export default (app) => {
       const exercise = await Exercise.get(req.params.id);
       res.send(exercise);
     } catch (e) {
-      res.status(400).send({error: 'Exercise not in the database'});
+      res.status(400).send({error: 'Error loading the exercise'});
     }
   }));
 
@@ -16,7 +16,7 @@ export default (app) => {
       const exercises = await r.table('Exercise');
       res.send(exercises);
     } catch (e) {
-      res.status(400).send({error: 'Exercise not in the database'});
+      res.status(400).send({error: 'Error loading all the exercises'});
     }
   }));
 };

@@ -7,7 +7,7 @@ export default (app) => {
       const routine = await Routine.get(req.params.id);
       res.send(routine);
     } catch (e) {
-      res.status(400).send({error: 'Routine not in the database'});
+      res.status(400).send({error: 'Error loading the routine'});
     }
   }));
 
@@ -16,7 +16,7 @@ export default (app) => {
       const routines = await Routine.filter({user: req.params.user});
       res.send(routines);
     } catch (e) {
-      res.status(400).send({error: 'Routine not in the database'});
+      res.status(400).send({error: 'Error loading the routine'});
     }
   }));
 
@@ -27,7 +27,7 @@ export default (app) => {
       const routines = await r.table('Routine').skip(skip).limit(limit);
       res.send(routines);
     } catch (e) {
-      res.status(400).send({error: 'Routine not in the database'});
+      res.status(400).send({error: 'Error retrieving all the routines'});
     }
   }));
 };

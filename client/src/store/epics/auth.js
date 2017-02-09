@@ -121,7 +121,7 @@ export const updateUser = action$ => action$
       {
         type: ActionTypes.DO_UPDATE_USER_SUCCESS,
         payload: response,
-    },
+      },
     Actions.addNotificationAction(
       {text: 'Update success', alertType: 'info'},
     ),
@@ -134,7 +134,7 @@ export const updateUser = action$ => action$
     })),
   );
 
-  export const updateProfile = action$ => action$
+export const updateProfile = action$ => action$
     .ofType(ActionTypes.DO_UPDATE_PROFILE)
     .map(signRequest)
     .switchMap(({headers, payload}) => Observable
@@ -144,7 +144,7 @@ export const updateUser = action$ => action$
         {
           type: ActionTypes.DO_UPDATE_PROFILE_SUCCESS,
           payload: response,
-      },
+        },
       Actions.addNotificationAction(
         {text: 'Update success', alertType: 'info'},
       ),
@@ -154,5 +154,8 @@ export const updateUser = action$ => action$
         payload: {
           error: err,
         },
-      })),
+      },
+      Actions.addNotificationAction(
+        {text: err.xhr.response.error, alertType: 'danger'}),
+      ))
     );

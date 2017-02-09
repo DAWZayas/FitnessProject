@@ -18,7 +18,10 @@ export const createExercise = action$ => action$
     .catch(error => Observable.of({
       type: ActionTypes.CREATE_EXERCISE_ERROR,
       payload: {error},
-    })),
+    },
+    Actions.addNotificationAction(
+      {text: error.xhr.response.error, alertType: 'danger'}),
+    ))
   );
 
 export const getExercises = action$ => action$
@@ -35,7 +38,9 @@ export const getExercises = action$ => action$
           type: ActionTypes.GET_EXERCISES_ERROR,
           payload: {error},
         },
-      )),
+        Actions.addNotificationAction(
+          {text: error.xhr.response.error, alertType: 'danger'}),
+        ))
     );
 
 export const createRoutine = action$ => action$
@@ -51,9 +56,12 @@ export const createRoutine = action$ => action$
         {text: 'Routine created', alertType: 'info'}),
       ))
       .catch(error => Observable.of({
-        type: ActionTypes.CREATE_EXERCISE_ERROR,
+        type: ActionTypes.CREATE_ROUTINE_ERROR,
         payload: {error},
-      })),
+      },
+      Actions.addNotificationAction(
+        {text: error.xhr.response.error, alertType: 'danger'}),
+      )),
     );
 
 export const getAllRoutines = action$ => action$
@@ -68,5 +76,8 @@ export const getAllRoutines = action$ => action$
       .catch(error => Observable.of({
         type: ActionTypes.GET_ALL_ROUTINES_ERROR,
         payload: {error},
-      })),
+      },
+      Actions.addNotificationAction(
+        {text: error.xhr.response.error, alertType: 'danger'}),
+      ))
     );
