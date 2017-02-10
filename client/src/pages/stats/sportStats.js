@@ -7,7 +7,7 @@ import {retrieveStatsData} from '../../store/actions';
 import {server as serverConfig} from '../../../config';
 
 import Loader from '../../components/loader';
-import DonutChart from '../../components/stats';
+import {DonutChart} from '../../components/stats';
 
 const mapDispatchToProps = dispatch => ({
   fetchStatsData: payload => dispatch(retrieveStatsData(payload)),

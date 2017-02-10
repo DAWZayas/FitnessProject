@@ -80,6 +80,7 @@ class Create extends Component {
           image: this.props.exercises.filter(token => e.target.id === token.id)[0].image,
           time: this.state.exerciseTime,
           name: this.props.exercises.filter(token => e.target.id === token.id)[0].name,
+          kind: this.props.exercises.filter(token => e.target.id === token.id)[0].kind,
         }],
       exerciseTime: 30,
     });
