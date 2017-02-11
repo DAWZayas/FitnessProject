@@ -8,6 +8,7 @@ import {server as serverConfig} from '../../../config';
 
 import Loader from '../../components/loader';
 import SportStats from './sportStats';
+import RoutineStats from './routineStats';
 
 const mapDispatchToProps = dispatch => ({
   fetchStatsData: payload => dispatch(retrieveStatsData(payload)),
@@ -170,7 +171,7 @@ class StatsInfo extends Component {
           </div>
          : null}
         {this.state.tab !== 'Info' && this.state.tab !== 'Routines' ? <SportStats /> : null}
-        {this.state.tab === 'Routines' ? null : null}
+        {this.state.tab === 'Routines' ? <RoutineStats /> : null}
       </div>
     );
   }

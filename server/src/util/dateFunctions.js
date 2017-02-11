@@ -61,3 +61,13 @@ export const transformTimeDuration = ({seconds, minutes, hours}) => {
 
 export const toSeconds = ({seconds, minutes, hours}) =>
   seconds + (minutes * 60) + (hours * 3600);
+
+  export const toTimeObject = (seconds) => {
+    const total = Math.abs(seconds);
+    const newHours = Math.floor(total / 3600);
+    let newMinutes = Math.floor((total % 3600) / 60);
+    let newSeconds = total % 60;
+    newMinutes = newMinutes < 10 ? '0' + newMinutes : newMinutes;
+    newSeconds = newSeconds < 10 ? '0' + newSeconds : newSeconds;
+    return {hours: newHours, minutes: newMinutes, seconds: newSeconds};
+  };

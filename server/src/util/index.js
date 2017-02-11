@@ -9,4 +9,5 @@ export
   isDateBetween,
   transformTimeDuration,
   toSeconds,
+  toTimeObject,
 } from './dateFunctions';
