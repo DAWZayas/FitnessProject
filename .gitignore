@@ -3,3 +3,4 @@ server/db/
 client/node_modules/
 server/public/
 client/dist/
+client/public/

@@ -33,7 +33,7 @@ class CountDown extends Component {
 
   componentDidUpdate() {
     const {actionToDispatch} = this.props;
-    if (this.state.time === 0) {
+    if (this.state.time === -1) {
       clearInterval(this.state.timer);
       actionToDispatch({...this.props.data, startDate: new Date(), pos: JSON.stringify(this.props.pos)}, this.props.action);
     }
@@ -46,8 +46,12 @@ class CountDown extends Component {
   render() {
     return (
       <div className="container text-xs-center">
-        <div className="" style={countDownStyle}>
-          <span >{this.state.time}</span>
+        <div key={this.state.time + 'audioSession'} className="text-center" style={countDownStyle}>
+          <span >{this.state.time > 0 ? this.state.time : 'GO!'}</span>
+          <audio autoPlay>
+            {this.state.time >= 1 ? <source src={`../../../static/audio/${this.state.time}.mp3`} type="audio/mp3" /> : null}
+            {this.state.time <= 0 ? <source src="../../../static/audio/go.mp3" type="audio/mp3" /> : null}
+          </audio>
         </div>
       </div>
     );

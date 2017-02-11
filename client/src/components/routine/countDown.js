@@ -23,7 +23,7 @@ class CountDown extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.time === 0) {
+    if (this.state.time === -1) {
       clearInterval(this.state.timer);
       this.props.action(this.props.data);
     }
@@ -36,8 +36,14 @@ class CountDown extends Component {
   render() {
     return (
       <div className="container">
-        <div className="text-center" style={countDownStyle}>
-          <span >{this.state.time}</span>
+        <div key={this.state.time + 'audio'} className="text-center" style={countDownStyle}>
+          <span >{this.state.time > 0 ? this.state.time :
+            this.props.data === 'go' ? 'GO!' :
+            this.props.data === 'rest' ? 'REST!' : 'STOP!'}</span>
+          <audio autoPlay>
+            {this.state.time >= 1 ? <source src={`../../../static/audio/${this.state.time}.mp3`} type="audio/mp3" /> : null}
+            {this.state.time <= 0 ? <source src={`../../../static/audio/${this.props.data}.mp3`} type="audio/mp3" /> : null}
+          </audio>
         </div>
       </div>
     );

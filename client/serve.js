@@ -46,7 +46,7 @@ app.use(webpackMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 
 // serve statics
-app.use(express.static(__dirname));
+app.use('/static', express.static('public'));
 // serve index
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 // start server

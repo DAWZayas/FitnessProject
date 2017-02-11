@@ -197,7 +197,7 @@ class DoRoutine extends Component {
           {this.state.state === 1 ?
             <div>
               <h4>Starts in...</h4>
-              <CountDown time="3" action={this.nextAction} data={{}} />
+              <CountDown time="3" action={this.nextAction} data="go" />
             </div>
             : ''
           }
@@ -206,7 +206,7 @@ class DoRoutine extends Component {
               <div className="card-block">
                 <h4 className="card-title">{this.state.routine.exercises[this.state.exercise].name}</h4>
                 <img src={this.state.routine.exercises[this.state.exercise].image} className="img-fluid" alt="" />
-                <CountDown time={this.state.routine.exercises[this.state.exercise].time} action={this.nextAction} data={{}} />
+                <CountDown time={this.state.routine.exercises[this.state.exercise].time} action={this.nextAction} data="rest" />
               </div>
             </div>
             : ''
@@ -214,14 +214,18 @@ class DoRoutine extends Component {
           {this.state.state === 3 ?
             <div>
               <h4>Exercise rest</h4>
-              <CountDown time={this.state.routine.rest} action={this.nextAction} data={{}} />
+              <CountDown time={this.state.routine.rest} action={this.nextAction} data="go" />
             </div>
             : ''
           }
           {this.state.state === 4 ?
             <div>
               <h4>Round rest</h4>
-              <CountDown time={this.state.routine.restRounds} action={this.nextAction} data={{}} />
+              <CountDown
+                time={this.state.routine.restRounds}
+                action={this.nextAction}
+                data={this.state.round === 'FINAL' ? 'stop' : 'go'}
+              />
             </div>
             : ''
           }
