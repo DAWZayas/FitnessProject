@@ -1,7 +1,7 @@
 import {login, oauthLogin, register, logout, updateUser, updateProfile} from './auth';
 import {addNotification} from './notifications';
 import {startSession, finishSession, prepareSession, updateSessionPosition} from './session';
-import {createExercise, getExercises, createRoutine, getAllRoutines} from './routine';
+import {createExercise, getExercises, createRoutine, getAllRoutines, finishRoutine} from './routine';
 import {getImages} from './images';
 import {addObservable} from './realtime';
 import {getStats} from './stats';
@@ -23,6 +23,7 @@ export default [
   getExercises,
   createRoutine,
   getAllRoutines,
+  finishRoutine,
   getImages,
   addObservable,
   getStats,

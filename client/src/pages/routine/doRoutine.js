@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import InfiniteScroll from 'redux-infinite-scroll';
 
-import {getAllRoutines} from '../../store/actions';
+import {getAllRoutines, finishRoutine} from '../../store/actions';
 import {CountDown, SearchBar} from '../../components/routine';
 import {server as serverConfig} from '../../../config';
 
@@ -13,6 +13,7 @@ import modal from './modal.css';
 
 const mapDispatchToProps = dispatch => ({
   fetchRoutines: payload => dispatch(getAllRoutines(payload)),
+  saveFinishRoutine: payload => dispatch(finishRoutine(payload)),
 });
 
 const mapStateToProps = state => ({
@@ -39,7 +40,15 @@ class DoRoutine extends Component {
   }
 
   componentDidUpdate() {
-
+    if (this.state.state === 5) {
+      this.props.saveFinishRoutine({
+        user: this.props.user,
+        sport: 'Routine',
+        exercises: JSON.stringify(this.state.routine.exercises),
+        finishDate: new Date(),
+        rounds: this.state.routine.rounds,
+      });
+    }
   }
 
   // componentWillMount() {
@@ -141,7 +150,7 @@ class DoRoutine extends Component {
               loader={<Loader />}
             >
               {routines.map(routine =>
-                <div key={routine.id}>
+                <div key={routine.id + Math.random()}>
                 {console.log(routine)}
                   <div className="card col-xs-6">
                     <div className="view overlay hm-white-slight">

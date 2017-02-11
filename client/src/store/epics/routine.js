@@ -81,3 +81,25 @@ export const getAllRoutines = action$ => action$
         {text: error.xhr.response.error, alertType: 'danger'}),
       ))
     );
+
+export const finishRoutine = action$ => action$
+    .ofType(ActionTypes.FINISH_ROUTINE)
+    .switchMap(({payload}) => Observable
+      .ajax.post(`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/api/routine/finish`, payload)
+      .map(res => res.response)
+      .mergeMap(routine => Observable.of({
+        type: ActionTypes.FINISH_ROUTINE_SUCCESS,
+        payload: routine,
+        hola: console.log(routine),
+      },
+      Actions.addNotificationAction(
+        {text: 'Routine finished', alertType: 'info'}),
+      ))
+      .catch(error => Observable.of({
+        type: ActionTypes.FINISH_ROUTINE_ERROR,
+        payload: {error},
+      },
+      Actions.addNotificationAction(
+        {text: error.xhr.response.error, alertType: 'danger'}),
+      )),
+    );

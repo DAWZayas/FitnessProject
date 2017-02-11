@@ -114,3 +114,8 @@ export const retrieveStatsData = payload => ({
   type: ActionTypes.RETRIEVE_STATS_DATA,
   payload,
 });
+
+export const finishRoutine = payload => ({
+  type: ActionTypes.FINISH_ROUTINE,
+  payload,
+});
