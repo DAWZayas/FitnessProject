@@ -76,7 +76,7 @@ const Profile = ({user}) => (
           <p>Running Km per week: {user.objectives.weekRunningKm}</p>
           <p>Cycling Km per week: {user.objectives.weekCyclingKm}</p>
           <p>Walking Km per week: {user.objectives.weekWalkingKm}</p>
-          <p>Active day time: {user.objectives.activeTimeDay} m</p>
+          <p>Active day time: {user.objectives.weekTimeExercises} m</p>
           <p>Exercises per week: {user.objectives.weekExercises}</p>
         </div>
       : 'No objectives yet'}

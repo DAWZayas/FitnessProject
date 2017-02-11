@@ -2,12 +2,12 @@ import {
   asyncRequest,
   startEndDaysWeek, startEndDaysMonth,
   startEndDaysYear, isDateBetween,
-  transformTimeDuration,
+  transformTimeDuration, toSeconds,
 } from '../util';
 import {User, SportSession} from '../db';
 
 export default (app) => {
-  app.post('/api/stats/', asyncRequest(async (req, res) => {
+  app.post('/api/stats/sport', asyncRequest(async (req, res) => {
     try {
       const user = await User.get(req.body.userId)
         .without(['password'])
@@ -212,6 +212,139 @@ export default (app) => {
       // console.log('velocity: ' + velocity);
       // console.log('year time: ' + time.duration.hours + ' ' + time.duration.minutes + ' ' + time.duration.seconds);
       // console.log('--------------------------');
+    } catch (e) {
+      res.status(400).send({error: 'User not exists'});
+    }
+  }));
+
+  app.post('/api/stats/routine', asyncRequest(async (req, res) => {
+    try {
+      const user = await User.get(req.body.userId)
+        .without(['password'])
+        .execute();
+
+      const statsData = {
+        week: {
+          numberRoutines: 0,
+          numberExercises: 0,
+          time: {
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+          },
+          objective: 0,
+          objectiveDone: 0,
+        },
+        month: {
+          numberRoutines: 0,
+          numberExercises: 0,
+          time: {
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+          },
+          objective: 0,
+          objectiveDone: 0,
+        },
+        year: {
+          numberRoutines: 0,
+          numberExercises: 0,
+          time: {
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+          },
+          objective: 0,
+          objectiveDone: 0,
+        },
+      };
+      const actualDate = new Date(req.body.actualDate);
+      const objectives = user.objectives || {};
+
+      if (objectives.weekTimeExercises && objectives.weekTimeExercises !== '') {
+        statsData.week.objective = Number(objectives.weekTimeExercises);
+        statsData.month.objective = Math.round(Number(objectives.weekTimeExercises) * 4.33);
+        statsData.year.objective = Number(objectives.weekTimeExercises) * 52;
+      }
+
+      const sessions = await SportSession.filter({user: user.login});
+      if (sessions.length <= 0) {
+        res.send(statsData);
+        return;
+      }
+      const routineSessions = sessions.filter(s => s.sport === 'Routine');
+      if (routineSessions.length <= 0) {
+        res.send(statsData);
+        return;
+      }
+
+      const startEndYear = startEndDaysYear(actualDate);
+      const yearSessions = routineSessions.filter(s => isDateBetween(s.endTime, startEndYear[0], startEndYear[1]));
+      if (yearSessions.length <= 0) {
+        res.send(statsData);
+        return;
+      } else {
+        statsData.year.numberRoutines = yearSessions.length;
+        statsData.year.numberExercises = yearSessions.map(s => s.exercises.length).reduce((a, b) => a + b);
+        statsData.year.time = yearSessions.reduce(
+            (a, b) => ({
+              duration: {
+                hours: a.duration.hours + b.duration.hours,
+                minutes: a.duration.minutes + b.duration.minutes,
+                seconds: a.duration.seconds + b.duration.seconds,
+              },
+            })).duration;
+        statsData.year.time = transformTimeDuration(statsData.year.time);
+        if (statsData.year.objective !== 0) {
+          statsData.year.objectiveDone = toSeconds(statsData.year.time) / statsData.year.objective * 100;
+        }
+      }
+
+      const startEndMonth = startEndDaysMonth(actualDate);
+      const monthSessions = routineSessions.filter(s => isDateBetween(s.endTime, startEndMonth[0], startEndMonth[1]));
+      if (monthSessions.length <= 0) {
+        res.send(statsData);
+        return;
+      } else {
+        statsData.month.numberRoutines = monthSessions.length;
+        statsData.month.numberExercises = monthSessions.map(s => s.exercises.length).reduce((a, b) => a + b);
+        statsData.month.time = monthSessions.reduce(
+            (a, b) => ({
+              duration: {
+                hours: a.duration.hours + b.duration.hours,
+                minutes: a.duration.minutes + b.duration.minutes,
+                seconds: a.duration.seconds + b.duration.seconds,
+              },
+            })).duration;
+        statsData.month.time = transformTimeDuration(statsData.month.time);
+        if (statsData.month.objective !== 0) {
+          statsData.month.objectiveDone = toSeconds(statsData.month.time) / statsData.month.objective * 100;
+        }
+      }
+
+      const startEndWeek = startEndDaysWeek(actualDate);
+      const weekSessions = routineSessions.filter(s => isDateBetween(s.endTime, startEndWeek[0], startEndWeek[1]));
+      if (weekSessions.length <= 0) {
+        res.send(statsData);
+        return;
+      } else {
+        statsData.week.numberRoutines = weekSessions.length;
+        statsData.week.numberExercises = weekSessions.map(s => s.exercises.length).reduce((a, b) => a + b);
+        statsData.week.time = weekSessions.reduce(
+            (a, b) => ({
+              duration: {
+                hours: a.duration.hours + b.duration.hours,
+                minutes: a.duration.minutes + b.duration.minutes,
+                seconds: a.duration.seconds + b.duration.seconds,
+              },
+            })).duration;
+        statsData.week.time = transformTimeDuration(statsData.week.time);
+        if (statsData.week.objective !== 0) {
+          statsData.week.objectiveDone = toSeconds(statsData.week.time) / statsData.week.objective * 100;
+        }
+      }
+      res.send(statsData);
+
     } catch (e) {
       res.status(400).send({error: 'User not exists'});
     }

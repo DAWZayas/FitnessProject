@@ -58,3 +58,6 @@ export const transformTimeDuration = ({seconds, minutes, hours}) => {
   newSeconds = newSeconds < 10 ? '0' + newSeconds : newSeconds;
   return {hours: newHours, minutes: newMinutes, seconds: newSeconds};
 };
+
+export const toSeconds = ({seconds, minutes, hours}) =>
+  seconds + (minutes * 60) + (hours * 3600);

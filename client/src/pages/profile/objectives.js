@@ -23,7 +23,7 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
   let weekCyclingKm;
   let weekWalkingKm;
   let finalWeight;
-  let activeTimeDay;
+  let weekTimeExercises;
   let weekExercises;
 
   const handleClick = (e) => {
@@ -34,7 +34,7 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
       weekCyclingKm: weekCyclingKm.value,
       weekWalkingKm: weekWalkingKm.value,
       finalWeight: finalWeight.value,
-      activeTimeDay: activeTimeDay.value,
+      weekTimeExercises: weekTimeExercises.value,
       weekExercises: weekExercises.value,
       id: user.id,
     });
@@ -92,13 +92,13 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
         </div>
         <h3>Routines objectives</h3>
         <div className="form-group">
-          <label htmlFor="inputActiveTimeDay">activeTimeDay</label>
+          <label htmlFor="inputweekTimeExercises">weekTimeExercises</label>
           <input
             type="number"
             className="form-control"
-            id="inputActiveTimeDay"
-            placeholder="activeTimeDay"
-            ref={(i) => { activeTimeDay = i; }}
+            id="inputweekTimeExercises"
+            placeholder="weekTimeExercises"
+            ref={(i) => { weekTimeExercises = i; }}
           />
         </div>
         <div className="form-group">

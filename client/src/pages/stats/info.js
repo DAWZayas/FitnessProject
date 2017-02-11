@@ -72,6 +72,7 @@ class StatsInfo extends Component {
           type: e.target.textContent,
           userId: this.props.user,
           actualDate: new Date(),
+          sport: e.target.textContent === 'Routines' ? 'routine' : 'sport',
         });
     }
   };

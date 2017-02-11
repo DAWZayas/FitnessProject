@@ -90,7 +90,6 @@ export const finishRoutine = action$ => action$
       .mergeMap(routine => Observable.of({
         type: ActionTypes.FINISH_ROUTINE_SUCCESS,
         payload: routine,
-        hola: console.log(routine),
       },
       Actions.addNotificationAction(
         {text: 'Routine finished', alertType: 'info'}),

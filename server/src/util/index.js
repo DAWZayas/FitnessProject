@@ -8,4 +8,5 @@ export
   startEndDaysYear,
   isDateBetween,
   transformTimeDuration,
+  toSeconds,
 } from './dateFunctions';
