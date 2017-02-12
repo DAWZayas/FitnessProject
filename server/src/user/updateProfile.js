@@ -1,12 +1,12 @@
 import passport from 'passport';
 
-import {User} from '../db';
+import {User, r} from '../db';
 import {hash, asyncRequest} from '../util';
 
 export default (app) => {
   app.post('/api/user/profile/:id', passport.authenticate('jwt', {session: false}), asyncRequest(async (req, res) => {
 
-    const {name, surname, age, email, country, weight, height} = req.body;
+    const {name, surname, age, email, country, weight, height, image} = req.body;
     const {weekRunningKm, weekCyclingKm, weekWalkingKm, finalWeight, weekTimeExercises, weekExercises} = req.body;
     const user = await User.get(req.params.id);
     if (req.user.id !== req.params.id) {
@@ -40,6 +40,13 @@ export default (app) => {
     }
 
     // update profile data
+    if (image) {
+      console.log(image);
+      var contents = new Buffer(image, 'base64');
+
+      user.image = r.binary(contents);
+      console.log(user.image);
+    }
     if (name) {
       user.name = name;
     }

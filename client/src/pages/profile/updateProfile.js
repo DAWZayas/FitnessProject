@@ -26,6 +26,7 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
   let countryInput;
   let weightInput;
   let heightInput;
+  let image;
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -39,7 +40,19 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
       weight: weightInput.value,
       height: heightInput.value,
       id: user.id,
+      image,
     });
+  };
+
+  const handleFileChange = (ev) => {
+    const reader = new FileReader();
+    const file = ev.target.files[0];
+    reader.onload = (e) => {
+      image = e.target.result.slice(22);
+      console.log(image);
+      // console.log(ev.target.files);
+    };
+    reader.readAsDataURL(file);
   };
 
   if (redirectToProfile) {
@@ -50,6 +63,11 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
   return (
     <div className="jumbotron animated fadeIn">
       <form>
+        <input
+          onChange={handleFileChange}
+          type="file"
+          accept=".png"
+        />
         <div className="form-group">
           <label htmlFor="inputName">Name:</label>
           <input
