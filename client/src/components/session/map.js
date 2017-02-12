@@ -9,7 +9,7 @@ export default class Map extends React.Component {
       map: null,
       loaded: false,
       poly: null,
-      marker: null,
+      markers: {},
     };
     // this.initMap = this.initMap.bind(this);
     this.loadMap = this.loadMap.bind(this);
@@ -26,15 +26,20 @@ export default class Map extends React.Component {
     }
 
     if (this.props.athletes) {
-
-      if (this.state.marker) { this.state.marker.setMap(null); }
-
-      const marker = new google.maps.Marker({
-        position: new google.maps.LatLng({lat: nextProps.pos.lat, lng: nextProps.pos.lng}),
-        title: '#',
-        map: this.state.map,
-      });
-      this.setState({marker});
+      const markers = {};
+      for (const athlete in nextProps.athletesObject) {
+        if (this.state.markers[athlete]) {
+          this.state.markers[athlete].setMap(null);
+        }
+        if (athlete !== undefined) {
+          markers[athlete] = new google.maps.Marker({
+            position: new google.maps.LatLng({lat: nextProps.athletesObject[athlete].pos.lat, lng: nextProps.athletesObject[athlete].pos.lng}),
+            title: nextProps.athletesObject[athlete].athlete,
+            map: this.state.map,
+          });
+        }
+      }
+      this.setState({markers});
     }
   }
 
@@ -58,6 +63,19 @@ export default class Map extends React.Component {
         });
 
         if (this.props.line) { this.state.poly.setMap(this.state.map); }
+
+        if (this.props.athletes) {
+          const athletesCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.6,
+            strokeWeight: 1,
+            fillColor: '#FF0000',
+            fillOpacity: 0.2,
+            map: this.state.map,
+            center: {lat: this.props.lat, lng: this.props.lng},
+            radius: 1000,
+          });
+        }
 
         this.state.markerOrigin.setMap(this.state.map);
       }

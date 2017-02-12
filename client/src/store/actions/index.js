@@ -110,6 +110,10 @@ export const removeObservable = observable => ({
   payload: observable,
 });
 
+export const resetAthletesPosition = () => ({
+  type: ActionTypes.RESET_ATLETE_POSITION,
+});
+
 export const retrieveStatsData = payload => ({
   type: ActionTypes.RETRIEVE_STATS_DATA,
   payload,
