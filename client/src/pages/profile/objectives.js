@@ -94,7 +94,7 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
         <div className="form-group">
           <label htmlFor="inputweekTimeExercises">weekTimeExercises</label>
           <input
-            type="number"
+            type="time"
             className="form-control"
             id="inputweekTimeExercises"
             placeholder="weekTimeExercises"

@@ -31,7 +31,9 @@ export default (app) => {
       user.objectives.finalWeight = finalWeight;
     }
     if (weekTimeExercises) {
-      user.objectives.weekTimeExercises = weekTimeExercises;
+      user.objectives.weekTimeExercises =
+        (Number(weekTimeExercises.slice(0, 2)) * 3600) +
+        (Number(weekTimeExercises.slice(3)) * 60);
     }
     if (weekExercises) {
       user.objectives.weekExercises = weekExercises;
@@ -67,6 +69,7 @@ export default (app) => {
       res.status(400).send({error: e.toString()});
       return;
     }
+    delete user.password;
     res.send(user);
   }));
 };

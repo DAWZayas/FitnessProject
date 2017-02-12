@@ -162,8 +162,11 @@ class StatsInfo extends Component {
                   Routine Objectives
                 </button>
                 {this.state.routine ? <div className="card-block text-xs-center animated flipInX">
-                  <h4 className="card-title">Weekly time <span className="tag badge grey"></span></h4>
-                  <h4 className="card-title">Weekly exercises <span className="tag badge grey"></span></h4>
+                  <h4 className="card-title">
+                    Weekly time <span className="tag badge grey">
+                      {Math.floor(this.props.userObjectives.weekTimeExercises / 3600) + ' h ' +
+                      Math.floor((this.props.userObjectives.weekTimeExercises % 3600) / 60) + ' m'}
+                    </span></h4>
                 </div> : null}
                 <Link to="/objectives" className="btn btn-default">Add objectives!</Link>
               </div>

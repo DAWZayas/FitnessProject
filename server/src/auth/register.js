@@ -31,6 +31,12 @@ export default (app) => {
     const user = new User({
       login,
       password: hashedPassword,
+      objectives: {
+        weekRunningKm: 0,
+        weekCyclingKm: 0,
+        weekWalkingKm: 0,
+        weekTimeExercises: 0,
+      },
     });
     await user.save();
 
