@@ -24,7 +24,6 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
   let weekWalkingKm;
   let finalWeight;
   let weekTimeExercises;
-  let weekExercises;
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -35,7 +34,6 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
       weekWalkingKm: weekWalkingKm.value,
       finalWeight: finalWeight.value,
       weekTimeExercises: weekTimeExercises.value,
-      weekExercises: weekExercises.value,
       id: user.id,
     });
   };
@@ -48,71 +46,88 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
   return (
     <div className="jumbotron animated fadeIn">
       <form>
-        <h3>General objectives</h3>
-        <div className="form-group">
-          <label htmlFor="inputFinalWeight">finalWeight</label>
+      <div className="card card-block z-depth-1">
+        <h4 >General objectives</h4>
+        <div className="md-form">
+          <img
+            src="../../../static/images/weight.png"
+            className="prefix"
+            style={{width: '40px'}}
+          />
           <input
             type="number"
             className="form-control"
             id="inputFinalWeight"
-            placeholder="finalWeight"
+            placeholder="Ideal weight"
             ref={(i) => { finalWeight = i; }}
           />
         </div>
-        <h3>Session objectives</h3>
-        <div className="form-group">
-          <label htmlFor="inputWeekRunningKm">weekRunningKm:</label>
+        </div>
+        <div className="card card-block z-depth-1">
+        <h4>Sport objectives</h4>
+        <div className="md-form">
+          <img
+            src="../../../static/images/run.png"
+            className="prefix"
+            style={{width: '40px'}}
+          />
           <input
             type="number"
             className="form-control"
             id="inputWeekRunningKm"
-            placeholder="weekRunningKm"
+            placeholder="Weekly kilometers running"
             ref={(i) => { weekRunningKm = i; }}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="inputWeekCyclingKm">weekCyclingKm:</label>
+        <div className="md-form">
+          <img
+            src="../../../static/images/bike.png"
+            className="prefix"
+            style={{width: '40px'}}
+          />
           <input
             type="number"
             className="form-control"
             id="inputWeekCyclingKm"
-            placeholder="weekCyclingKm"
+            placeholder="Weekly kilometers pedaling"
             ref={(i) => { weekCyclingKm = i; }}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="inputWeekWalkingKm">weekWalkingKm:</label>
+        <div className="md-form">
+          <img
+            src="../../../static/images/walk.png"
+            className="prefix"
+            style={{width: '40px'}}
+          />
           <input
             type="number"
             className="form-control"
             id="inputWeekWalkingKm"
-            placeholder="weekWalkingKm"
+            placeholder="Weekly kilometers walking"
             ref={(i) => { weekWalkingKm = i; }}
           />
         </div>
-        <h3>Routines objectives</h3>
-        <div className="form-group">
-          <label htmlFor="inputweekTimeExercises">weekTimeExercises</label>
+        </div>
+        <div className="card card-block z-depth-1">
+        <h4>Routine objectives</h4>
+        <div className="md-form">
+          <img
+            src="../../../static/images/routine.png"
+            className="prefix"
+            style={{width: '40px'}}
+          />
           <input
             type="time"
             className="form-control"
             id="inputweekTimeExercises"
-            placeholder="weekTimeExercises"
+            placeholder="Weekly exercise time"
             ref={(i) => { weekTimeExercises = i; }}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="inputWeekExercises">weekExercises</label>
-          <input
-            type="number"
-            className="form-control"
-            id="inputWeekExercises"
-            placeholder="weekExercises"
-            ref={(i) => { weekExercises = i; }}
-          />
         </div>
         <div className="text-xs-center">
-          <button type="submit" className="btn btn-default" onClick={handleClick}>Update objectives</button>
+          <button type="submit" className="btn btn-default" onClick={handleClick}>Update</button>
+          <Link to="/stats/info" className="btn btn-danger">Cancel</Link>
         </div>
       </form>
     </div>

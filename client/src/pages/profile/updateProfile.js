@@ -20,10 +20,8 @@ const mapDispatchToProps = dispatch => ({
 
 const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onClick}) => {
   let nameInput;
-  let surnameInput;
   let ageInput;
   let emailInput;
-  let countryInput;
   let weightInput;
   let heightInput;
   let image;
@@ -32,10 +30,8 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
     e.preventDefault();
     onUpdateClick({
       name: nameInput.value,
-      surname: surnameInput.value,
       age: ageInput.value,
       email: emailInput.value,
-      country: countryInput.value,
       weight: weightInput.value,
       height: heightInput.value,
       id: user.id,
@@ -46,6 +42,7 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
   const handleFileChange = (ev) => {
     const reader = new FileReader();
     const file = ev.target.files[0];
+    document.getElementById('uploadFile').textContent = ev.target.files[0].name;
     reader.onload = (e) => {
       image = e.target.result;
     };
@@ -60,83 +57,68 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
   return (
     <div className="jumbotron animated fadeIn">
       <form>
-        <input
-          onChange={handleFileChange}
-          type="file"
-          accept="image/png"
-        />
-        <div className="form-group">
-          <label htmlFor="inputName">Name:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputName"
-            placeholder="Name"
-            ref={(i) => { nameInput = i; }}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputSurname">Surname:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputSurname"
-            placeholder="Surname"
-            ref={(i) => { surnameInput = i; }}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputAge">Age:</label>
-          <input
-            type="number"
-            className="form-control"
-            id="inputAge"
-            placeholder="Age"
-            ref={(i) => { ageInput = i; }}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputEmail">Email:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputEmail"
-            placeholder="Email"
-            ref={(i) => { emailInput = i; }}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputCountry">Country:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputCountry"
-            placeholder="Country"
-            ref={(i) => { countryInput = i; }}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputWeight">Weight:</label>
-          <input
-            type="number"
-            className="form-control"
-            id="inputWeight"
-            placeholder="Your Weight in Kilogrammes"
-            ref={(i) => { weightInput = i; }}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputHeight">Height:</label>
-          <input
-            type="number"
-            className="form-control"
-            id="inputHeight"
-            placeholder="Your Height in centimetres"
-            ref={(i) => { heightInput = i; }}
-          />
+        <div className="card card-block z-depth-1">
+          <h4>Change user profile</h4>
+          <div className="md-form">
+            <i className="fa fa-user prefix" aria-hidden="true"></i>
+            <input
+              type="text"
+              className="form-control"
+              id="inputName"
+              placeholder="Name"
+              ref={(i) => { nameInput = i; }}
+            />
+          </div>
+          <div className="md-form">
+            <i className="fa fa-envelope prefix" aria-hidden="true"></i>
+            <input
+              type="text"
+              className="form-control"
+              id="inputEmail"
+              placeholder="Email"
+              ref={(i) => { emailInput = i; }}
+            />
+          </div>
+          <div className="md-form">
+            <i className="fa fa-calendar-o prefix" aria-hidden="true"></i>
+            <input
+              type="number"
+              className="form-control"
+              id="inputAge"
+              placeholder="Age"
+              ref={(i) => { ageInput = i; }}
+            />
+          </div>
+          <div className="md-form">
+            <i className="fa fa-tag prefix" aria-hidden="true"></i>
+            <input
+              type="number"
+              className="form-control"
+              id="inputWeight"
+              placeholder="Your Weight in Kilogrammes"
+              ref={(i) => { weightInput = i; }}
+            />
+          </div>
+          <div className="md-form">
+            <i className="fa fa-male prefix" aria-hidden="true"></i>
+            <input
+              type="number"
+              className="form-control"
+              id="inputHeight"
+              placeholder="Your Height in centimetres"
+              ref={(i) => { heightInput = i; }}
+            />
+          </div>
+
+          <label className="btn btn-blue-grey" style={{borderRadius: '50%'}}>
+            <i className="fa fa-upload fa-2x" aria-hidden="true" /> Image
+            <input type="file" accept="image/png" onChange={handleFileChange} style={{display: 'none'}} />
+          </label>
+          <span id="uploadFile"></span>
         </div>
         <div className="text-xs-center">
           <button type="submit" className="btn btn-default" onClick={handleClick}>Update</button>
+          <Link to="/profile" className="btn btn-danger">Cancel</Link>
         </div>
       </form>
     </div>

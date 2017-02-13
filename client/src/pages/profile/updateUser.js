@@ -42,8 +42,10 @@ const UpdateUser = ({onUpdateClick, navToLogin, redirectToProfile, user, onClick
   return (
     <div className="jumbotron animated fadeIn">
       <form>
-        <div className="form-group">
-          <label htmlFor="inputUsername">Username:</label>
+        <div className="card card-block z-depth-1">
+        <h4>Change user / password</h4>
+        <div className="md-form">
+          <i className="fa fa-user prefix" aria-hidden="true"></i>
           <input
             type="text"
             className="form-control"
@@ -52,8 +54,8 @@ const UpdateUser = ({onUpdateClick, navToLogin, redirectToProfile, user, onClick
             ref={(i) => { usernameInput = i; }}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="inputPassword">Password</label>
+        <div className="md-form">
+          <i className="fa fa-lock prefix" aria-hidden="true"></i>
           <input
             type="password"
             className="form-control"
@@ -62,8 +64,8 @@ const UpdateUser = ({onUpdateClick, navToLogin, redirectToProfile, user, onClick
             ref={(i) => { passwordInput = i; }}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="inputPasswordRepeat">Password</label>
+        <div className="md-form">
+          <i className="fa fa-lock prefix" aria-hidden="true"></i>
           <input
             type="password"
             className="form-control"
@@ -72,8 +74,10 @@ const UpdateUser = ({onUpdateClick, navToLogin, redirectToProfile, user, onClick
             ref={(i) => { passwordInputRepeat = i; }}
           />
         </div>
+        </div>
         <div className="text-xs-center">
           <button type="submit" className="btn btn-default" onClick={handleClick}>Update</button>
+          <Link to="/profile" className="btn btn-danger">Cancel</Link>
         </div>
       </form>
     </div>
