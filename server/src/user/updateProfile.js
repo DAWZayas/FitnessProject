@@ -1,4 +1,5 @@
 import passport from 'passport';
+import fs from 'fs';
 
 import {User, r} from '../db';
 import {hash, asyncRequest} from '../util';
@@ -41,11 +42,9 @@ export default (app) => {
 
     // update profile data
     if (image) {
-      console.log(image);
-      var contents = new Buffer(image, 'base64');
-
-      user.image = r.binary(contents);
-      console.log(user.image);
+      const base64Data = decodeURIComponent(image).replace(/^data:image\/png;base64,/, '');
+      fs.writeFileSync(__dirname + '/../../public/images/profiles/' + req.params.id + '.png', base64Data, 'base64');
+      user.image = 'http://localhost:8080/static/images/profiles/' + req.params.id + '.png';
     }
     if (name) {
       user.name = name;

@@ -34,7 +34,7 @@ app.use(cors());
 
 // add body parsing
 app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended: true, limit: '2mb'})); // for parsing application/x-www-form-urlencoded
 
 // add cookie parsing
 app.use(cookieParser());

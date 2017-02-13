@@ -30,7 +30,6 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
 
   const handleClick = (e) => {
     e.preventDefault();
-
     onUpdateClick({
       name: nameInput.value,
       surname: surnameInput.value,
@@ -40,7 +39,7 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
       weight: weightInput.value,
       height: heightInput.value,
       id: user.id,
-      image,
+      image: encodeURIComponent(image),
     });
   };
 
@@ -48,9 +47,7 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
     const reader = new FileReader();
     const file = ev.target.files[0];
     reader.onload = (e) => {
-      image = e.target.result.slice(22);
-      console.log(image);
-      // console.log(ev.target.files);
+      image = e.target.result;
     };
     reader.readAsDataURL(file);
   };
@@ -66,7 +63,7 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
         <input
           onChange={handleFileChange}
           type="file"
-          accept=".png"
+          accept="image/png"
         />
         <div className="form-group">
           <label htmlFor="inputName">Name:</label>
