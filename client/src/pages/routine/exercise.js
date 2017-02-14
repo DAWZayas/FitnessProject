@@ -98,11 +98,11 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
           <div className={modal.popup}>
             <h2>Images</h2>
             <a className={modal.close} href="#a">&times;</a>
+            <hr />
             <div className={modal.content}>
-              <hr />
-              {statusImages && statusImages === 'done' ? images.map(img =>
+              {images !== undefined ? images.map(img =>
                 <a href="#a">
-                  <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/` + img} onClick={selectImage} width="50px" height="50px" alt="" />
+                  <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/` + img} className="col-xs-6 col-md-4 col-lg-3" onClick={selectImage} alt="" />
                 </a>
               ) : <div className="text-xs-center"><Loader /></div>}
               <hr />

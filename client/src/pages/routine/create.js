@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
   exercises: state.routine.exercises,
   status: state.routine.exerciseStatus,
   statusImages: state.images.state,
-  images: state.images.exercises,
+  images: state.images.routines,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -118,7 +118,7 @@ class Create extends Component {
   };
 
   handleImages = () => {
-    this.props.onSelectImages({folder: 'exercises'});
+    this.props.onSelectImages({folder: 'routines'});
   };
 
   selectImage = (e) => {
@@ -148,11 +148,11 @@ class Create extends Component {
             <div className={modal.popup}>
               <h2>Images</h2>
               <a className={modal.close} href="#a">&times;</a>
+              <hr />
               <div className={modal.content}>
-                <hr />
-                {this.props.statusImages && this.props.statusImages === 'done' ? this.props.images.map(img =>
+                {this.props.images !== undefined ? this.props.images.map(img =>
                   <a href="#a">
-                    <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/` + img} onClick={this.selectImage} width="50px" height="50px" alt="" />
+                    <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/routines/` + img} onClick={this.selectImage} className="col-xs-6 col-md-4 col-lg-3" alt="" />
                   </a>
                 ) : <div className="text-xs-center"><Loader /></div>}
                 <hr />
@@ -276,8 +276,8 @@ class Create extends Component {
           <div className="card">
             {this.state.routineExercises.length <= 0 ? <h4 className="card-block text-xs-center">No exercises added yet</h4> :
             this.state.routineExercises.map((e, key) =>
-              <div className="card-block row" key={key}>
-                <img className="img-fluid col-xs-6"src={e.image} alt="" />
+              <div className="row" key={key}>
+                <img className="img-fluid col-xs-4"src={e.image} alt="" />
                 <span className="col-xs-6">ex: {e.name}, time: {e.time}</span>
               </div>
             )}
