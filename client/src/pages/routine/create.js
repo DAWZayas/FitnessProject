@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 import {createRoutine, getExercises, getImages} from '../../store/actions';
 import {server as serverConfig} from '../../../config';
 
@@ -127,19 +128,19 @@ class Create extends Component {
   render() {
     return (
       <div className="jumbotron animated fadeIn">
+      <div className="card-block z-depth-1">
         <h2>Create routine</h2>
         <form>
           <div className="form-group">
-            <label htmlFor="inputName">Name</label>
             <input
               type="text"
               className="form-control"
               id="inputName"
-              placeholder="routine name"
+              placeholder="Routine name"
               onChange={this.setName}
             />
           </div>
-          <div className="form-group">
+          <div className="card-block">
             <a className="btn btn-info btn-sm" href="#images" onClick={this.handleImages}>Select image</a>
             {image ? <img src={image} width="50px" height="50px" alt="" /> : ''}
           </div>
@@ -157,10 +158,12 @@ class Create extends Component {
                 <hr />
               </div>
             </div>
+            <hr />
           </div>
+          <hr />
           <div className="form-inline">
-            <div className="form-group">
-              <label htmlFor="inputLevel">Level</label>
+            <div className="">
+              <h5>Level</h5>
               <div id="inputLevel" onChange={this.setLevel}>
                 <label className={styles.radio} htmlFor="g11"><input type="radio" name="group1" value="1" id="g11" />
                   <span className={styles.outer}><span className={styles.inner} /></span>
@@ -184,10 +187,11 @@ class Create extends Component {
                 </label>
               </div>
             </div>
+            <hr />
           </div>
           <div className="form-inline">
-            <div className="form-group">
-              <label htmlFor="inputRest">Rest</label>
+            <div className="">
+              <h5>Rest</h5>
               <div id="inputRest" onChange={this.setRest}>
                 <label className={styles.radio} htmlFor="g21"><input type="radio" name="group2" value="5" id="g21" />
                   <span className={styles.outer}><span className={styles.inner} /></span>
@@ -211,10 +215,11 @@ class Create extends Component {
                 </label>
               </div>
             </div>
+            <hr />
           </div>
           <div className="form-inline">
-            <div className="form-group">
-              <label htmlFor="inputRounds">Rounds</label>
+            <div className="">
+              <h5>Rounds</h5>
               <div id="inputRounds" onChange={this.setRounds}>
                 <label className={styles.radio} htmlFor="g31"><input type="radio" name="group3" value="1" id="g31" />
                   <span className={styles.outer}><span className={styles.inner} /></span>
@@ -238,10 +243,11 @@ class Create extends Component {
                 </label>
               </div>
             </div>
+            <hr />
           </div>
           <div className="form-inline">
-            <div className="form-group">
-              <label htmlFor="inputRestRounds">Rounds Rest</label>
+            <div className="">
+              <h5>Rounds Rest</h5>
               <div id="inputRestRounds" onChange={this.setRestRounds}>
                 <label className={styles.radio} htmlFor="g41"><input type="radio" name="group4" value="30" id="g41" />
                   <span className={styles.outer}><span className={styles.inner} /></span>
@@ -266,18 +272,21 @@ class Create extends Component {
               </div>
             </div>
           </div>
-
-          <div className="jumbotron">
-            {this.state.routineExercises.length <= 0 ? <h4 className="card-title">No exercises added yet</h4> :
+          <hr />
+          <div className="card">
+            {this.state.routineExercises.length <= 0 ? <h4 className="card-block text-xs-center">No exercises added yet</h4> :
             this.state.routineExercises.map((e, key) =>
-              <div className="card row" key={key}>
+              <div className="card-block row" key={key}>
                 <img className="img-fluid col-xs-6"src={e.image} alt="" />
                 <span className="col-xs-6">ex: {e.name}, time: {e.time}</span>
               </div>
             )}
           </div>
-          <button type="submit" className="btn btn-primary" onClick={this.handleClickExercise}>{this.state.showExercises ? 'Hide exercises' : 'Show exercises'}</button>
-          <div className="form-group row">
+          <hr />
+          <div className="text-xs-center">
+            <button type="submit" className="btn btn-primary" onClick={this.handleClickExercise}>{this.state.showExercises ? 'Hide exercises' : 'Show exercises'}</button>
+          </div>
+          <div className="row">
             {this.state.showExercises ?
               this.props.status === 'loading' ? <div className="text-xs-center"><Loader /></div> :
                 this.props.exercises.map((ex, key) =>
@@ -300,7 +309,7 @@ class Create extends Component {
                           <p className="card-text">{ex.calories}</p>
                           <p className="card-text">{ex.description}</p>
                           <div className="form-inline">
-                            <div className="form-group">
+                            <div className="">
                               <label htmlFor="exerciseTime">Exercise time in seconds (30 by default)</label>
                               <div id="exerciseTime" onChange={this.setExerciseTime}>
                                 <label className={styles.radio} htmlFor={`t1-${ex.id}`}><input type="radio" name="time4" value="30" id={`t1-${ex.id}`} checked={false} />
@@ -334,8 +343,12 @@ class Create extends Component {
                 )
                 : ''}
           </div>
-          <button type="submit" className="btn btn-default" onClick={this.handleClick}>Create</button>
         </form>
+        </div>
+        <div className="card-block text-xs-center">
+          <button type="submit" className="btn btn-default" onClick={this.handleClick}>Create</button>
+          <Link to="/routine" className="btn btn-danger">Cancel</Link>
+        </div>
       </div>
     );
   }

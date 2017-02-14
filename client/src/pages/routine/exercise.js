@@ -50,15 +50,15 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
 
   return (
     <div className="jumbotron animated fadeIn">
+    <div className="card-block z-depth-1">
       <h2>Create exercise</h2>
-      <form>
+        <form>
         <div className="form-group">
-          <label htmlFor="inputName">Name</label>
           <input
             type="text"
             className="form-control"
             id="inputName"
-            placeholder="exercise"
+            placeholder="Exercise name"
             ref={(i) => { name = i; }}
           />
         </div>
@@ -82,12 +82,11 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
           ></textarea>
         </div>
         <div className="form-group">
-          <label htmlFor="inputCalories">Calories</label>
           <input
             type="number"
             className="form-control"
             id="inputCalories"
-            placeholder="calories"
+            placeholder="Calories"
             ref={(i) => { calories = i; }}
           />
         </div>
@@ -110,8 +109,12 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-default" onClick={handleClick}>Create</button>
-      </form>
+        </form>
+        </div>
+        <div className="card-block text-xs-center">
+          <button type="submit" className="btn btn-default" onClick={handleClick}>Create</button>
+          <Link to="/routine" className="btn btn-danger">Cancel</Link>
+        </div>
     </div>
   );
 };
