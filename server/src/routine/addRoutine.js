@@ -17,7 +17,7 @@ export default (app) => {
       res.status(400).send({error: 'No exercises added to the routine'});
       return;
     }
-    if (!image) {
+    if (typeof image === 'undefined' || image === 'undefined' || !image || image === '') {
       res.status(400).send({error: 'Missing routine image'});
       return;
     }

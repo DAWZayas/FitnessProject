@@ -21,7 +21,7 @@ export default (app) => {
       res.status(400).send({error: 'Missing exercise calories'});
       return;
     }
-    if (!image) {
+    if (typeof image === 'undefined' || image === 'undefined' || !image || image === '') {
       res.status(400).send({error: 'Missing exercise image'});
       return;
     }
