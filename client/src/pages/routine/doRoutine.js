@@ -126,9 +126,9 @@ class DoRoutine extends Component {
       routines = routines.filter(r => r.user === this.props.user);
     }
     return (
-      <div className="container">
+      <div className="card-block z-depth-1">
         <div className="card text-xs-center">
-          <h1>Routines</h1>
+          <h1 className="card-block text-xs-center">Exercise routines</h1>
         </div>
         <div className="text-xs-center">
         {this.state.state === 0 ?
@@ -172,14 +172,14 @@ class DoRoutine extends Component {
                       <div className={modal.content}>
                         <hr />
                         <ul className="list-group">
-                          <li className="list-group-item">Created by: {routine.user}</li>
-                          <li className="list-group-item">Level: {routine.level}</li>
-                          <li className="list-group-item">Rounds: {routine.rounds}</li>
-                          <li className="list-group-item">Rest: {routine.rest} s.</li>
-                          <li className="list-group-item">Round rest: {routine.restRounds} s.</li>
-                          <li className="list-group-item list-group-item-info">Exercises: {routine.exercises.length}</li>
+                          <li className="list-group-item"><h4>Creator: <span className="tag badge grey">{routine.user}</span></h4></li>
+                          <li className="list-group-item"><h4>Level: <span className="tag badge grey">{routine.level}</span></h4></li>
+                          <li className="list-group-item"><h4>Rounds: <span className="tag badge grey">{routine.rounds}</span></h4></li>
+                          <li className="list-group-item"><h4>Rest: <span className="tag badge grey">{routine.rest} s.</span></h4></li>
+                          <li className="list-group-item"><h4>Round rest: <span className="tag badge grey">{routine.restRounds} s.</span></h4></li>
+                          <li className="list-group-item blue-grey lighten-4"><h4>Exercises: <span className="tag badge grey">{routine.exercises.length}</span></h4></li>
                           {routine.exercises.map((ex, key) =>
-                            (<li className="list-group-item" key={key}>{ex.name}: {ex.time} s.</li>))}
+                            (<li className="list-group-item blue-grey lighten-5" key={key}><h4>{ex.name}: <span className="tag badge grey">{ex.time} s.</span></h4></li>))}
                         </ul>
                         <button type="submit" className="btn btn-default" onClick={this.handleClick} value={routine.id} >Do it!</button>
                       </div>
@@ -194,7 +194,7 @@ class DoRoutine extends Component {
 
           {this.state.state !== 0 ?
             <div className="card card-block z-depth-1">
-              <h4>Round: {this.state.round}</h4>
+              <h2>Round: <b>{this.state.round}</b></h2>
             </div>
             : ''
           }
@@ -206,7 +206,7 @@ class DoRoutine extends Component {
             : ''
           }
           {this.state.state === 2 ?
-            <div className="card">
+            <div>
               <div className="card-block">
                 <h1 className="">{this.state.routine.exercises[this.state.exercise].name}</h1>
                 <img src={this.state.routine.exercises[this.state.exercise].image} className="img-fluid" alt="" />
@@ -219,26 +219,39 @@ class DoRoutine extends Component {
           }
           {this.state.state === 3 ?
             <div>
-              <h4>Exercise rest</h4>
-              <CountDown time={this.state.routine.rest} action={this.nextAction} data="go" />
+              <div className="card-block">
+                <h1>Exercise rest</h1>
+                <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/rest.png`} className="img-fluid" alt="" />
+                <div className="z-depth-1">
+                  <CountDown time={this.state.routine.rest} action={this.nextAction} data="go" />
+                </div>
+              </div>
             </div>
             : ''
           }
           {this.state.state === 4 ?
             <div>
-              <h4>Round rest</h4>
-              <CountDown
-                time={this.state.routine.restRounds}
-                action={this.nextAction}
-                data={this.state.round === 'FINAL' ? 'stop' : 'go'}
-              />
+              <div className="card-block">
+                <h1>Round rest</h1>
+                <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/rest.png`} className="img-fluid" alt="" />
+                <div className="z-depth-1">
+                  <CountDown
+                    time={this.state.routine.restRounds}
+                    action={this.nextAction}
+                    data={this.state.round === 'FINAL' ? 'stop' : 'go'}
+                  />
+                </div>
+              </div>
             </div>
             : ''
           }
           {this.state.state === 5 ?
             <div>
-              <h4>Congratulations, you finished the workout!!</h4>
-              <Link to="/routine" className="btn btn-default">Back</Link>
+              <div className="card-block animated zoomIn">
+                <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/medal.png`} className="img-fluid" alt="" />
+                <h2>Congratulations, you finished the workout!!</h2>
+                <Link to="/routine" className="btn btn-default">Back</Link>
+              </div>
             </div>
             : ''
           }

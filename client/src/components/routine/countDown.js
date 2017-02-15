@@ -41,7 +41,7 @@ class CountDown extends Component {
             this.props.data === 'go' ? 'GO!' :
             this.props.data === 'rest' ? 'REST!' : 'STOP!'}</span>
           <audio autoPlay>
-            {this.state.time >= 1 ? <source src={`../../../static/audio/${this.state.time}.mp3`} type="audio/mp3" /> : null}
+            {this.state.time >= 1 && this.state.time <= 5 ? <source src={`../../../static/audio/${this.state.time}.mp3`} type="audio/mp3" /> : null}
             {this.state.time <= 0 ? <source src={`../../../static/audio/${this.props.data}.mp3`} type="audio/mp3" /> : null}
           </audio>
         </div>
