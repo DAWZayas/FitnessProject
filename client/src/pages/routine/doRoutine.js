@@ -130,18 +130,19 @@ class DoRoutine extends Component {
         <div className="card text-xs-center">
           <h1>Routines</h1>
         </div>
-        <nav className="navbar navbar-default card">
-          <div className="container-fluid">
-            <button type="submit" className="btn btn-sm btn-default" onClick={this.showMineOrAll}>{this.state.showMine ? 'All' : 'Mine'}</button>
-            <form className="navbar-form navbar-right col-xs-6">
-              <SearchBar onUserInput={this.handleUserInput} />
-            </form>
-          </div>
-        </nav>
         <div className="text-xs-center">
         {this.state.state === 0 ?
           !this.props.hasMore && this.props.routines.length === 0 ?
             <div>No Routines yet!</div> :
+            <div>
+            <nav className="navbar navbar-default card">
+              <div className="container-fluid">
+                <button type="submit" className="btn btn-sm btn-default" onClick={this.showMineOrAll}>{this.state.showMine ? 'All' : 'Mine'}</button>
+                <form className="navbar-form navbar-right col-xs-6">
+                  <SearchBar onUserInput={this.handleUserInput} />
+                </form>
+              </div>
+            </nav>
             <InfiniteScroll
               elementIsScrollable={false}
               loadMore={this.onLoadMore}
@@ -187,11 +188,14 @@ class DoRoutine extends Component {
                 </div>)
               }
             </InfiniteScroll>
+            </div>
           : ''
         }
 
           {this.state.state !== 0 ?
-            <h4>Round: {this.state.round}</h4>
+            <div className="card card-block z-depth-1">
+              <h4>Round: {this.state.round}</h4>
+            </div>
             : ''
           }
           {this.state.state === 1 ?
@@ -204,9 +208,11 @@ class DoRoutine extends Component {
           {this.state.state === 2 ?
             <div className="card">
               <div className="card-block">
-                <h4 className="card-title">{this.state.routine.exercises[this.state.exercise].name}</h4>
+                <h1 className="">{this.state.routine.exercises[this.state.exercise].name}</h1>
                 <img src={this.state.routine.exercises[this.state.exercise].image} className="img-fluid" alt="" />
+                <div className="z-depth-1">
                 <CountDown time={this.state.routine.exercises[this.state.exercise].time} action={this.nextAction} data="rest" />
+                </div>
               </div>
             </div>
             : ''

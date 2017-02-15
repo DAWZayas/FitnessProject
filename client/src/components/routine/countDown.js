@@ -6,7 +6,7 @@ const countDownStyle = {
   display: 'inline-block',
   fontWeight: '100',
   textAlign: 'center',
-  fontSize: '50px',
+  fontSize: '100px',
 };
 
 class CountDown extends Component {

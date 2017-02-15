@@ -47,6 +47,7 @@ class Create extends Component {
     this.resetExerciseTime = this.resetExerciseTime.bind(this);
     this.handleImages = this.handleImages.bind(this);
     this.selectImage = this.selectImage.bind(this);
+    this.handleRemoveExercise = this.handleRemoveExercise.bind(this);
   }
 
   handleClick = (e) => {
@@ -69,6 +70,15 @@ class Create extends Component {
     e.preventDefault();
     this.setState({showExercises: !this.state.showExercises});
     this.props.loadExercises();
+  };
+
+  handleRemoveExercise = (e) => {
+    e.preventDefault();
+    let index = Number(e.target.id[0]);
+    let firstRoutine = this.state.routineExercises.slice(0, index);
+    this.setState({
+      routineExercises: this.state.routineExercises.slice(0, index).concat(this.state.routineExercises.slice(index + 1)),
+    });
   };
 
   handleAddExercise = (e) => {
@@ -276,9 +286,13 @@ class Create extends Component {
           <div className="card">
             {this.state.routineExercises.length <= 0 ? <h4 className="card-block text-xs-center">No exercises added yet</h4> :
             this.state.routineExercises.map((e, key) =>
-              <div className="row" key={key}>
-                <img className="img-fluid col-xs-4"src={e.image} alt="" />
-                <span className="col-xs-6">ex: {e.name}, time: {e.time}</span>
+              <div className="row card-block" key={key}>
+                <img className="img-fluid col-xs-4" src={e.image} alt="" />
+                <div className="card-block col-xs-6">
+                  <h4 className="card-text">{e.name}</h4>
+                  <h4 className="card-text">{e.time}''</h4>
+                </div>
+                <i id={key + 'R-ex'} className="fa fa-close fa-2x grey-text" onClick={this.handleRemoveExercise} aria-hidden="true" style={{cursor: 'pointer'}} />
               </div>
             )}
           </div>
@@ -296,7 +310,7 @@ class Create extends Component {
                       <a className="mask" href={`#ex${ex.id}`} />
                     </div>
                     <div className="card-block">
-                      <h4 className="card-title">{ex.name}</h4>
+                      <h4 className="card-title text-xs-center">{ex.name}</h4>
                     </div>
                     <div id={`ex${ex.id}`} className={modal.overlay}>
                       <a className={modal.cancel} href="#a" onClick={this.resetExerciseTime}></a>
@@ -305,12 +319,13 @@ class Create extends Component {
                         <a className={modal.close} href="#a" onClick={this.resetExerciseTime}>&times;</a>
                         <div className={modal.content}>
                           <hr />
-                          <p className="card-text">{ex.kind}</p>
-                          <p className="card-text">{ex.calories}</p>
-                          <p className="card-text">{ex.description}</p>
+                          <h4 className="card-text">Kind: {ex.kind}</h4>
+                          <h4 className="card-text">Calories: {ex.calories} kcal/h</h4>
+                          <h4 className="card-text">Description: {ex.description}</h4>
+                          <hr />
                           <div className="form-inline">
                             <div className="">
-                              <label htmlFor="exerciseTime">Exercise time in seconds (30 by default)</label>
+                              <h5>Exercise time in seconds (30 by default)</h5>
                               <div id="exerciseTime" onChange={this.setExerciseTime}>
                                 <label className={styles.radio} htmlFor={`t1-${ex.id}`}><input type="radio" name="time4" value="30" id={`t1-${ex.id}`} checked={false} />
                                   <span className={styles.outer}><span className={styles.inner} /></span>
@@ -335,7 +350,10 @@ class Create extends Component {
                               </div>
                             </div>
                           </div>
-                          <a id={ex.id} href="#a" className="btn btn-default" onClick={this.handleAddExercise}>Add</a>
+                          <hr />
+                          <div className="text-xs-center">
+                            <a id={ex.id} href="#a" className="btn btn-default" onClick={this.handleAddExercise}>Add</a>
+                          </div>
                         </div>
                       </div>
                     </div>
