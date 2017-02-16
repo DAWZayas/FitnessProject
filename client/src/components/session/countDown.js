@@ -46,7 +46,7 @@ class CountDown extends Component {
   render() {
     return (
       <div className="container text-xs-center">
-        <div key={this.state.time + 'audioSession'} className="text-center" style={countDownStyle}>
+        <div key={this.state.time + 'audioSession'} className="text-center animated zoomIn" style={countDownStyle}>
           <span >{this.state.time > 0 ? this.state.time : 'GO!'}</span>
           <audio autoPlay>
             {this.state.time >= 1 ? <source src={`../../../static/audio/${this.state.time}.mp3`} type="audio/mp3" /> : null}

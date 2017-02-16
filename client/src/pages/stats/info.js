@@ -90,10 +90,8 @@ class StatsInfo extends Component {
   render() {
     return (
       <div className="container">
-        <div className="card text-xs-center">
-          <h1>Stats</h1>
-        </div>
-        <nav className="navbar navbar-dark default-color">
+        <h1 className="card card-block text-xs-center">Stats/objectives</h1>
+        <nav className="card navbar navbar-dark default-color">
           <ul className="nav navbar-nav" style={style.navbarNav}>
             <li className={`nav-item ${this.state.tab === 'Info' && 'active'}`} style={style.li}>
               <a href="#2" className="nav-link" onClick={this.handleClick}>Info</a>

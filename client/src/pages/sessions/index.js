@@ -23,7 +23,7 @@ const Sessions = ({onPrepareSession}) => {
   };
   return (
     <div className="jumbotron animated fadeIn">
-
+      <h3 className="card card-block text-xs-center">Choose your sport session</h3>
       <div className="card">
         <div className="card-block">
           <h4 className="card-title">Running session</h4>

@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
   onFinishSession: (payload) => dispatch(finishSession(payload)),
 });
 
-const started = (onFinishSession, sessionId) => {
+const started = (onFinishSession, sessionId, sport) => {
   let totalDistance = 0;
   const handleClick = (e) => {
     e.preventDefault();
@@ -28,6 +28,7 @@ const started = (onFinishSession, sessionId) => {
   const distanceFunction = dist => totalDistance = dist;
   return (
     <div>
+      <h2 className="card card-block text-xs-center">{sport} session</h2>
       <div className="card card-block text-xs-center">
         <Timer />
       </div>
@@ -40,10 +41,13 @@ const started = (onFinishSession, sessionId) => {
 };
 
 const Session = ({sessionState, onFinishSession, sessionId, user, sport}) => (
-  <div className="jumbotron animated fadeInRight">
-    <h1>Session page</h1>
-    {sessionState === 1 ? <CountDown time={COUNTDOWN_TIME} action={startSession} data={{user, sport}} /> : ''}
-    {sessionState === 2 ? started(onFinishSession, sessionId) : ''}
+  <div className="jumbotron animated fadeIn">
+    {sessionState === 1 ?
+      <div>
+        <h1 className="card card-block text-xs-center">Session starts in...</h1>
+        <CountDown time={COUNTDOWN_TIME} action={startSession} data={{user, sport}} />
+      </div> : ''}
+    {sessionState === 2 ? started(onFinishSession, sessionId, sport) : ''}
     {sessionState === 3 ? <SummarySession /> : ''}
   </div>
 );

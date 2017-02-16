@@ -53,7 +53,7 @@ class Athletes extends Component {
     return (
       <div className="card">
         <div className="card-block">
-          <h4 className="card-title">Real time</h4>
+          <h2 className="card card-block text-xs-center">Athletes in 1 km around</h2>
           {this.props.userCoords ?
             <div>
               <Map lat={this.props.userCoords.lat} lng={this.props.userCoords.lng} athletesObject={this.props.athletesObject} athletes />

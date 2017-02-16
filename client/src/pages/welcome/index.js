@@ -13,11 +13,12 @@ const mapDispatchToProps = (dispatch) => ({
 const Welcome = () => (
   <div className="jumbotron">
     <div className="card text-xs-center">
-      <div className="card-block">
-        <h4 className="card-title">Sport is life and life is sport</h4>
-      </div>
+      <h4 className="card-block card-title">Sport is life and life is sport</h4>
     </div>
-    <Slider />
+    <div className="card card-block text-xs-center">
+      <Slider />
+      <h4 className="card-block text-xs-center">The longer and faster you can train your body, the greater you will improve aerobic and anaerobic fitness levels.</h4>
+    </div>
   </div>
 );
 

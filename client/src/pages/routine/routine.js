@@ -9,8 +9,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Routine = () => (
-  <div className="jumbotron animated fadeInRight">
-    <h1>Routine page</h1>
+  <div className="jumbotron animated fadeIn">
+    <h3 className="card card-block text-xs-center">Choose your option</h3>
     <div className="card">
       <div className="card-block">
         <h4 className="card-title">Do a routine!</h4>

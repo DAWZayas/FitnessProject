@@ -128,7 +128,7 @@ class DoRoutine extends Component {
     return (
       <div className="card-block z-depth-1">
         <div className="card text-xs-center">
-          <h1 className="card-block text-xs-center">Exercise routines</h1>
+          <h2 className="card-block text-xs-center">{(this.state.routine && this.state.routine.name) || 'Exercise routines'}</h2>
         </div>
         <div className="text-xs-center">
         {this.state.state === 0 ?
@@ -214,6 +214,7 @@ class DoRoutine extends Component {
                 <CountDown time={this.state.routine.exercises[this.state.exercise].time} action={this.nextAction} data="rest" />
                 </div>
               </div>
+              <Link to="/routine" className="btn btn-danger">Cancel</Link>
             </div>
             : ''
           }
@@ -226,6 +227,7 @@ class DoRoutine extends Component {
                   <CountDown time={this.state.routine.rest} action={this.nextAction} data="go" />
                 </div>
               </div>
+              <Link to="/routine" className="btn btn-danger">Cancel</Link>
             </div>
             : ''
           }
@@ -242,6 +244,7 @@ class DoRoutine extends Component {
                   />
                 </div>
               </div>
+              <Link to="/routine" className="btn btn-danger">Cancel</Link>
             </div>
             : ''
           }
