@@ -8,10 +8,10 @@ const mapStateToProps = state => ({
 
 const SummarySession = ({session}) => (
   <div className="card text-xs-center">
-    <div className="card-header blue-grey darken-1 white-text">
-      <h3>Session summary session</h3>
+    <div className="card-header light-grey-gradient white-text">
+      <h3>Session summary</h3>
     </div>
-    <div className="card-block">
+    <div className="card-block light-gradient">
       <ul className="list-group">
         <li className="list-group-item"><h4>User: <span className="tag badge grey">{session.user}</span></h4></li>
         <li className="list-group-item"><h4>Sport: <span className="tag badge grey">{session.sport}</span></h4></li>

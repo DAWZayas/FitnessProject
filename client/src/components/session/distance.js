@@ -60,10 +60,10 @@ class Distance extends Component {
   render() {
     return (
       <div>
-        <div className="card card-block text-xs-center">
+        <div className="card card-block text-xs-center light-gradient">
           <Map lat={this.props.session.lat} lng={this.props.session.lng} pos={this.state.pos[this.state.pos.length - 1]} line />
         </div>
-        <div className="card card-block text-xs-center">
+        <div className="card card-block text-xs-center light-gradient">
           <h2>Distance: {this.state.distance} m.</h2>
         </div>
       </div>

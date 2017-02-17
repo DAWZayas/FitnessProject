@@ -1,0 +1,19 @@
+*[class~="basic-gradient"]{
+  background: linear-gradient(135deg,#000 0,#2BBBAD 100%) !important;
+}
+
+*[class~="light-gradient"]{
+  background: linear-gradient(to right, rgba(250,250,250,1) 0%, rgba(240,240,240,1) 100%);
+}
+
+*[class~="light-grey-gradient"]{
+  background: linear-gradient(135deg,#455a64 0,#b0bec5 100%) !important;
+}
+
+*[class~="stats-bar-gradient"]{
+  background: linear-gradient(135deg,#00695c 0,#2BBBAD 100%) !important;
+}
+
+body {
+  background-color: #eeeeee;
+}

@@ -12,6 +12,7 @@ import {Provider} from 'react-redux';
 // styles
 import 'mdbootstrap/css/bootstrap.min.css';
 import 'mdbootstrap/css/mdb.min.css';
+import './css/main.scss';
 
 import 'hellojs/dist/hello.all';
 

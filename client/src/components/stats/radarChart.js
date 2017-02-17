@@ -63,7 +63,7 @@ class RadarChart extends Component {
 
   render() {
     return (
-      <canvas id={this.props.canvasId} height="250" style={{border: "1px solid white"}}></canvas>
+      <canvas id={this.props.canvasId} height="250" style={{border: "1px solid transparent"}}></canvas>
     );
   }
 }

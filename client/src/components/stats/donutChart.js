@@ -88,7 +88,7 @@ class DonutChart extends Component {
 
   render() {
     return (
-      <canvas id={this.props.canvasId} height="114" style={{border: "1px solid white"}}></canvas>
+      <canvas id={this.props.canvasId} height="114" style={{border: "1px solid transparent"}}></canvas>
     );
   }
 }

@@ -6,9 +6,11 @@ import {Notifications} from '../notifications';
 
 const style = {
   footer: {
-    position: 'absolute',
+    position: 'fixed',
+    zIndex: 99,
     bottom: '0',
     width: '100%',
+    margin: 'auto',
   },
 };
 
