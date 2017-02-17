@@ -44,9 +44,9 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
   }
 
   return (
-    <div className="jumbotron animated fadeIn">
+    <div className="jumbotron animated fadeIn grey lighten-5">
       <form>
-      <div className="card card-block z-depth-1">
+      <div className="card card-block z-depth-1 light-gradient">
         <h4 >General objectives</h4>
         <div className="md-form">
           <img
@@ -63,7 +63,7 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
           />
         </div>
         </div>
-        <div className="card card-block z-depth-1">
+        <div className="card card-block z-depth-1 light-gradient">
         <h4>Sport objectives</h4>
         <div className="md-form">
           <img
@@ -108,7 +108,7 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
           />
         </div>
         </div>
-        <div className="card card-block z-depth-1">
+        <div className="card card-block z-depth-1 light-gradient">
         <h4>Routine objectives</h4>
         <div className="md-form">
           <img

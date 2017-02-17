@@ -50,7 +50,7 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
 
   return (
     <div className="jumbotron animated fadeIn">
-    <div className="card-block z-depth-1">
+    <div className="card-block z-depth-1 grey lighten-5">
       <h2>Create exercise</h2>
         <form>
         <div className="form-group">

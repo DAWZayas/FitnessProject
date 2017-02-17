@@ -22,22 +22,22 @@ const Sessions = ({onPrepareSession}) => {
     onPrepareSession('Walking');
   };
   return (
-    <div className="jumbotron animated fadeIn">
+    <div className="jumbotron animated fadeIn grey lighten-5">
       <h3 className="card card-block text-xs-center">Choose your sport session</h3>
       <div className="card">
-        <div className="card-block">
+        <div className="card-block light-gradient">
           <h4 className="card-title">Running session</h4>
           <Link to="/session" className="btn btn-default" onClick={handleClickRunning}>Go!</Link>
         </div>
       </div>
       <div className="card">
-        <div className="card-block">
+        <div className="card-block light-gradient">
           <h4 className="card-title">Cycling session</h4>
           <Link to="/session" className="btn btn-default" onClick={handleClickCycling}>Go!</Link>
         </div>
       </div>
       <div className="card">
-        <div className="card-block">
+        <div className="card-block light-gradient">
           <h4 className="card-title">Walking session</h4>
           <Link to="/session" className="btn btn-default" onClick={handleClickWalking}>Go!</Link>
         </div>

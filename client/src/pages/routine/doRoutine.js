@@ -126,7 +126,7 @@ class DoRoutine extends Component {
       routines = routines.filter(r => r.user === this.props.user);
     }
     return (
-      <div className="card-block z-depth-1">
+      <div className="card-block z-depth-1 grey lighten-5">
         <div className="card text-xs-center">
           <h2 className="card-block text-xs-center">{(this.state.routine && this.state.routine.name) || 'Exercise routines'}</h2>
         </div>
@@ -210,7 +210,7 @@ class DoRoutine extends Component {
               <div className="card-block">
                 <h1 className="">{this.state.routine.exercises[this.state.exercise].name}</h1>
                 <img src={this.state.routine.exercises[this.state.exercise].image} className="img-fluid" alt="" />
-                <div className="z-depth-1">
+                <div className="z-depth-1 white">
                 <CountDown time={this.state.routine.exercises[this.state.exercise].time} action={this.nextAction} data="rest" />
                 </div>
               </div>

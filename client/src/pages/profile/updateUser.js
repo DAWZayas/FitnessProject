@@ -40,9 +40,9 @@ const UpdateUser = ({onUpdateClick, navToLogin, redirectToProfile, user, onClick
   }
 
   return (
-    <div className="jumbotron animated fadeIn">
+    <div className="jumbotron animated fadeIn grey lighten-5">
       <form>
-        <div className="card card-block z-depth-1">
+        <div className="card card-block z-depth-1 light-gradient">
         <h4>Change user / password</h4>
         <div className="md-form">
           <i className="fa fa-user prefix" aria-hidden="true"></i>

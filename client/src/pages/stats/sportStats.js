@@ -72,13 +72,13 @@ class SportStats extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="">
         {Object.getOwnPropertyNames(this.props.sportStats).length > 0 ?
           <div className="card" style={{overflow: 'hidden'}}>
-            <div className="card-header blue-grey darken-1 white-text">
+            <div className="card-header light-grey-gradient white-text">
               Weekly stats
             </div>
-            <div className="card-block text-xs-center">
+            <div className="card-block text-xs-center light-gradient">
               <div className="card card-block col-xs-6">
                 <h4 className="card-title">Sessions</h4>
                 <hr />
@@ -127,10 +127,10 @@ class SportStats extends Component {
         : ''}
         {Object.getOwnPropertyNames(this.props.sportStats).length > 0 ?
           <div className="card" style={{overflow: 'hidden'}}>
-            <div className="card-header blue-grey darken-1 white-text">
+            <div className="card-header light-grey-gradient white-text">
               Monthly stats
             </div>
-            <div className="card-block text-xs-center">
+            <div className="card-block text-xs-center light-gradient">
               <div className="card card-block col-xs-6">
                 <h4 className="card-title">Sessions</h4>
                 <hr />
@@ -179,10 +179,10 @@ class SportStats extends Component {
         : ''}
         {Object.getOwnPropertyNames(this.props.sportStats).length > 0 ?
           <div className="card" style={{overflow: 'hidden'}}>
-            <div className="card-header blue-grey darken-1 white-text">
+            <div className="card-header light-grey-gradient white-text">
               Annual stats
             </div>
-            <div className="card-block text-xs-center">
+            <div className="card-block text-xs-center light-gradient">
               <div className="card card-block col-xs-6">
                 <h4 className="card-title">Sessions</h4>
                 <hr />

@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import Chart from 'chart.js'
+import {server as serverConfig} from '../../../config';
 
 const mapStateToProps = (state) => ({
 });
@@ -10,11 +11,15 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Home = () => (
-  <div className="jumbotron animated fadeIn">
+  <div className="jumbotron animated fadeIn grey lighten-5">
     <div className="card">
-      <div className="card-block">
+      <div className="card-block light-gradient">
         <Link to="/sessions" className="float-xs-right">
-          <img className="rounded z-depth-1" src="http://localhost:8080/static/images/activities/session.png" width="100px" height="100px" alt="Generic" />
+          <img
+            className="rounded z-depth-1 grey lighten-5"
+            src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/activities/session.png`}
+            width="100px" height="100px" alt="Generic"
+          />
         </Link>
         <h4 className="card-title">Sport session</h4>
         <hr />
@@ -24,9 +29,13 @@ const Home = () => (
       </div>
     </div>
     <div className="card">
-      <div className="card-block">
+      <div className="card-block light-gradient">
         <Link to="/routine" className="float-xs-right">
-          <img className="rounded z-depth-1" src="http://localhost:8080/static/images/activities/routine.png" width="100px" height="100px" alt="Generic" />
+          <img
+            className="rounded z-depth-1 grey lighten-5"
+            src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/activities/routine.png`}
+            width="100px" height="100px" alt="Generic"
+          />
         </Link>
         <h4 className="card-title">Exercise routine</h4>
         <hr />
@@ -36,9 +45,13 @@ const Home = () => (
       </div>
     </div>
     <div className="card">
-      <div className="card-block">
+      <div className="card-block light-gradient">
         <Link to="/stats/info" className="float-xs-right">
-          <img className="rounded z-depth-1" src="http://localhost:8080/static/images/activities/chart.png" width="100px" height="100px" alt="Generic" />
+          <img
+            className="rounded z-depth-1 grey lighten-5"
+            src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/activities/chart.png`}
+            width="100px" height="100px" alt="Generic"
+          />
         </Link>
         <h4 className="card-title">Exercise statistics</h4>
         <hr />
@@ -47,10 +60,14 @@ const Home = () => (
         </div>
       </div>
     </div>
-    <div className="card turquesa-gradient">
-      <div className="card-block">
+    <div className="card">
+      <div className="card-block light-gradient">
         <Link to="/athletes" className="float-xs-right">
-          <img className="rounded z-depth-1" src="http://localhost:8080/static/images/activities/radar.png" width="100px" height="100px" alt="Generic" />
+          <img
+            className="rounded z-depth-1 grey lighten-5"
+            src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/activities/radar.png`}
+            width="100px" height="100px" alt="Generic"
+          />
         </Link>
         <h4 className="card-title">Athletes nearby</h4>
         <hr />

@@ -28,12 +28,12 @@ const started = (onFinishSession, sessionId, sport) => {
   const distanceFunction = dist => totalDistance = dist;
   return (
     <div>
-      <h2 className="card card-block text-xs-center">{sport} session</h2>
-      <div className="card card-block text-xs-center">
+      <h2 className="card card-block text-xs-center light-gradient">{sport} session</h2>
+      <div className="card card-block text-xs-center light-gradient">
         <Timer />
       </div>
       <Distance totalDistance={distanceFunction} />
-      <div className="card card-block text-xs-center">
+      <div className="card card-block text-xs-center light-gradient">
         <button type="submit" className="btn btn-deep-orange btn-block" onClick={handleClick}>Finish</button>
       </div>
     </div>
@@ -41,7 +41,7 @@ const started = (onFinishSession, sessionId, sport) => {
 };
 
 const Session = ({sessionState, onFinishSession, sessionId, user, sport}) => (
-  <div className="jumbotron animated fadeIn">
+  <div className="jumbotron animated fadeIn grey lighten-5">
     {sessionState === 1 ?
       <div>
         <h1 className="card card-block text-xs-center">Session starts in...</h1>

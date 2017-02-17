@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Profile = ({user}) => (
-  <div className="jumbotron animated fadeIn">
+  <div className="jumbotron animated fadeIn grey lighten-5">
     <div className="card-block row">
       <div className="col-xs-12 col-sm-4">
         <img

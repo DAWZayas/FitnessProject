@@ -138,7 +138,7 @@ class Create extends Component {
   render() {
     return (
       <div className="jumbotron animated fadeIn">
-      <div className="card-block z-depth-1">
+      <div className="card-block z-depth-1 grey lighten-5">
         <h2>Create routine</h2>
         <form>
           <div className="form-group">
