@@ -6,6 +6,7 @@ import oauthshim from 'oauth-shim';
 
 // our packages
 import {auth as authConfig} from '../../config';
+import {r} from '../db';
 
 export default (app) => {
   app.post('/api/login', passport.authenticate('local'), (req, res) => {
@@ -26,9 +27,22 @@ export default (app) => {
         };
         fetch('https://www.googleapis.com/oauth2/v1/userinfo?alt=json', options)
           .then(response => response.json())
-          .then((googleUser) => {
-            const token = jwt.sign(googleUser, authConfig.jwtSecret);
-            res.send({user: {login: googleUser.given_name}, token});
+          .then(async (googleUser) => {
+            let user = await r.table('User').get(googleUser.id + '-google');
+            if (!user) {
+              user = {
+                id: googleUser.id + '-google',
+                login: googleUser.given_name,
+                objectives: {
+                  weekRunningKm: 0, weekCyclingKm: 0, weekWalkingKm: 0, weekTimeExercises: 0,
+                },
+                image: googleUser.picture,
+                registrationDate: new Date(),
+              };
+              await r.table('User').insert(user);
+            }
+            const token = jwt.sign(user, authConfig.jwtSecret);
+            res.send({user, token});
           })
           .catch(() => res.status(401).send({error: 'Error logging in!'}));
         break;
@@ -40,9 +54,22 @@ export default (app) => {
         };
         fetch('https://api.github.com/user', options)
           .then(response => response.json())
-          .then((githubUser) => {
-            const token = jwt.sign(githubUser, authConfig.jwtSecret);
-            res.send({user: {login: githubUser.login}, token});
+          .then(async (githubUser) => {
+            let user = await r.table('User').get(githubUser.id + '-github');
+            if (!user) {
+              user = {
+                id: githubUser.id + '-github',
+                login: githubUser.login,
+                objectives: {
+                  weekRunningKm: 0, weekCyclingKm: 0, weekWalkingKm: 0, weekTimeExercises: 0,
+                },
+                image: githubUser.avatar_url,
+                registrationDate: new Date(),
+              };
+              await r.table('User').insert(user);
+            }
+            const token = jwt.sign(user, authConfig.jwtSecret);
+            res.send({user, token});
           })
           .catch(() => res.status(401).send({error: 'Error logging in!'}));
         break;
