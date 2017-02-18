@@ -41,7 +41,7 @@ export default (app) => {
     }
 
     // check passwords for match
-    if (passwordChanged && password !== passwordRepeat) {
+    if (password !== passwordRepeat) {
       res.status(400).send({error: 'Passwords do not match!'});
       return;
     }

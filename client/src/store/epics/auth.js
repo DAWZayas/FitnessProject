@@ -131,7 +131,10 @@ export const updateUser = action$ => action$
       payload: {
         error: err,
       },
-    })),
+    },
+    Actions.addNotificationAction(
+      {text: err.xhr.response.error, alertType: 'danger'}),
+    )),
   );
 
 export const updateProfile = action$ => action$
