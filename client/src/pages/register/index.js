@@ -39,23 +39,25 @@ const Register = ({onRegisterClick, navToLogin, redirectToLogin}) => {
   }
 
   return (
-    <div className="jumbotron">
-      <form>
+    <div className="jumbotron container">
+      <form className="card-block z-depth-1 col-xs-12 col-md-8 offset-md-2 offset-lg-3 col-lg-6">
         <div className="form-group">
           <div className={`${styles.login_register_header} z-depth-1`}>
-            <h3>Register</h3>
+            <h2>Register</h2>
           </div>
-          <label htmlFor="inputUsername">Username:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputUsername"
-            placeholder="Username"
-            ref={(i) => { usernameInput = i; }}
-          />
+          <div className="md-form">
+            <i className="fa fa-user prefix" aria-hidden="true"></i>
+            <input
+              type="text"
+              className="form-control"
+              id="inputUsername"
+              placeholder="Username"
+              ref={(i) => { usernameInput = i; }}
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="inputPassword">Password</label>
+        <div className="md-form">
+          <i className="fa fa-lock prefix" aria-hidden="true"></i>
           <input
             type="password"
             className="form-control"
@@ -64,8 +66,8 @@ const Register = ({onRegisterClick, navToLogin, redirectToLogin}) => {
             ref={(i) => { passwordInput = i; }}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="inputPasswordRepeat">Password</label>
+        <div className="md-form">
+          <i className="fa fa-lock prefix" aria-hidden="true"></i>
           <input
             type="password"
             className="form-control"

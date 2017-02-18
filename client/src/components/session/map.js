@@ -22,7 +22,9 @@ export default class Map extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.line) {
       const path = this.state.poly.getPath();
-      path.push(new google.maps.LatLng({lat: nextProps.pos.lat, lng: nextProps.pos.lng}));
+      const newPos = new google.maps.LatLng({lat: nextProps.pos.lat, lng: nextProps.pos.lng});
+      path.push(newPos);
+      this.state.map.setCenter(newPos);
     }
 
     if (this.props.athletes) {
@@ -85,7 +87,7 @@ export default class Map extends React.Component {
   render() {
     return (
       <div>
-        <div id="map" ref={node => this.node = node} style={{height: '300px'}}></div>
+        <div id="map" ref={node => this.node = node} style={{height: '60vw'}}></div>
       </div>
     );
   }

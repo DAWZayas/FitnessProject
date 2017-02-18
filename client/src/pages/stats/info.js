@@ -113,10 +113,12 @@ class StatsInfo extends Component {
         {this.state.tab === 'Info' ?
           <div className="card-block text-xs-center">
             {this.props.userObjectives ?
-              <div className="jumbotron light-gradient" style={{overflow: 'hidden'}}>
+              <div className="jumbotron light-gradient container">
+                <div>
                 <button className="btn light-grey-gradient white-text" id="run" onClick={this.handleCollapse}>
                   Running Objectives
                 </button>
+                </div>
                 {this.state.run ? <div className="card-block text-xs-center animated flipInX">
                   <h4 className="card-title">
                     Weekly <span className="tag badge grey">{Number(this.props.userObjectives.weekRunningKm).toFixed(1)} km</span>
@@ -128,9 +130,11 @@ class StatsInfo extends Component {
                     Annual <span className="tag badge grey">{(Number(this.props.userObjectives.weekRunningKm) * 52).toFixed(1)} km</span>
                   </h4>
                 </div> : null}
+                <div>
                 <button className="btn light-grey-gradient white-text" id="cycle" onClick={this.handleCollapse}>
                   Cycling Objectives
                 </button>
+                </div>
                 {this.state.cycle ? <div className="card-block text-xs-center animated flipInX">
                   <h4 className="card-title">
                     Weekly <span className="tag badge grey">{Number(this.props.userObjectives.weekCyclingKm).toFixed(1)} km</span>
@@ -142,9 +146,11 @@ class StatsInfo extends Component {
                     Annual <span className="tag badge grey">{(Number(this.props.userObjectives.weekCyclingKm) * 52).toFixed(1)} km</span>
                   </h4>
                 </div> : null}
+                <div>
                 <button className="btn light-grey-gradient white-text" id="walk" onClick={this.handleCollapse}>
                   Walking Objectives
                 </button>
+                </div>
                 {this.state.walk ? <div className="card-block text-xs-center animated flipInX">
                   <h4 className="card-title">
                     Weekly <span className="tag badge grey">{Number(this.props.userObjectives.weekWalkingKm).toFixed(1)} km</span>
@@ -156,9 +162,11 @@ class StatsInfo extends Component {
                     Annual <span className="tag badge grey">{(Number(this.props.userObjectives.weekWalkingKm) * 52).toFixed(1)} km</span>
                   </h4>
                 </div> : null}
+                <div>
                 <button className="btn light-grey-gradient white-text" id="routine" onClick={this.handleCollapse}>
                   Routine Objectives
                 </button>
+                </div>
                 {this.state.routine ? <div className="card-block text-xs-center animated flipInX">
                   <h4 className="card-title">
                     Weekly time <span className="tag badge grey">

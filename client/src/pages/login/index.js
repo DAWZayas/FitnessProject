@@ -25,7 +25,6 @@ const mapDispatchToProps = dispatch => ({
 const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
   let usernameInput;
   let passwordInput;
-  let rememberInput;
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -33,7 +32,6 @@ const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
     onLoginClick({
       login: usernameInput.value,
       password: passwordInput.value,
-      remember: rememberInput.checked,
     });
   };
 
@@ -67,11 +65,11 @@ const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
 
 
   return (
-    <div className="jumbotron">
-      <form>
+    <div className="jumbotron container">
+      <form className="card-block z-depth-1 col-xs-12 col-md-8 offset-md-2 offset-lg-3 col-lg-6">
         <div className="form-group">
           <div className={`${styles.login_register_header} z-depth-1`}>
-            <h3>Login</h3>
+            <h2>Login</h2>
           </div>
           <div className={styles.social}>
             <button type="button" className={`btn ${styles.github}`} onClick={githubToken}>github</button>
@@ -83,17 +81,19 @@ const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
               <div className={`${styles.line} ${styles.r}`}></div>
             </div>
           </div>
-          <label htmlFor="inputUsername">Username:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputUsername"
-            placeholder="Username"
-            ref={(i) => { usernameInput = i; }}
-          />
+          <div className="md-form">
+            <i className="fa fa-user prefix" aria-hidden="true"></i>
+            <input
+              type="text"
+              className="form-control"
+              id="inputUsername"
+              placeholder="Username"
+              ref={(i) => { usernameInput = i; }}
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="inputPassword">Password</label>
+        <div className="md-form">
+          <i className="fa fa-lock prefix" aria-hidden="true"></i>
           <input
             type="password"
             className="form-control"
@@ -101,15 +101,6 @@ const Login = ({onLoginClick, navToHome, token, oauthLogin}) => {
             placeholder="Password"
             ref={(i) => { passwordInput = i; }}
           />
-        </div>
-        <div className="checkbox">
-          <label htmlFor="inputRemember">
-            <input
-              type="checkbox"
-              id="inputRemember"
-              ref={(i) => { rememberInput = i; }}
-            /> Remember me
-          </label>
         </div>
         <div className={styles.login_register_footer}>
           <button type="submit" className="btn btn-default" onClick={handleClick}>Login</button>
