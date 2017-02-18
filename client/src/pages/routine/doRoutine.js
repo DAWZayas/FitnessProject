@@ -214,7 +214,7 @@ class DoRoutine extends Component {
                 <CountDown time={this.state.routine.exercises[this.state.exercise].time} action={this.nextAction} data="rest" />
                 </div>
               </div>
-              <Link to="/routine" className="btn btn-danger">Cancel</Link>
+              <Link to="/routine" className="btn btn-danger">Back</Link>
             </div>
             : ''
           }
@@ -227,7 +227,7 @@ class DoRoutine extends Component {
                   <CountDown time={this.state.routine.rest} action={this.nextAction} data="go" />
                 </div>
               </div>
-              <Link to="/routine" className="btn btn-danger">Cancel</Link>
+              <Link to="/routine" className="btn btn-danger">Back</Link>
             </div>
             : ''
           }
@@ -244,7 +244,7 @@ class DoRoutine extends Component {
                   />
                 </div>
               </div>
-              <Link to="/routine" className="btn btn-danger">Cancel</Link>
+              <Link to="/routine" className="btn btn-danger">Back</Link>
             </div>
             : ''
           }

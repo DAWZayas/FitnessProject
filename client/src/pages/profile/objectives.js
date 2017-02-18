@@ -127,7 +127,7 @@ const Objectives = ({onUpdateClick, redirectToProfile, user}) => {
         </div>
         <div className="text-xs-center">
           <button type="submit" className="btn btn-default" onClick={handleClick}>Update</button>
-          <Link to="/stats/info" className="btn btn-danger">Cancel</Link>
+          <Link to="/stats/info" className="btn btn-danger">Back</Link>
         </div>
       </form>
     </div>

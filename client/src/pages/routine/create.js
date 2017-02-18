@@ -365,7 +365,7 @@ class Create extends Component {
         </div>
         <div className="card-block text-xs-center">
           <button type="submit" className="btn btn-default" onClick={this.handleClick}>Create</button>
-          <Link to="/routine" className="btn btn-danger">Cancel</Link>
+          <Link to="/routine" className="btn btn-danger">Back</Link>
         </div>
       </div>
     );

@@ -118,7 +118,7 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
         </div>
         <div className="text-xs-center">
           <button type="submit" className="btn btn-default" onClick={handleClick}>Update</button>
-          <Link to="/profile" className="btn btn-danger">Cancel</Link>
+          <Link to="/profile" className="btn btn-danger">Back</Link>
         </div>
       </form>
     </div>

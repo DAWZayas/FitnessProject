@@ -113,7 +113,7 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
         </div>
         <div className="card-block text-xs-center">
           <button type="submit" className="btn btn-default" onClick={handleClick}>Create</button>
-          <Link to="/routine" className="btn btn-danger">Cancel</Link>
+          <Link to="/routine" className="btn btn-danger">Back</Link>
         </div>
     </div>
   );
