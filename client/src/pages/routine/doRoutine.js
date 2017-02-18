@@ -177,7 +177,7 @@ class DoRoutine extends Component {
                           <li className="list-group-item"><h4>Round rest: <span className="tag badge grey">{routine.restRounds} s.</span></h4></li>
                           <li className="list-group-item blue-grey lighten-4"><h4>Exercises: <span className="tag badge grey">{routine.exercises.length}</span></h4></li>
                           {routine.exercises.map((ex, key) =>
-                            (<li className="list-group-item blue-grey lighten-5" key={key}><h4>{ex.name}: <span className="tag badge grey">{ex.time} s.</span></h4></li>))}
+                            (<li className="list-group-item blue-grey lighten-5" key={key + 'R-ex'}><h4>{ex.name}: <span className="tag badge grey">{ex.time} s.</span></h4></li>))}
                         </ul>
                         <button type="submit" className="btn btn-default" onClick={this.handleClick} value={routine.id} >Do it!</button>
                       </div>

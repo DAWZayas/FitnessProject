@@ -101,7 +101,7 @@ const Exercise = ({onCreateExerciseClick, onSelectImages, images, statusImages})
             <hr />
             <div className={modal.content}>
               {images !== undefined ? images.map(img =>
-                <a href="#a">
+                <a href="#a" key={img + 'selectImage'}>
                   <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/` + img} className="col-xs-6 col-md-4 col-lg-3" onClick={selectImage} alt="" />
                 </a>
               ) : <div className="text-xs-center"><Loader /></div>}

@@ -157,7 +157,7 @@ class Create extends Component {
               <hr />
               <div className={modal.content}>
                 {this.props.images !== undefined ? this.props.images.map(img =>
-                  <a href="#a">
+                  <a href="#a" key={img + '-exercise'}>
                     <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/routines/` + img} onClick={this.selectImage} className="col-xs-6 col-md-4 col-lg-3" alt="" />
                   </a>
                 ) : <div className="text-xs-center"><Loader /></div>}
@@ -282,7 +282,7 @@ class Create extends Component {
           <div className="card">
             {this.state.routineExercises.length <= 0 ? <h4 className="card-block text-xs-center">No exercises added yet</h4> :
             this.state.routineExercises.map((e, key) =>
-              <div className="row card-block" key={key}>
+              <div className="row card-block" key={key + '-routineExercises'}>
                 <img className="img-fluid col-xs-4" src={e.image} alt="" />
                 <div className="card-block col-xs-6">
                   <h4 className="card-text">{e.name}</h4>
@@ -300,7 +300,7 @@ class Create extends Component {
             {this.state.showExercises ?
               this.props.status === 'loading' ? <div className="text-xs-center"><Loader /></div> :
                 this.props.exercises.map((ex, key) =>
-                  <div className="card col-xs-6" key={key}>
+                  <div className="card col-xs-6" key={key + '-showExercises'}>
                     <div className="view overlay hm-white-slight">
                       <img src={ex.image} className="img-fluid" alt="" />
                       <a className="mask" href={`#ex${ex.id}`} />
