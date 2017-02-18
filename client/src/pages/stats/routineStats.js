@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
   sportStats: state.stats.sportStats,
 });
 
-class SportStats extends Component {
+class RoutineStats extends Component {
 
   constructor(props) {
     super(props);
@@ -36,4 +36,4 @@ class SportStats extends Component {
     );
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SportStats);
+export default connect(mapStateToProps, mapDispatchToProps)(RoutineStats);
