@@ -46,10 +46,6 @@ class Athletes extends Component {
   }
 
   render() {
-    // console.log(this.props.userCoords);
-    // console.log(this.props.marker);
-    // console.log(this.props.athletesPos);
-    // Object.keys(this.props.athletesPos).length === 0 ? {} :
     return (
       <div className="card">
         <div className="card-block">

@@ -170,49 +170,6 @@ export default (app) => {
         }
       }
       res.send(statsData);
-      // const weekSessionsRunning = weekSessions.filter(s => s.sport === sport);
-      // const numberSessions = weekSessionsRunning.length;
-      // const distanceDone = weekSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance}));
-      // const velocity = weekSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / numberSessions;
-      // const time = weekSessionsRunning.reduce(
-      //   (a, b) => ({
-      //     duration: {
-      //       hours: a.duration.hours + b.duration.hours,
-      //       minutes: a.duration.minutes + b.duration.minutes,
-      //       seconds: a.duration.seconds + b.duration.seconds,
-      //     },
-      //   }));
-      //
-      // const monthSessionsRunning = monthSessions.filter(s => s.sport === sport);
-      // const numberSessions = monthSessionsRunning.length;
-      // const distanceDone = monthSessionsRunning.reduce((a, b) => ({distance: a.distance + b.distance}));
-      // const velocity = monthSessionsRunning.reduce((a, b) => ({velocity: a.velocity + b.velocity})).velocity / numberSessions;
-      // const time = monthSessionsRunning.reduce(
-      //   (a, b) => ({
-      //     duration: {
-      //       hours: a.duration.hours + b.duration.hours,
-      //       minutes: a.duration.minutes + b.duration.minutes,
-      //       seconds: a.duration.seconds + b.duration.seconds,
-      //     },
-      //   }));
-
-
-      // console.log('--------------------------');
-      // console.log('week sessions: ' + numberSessions);
-      // console.log('distance: ' + distanceDone.distance);
-      // console.log('velocity: ' + velocity);
-      // console.log('week time: ' + time.duration.hours + ' ' + time.duration.minutes + ' ' + time.duration.seconds);
-      // console.log('--------------------------');
-      // console.log('month sessions: ' + numberSessions);
-      // console.log('distance: ' + distanceDone.distance);
-      // console.log('velocity: ' + velocity);
-      // console.log('month time: ' + time.duration.hours + ' ' + time.duration.minutes + ' ' + time.duration.seconds);
-      // console.log('--------------------------');
-      // console.log('year sessions: ' + numberSessions);
-      // console.log('distance: ' + distanceDone.distance);
-      // console.log('velocity: ' + velocity);
-      // console.log('year time: ' + time.duration.hours + ' ' + time.duration.minutes + ' ' + time.duration.seconds);
-      // console.log('--------------------------');
     } catch (e) {
       res.status(400).send({error: 'User not exists'});
     }

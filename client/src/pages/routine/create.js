@@ -83,8 +83,6 @@ class Create extends Component {
 
   handleAddExercise = (e) => {
     // e.preventDefault();
-    console.log(e.target.id);
-    console.log(this.state.exerciseTime);
     this.setState({
       routineExercises: [...this.state.routineExercises,
         {id: e.target.id,
@@ -95,11 +93,9 @@ class Create extends Component {
         }],
       exerciseTime: 30,
     });
-    console.log(this.state.routineExercises.map(ex => JSON.stringify(ex)));
   };
 
   setName = (e) => {
-    console.log(e.target.value);
     this.setState({name: e.target.value});
   };
 

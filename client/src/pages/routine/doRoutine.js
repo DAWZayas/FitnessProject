@@ -63,7 +63,6 @@ class DoRoutine extends Component {
 
   handleClick = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
     this.setState(
       {
         state: 1,
@@ -152,7 +151,6 @@ class DoRoutine extends Component {
             >
               {routines.map(routine =>
                 <div key={routine.id + Math.random()}>
-                {console.log(routine)}
                   <div className="card col-xs-6">
                     <div className="view overlay hm-white-slight">
                       <img src={routine.image} className="img-fluid" alt="" />

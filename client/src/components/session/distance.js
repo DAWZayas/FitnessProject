@@ -49,7 +49,6 @@ class Distance extends Component {
       let distance = 0;
       if (this.state.pos) {
         const dist = distanceCoords(this.state.pos[this.state.pos.length - 1], pos);
-        // console.log(dist);
         distance = !isNaN(dist) && Math.trunc(dist * 1000);
       }
       this.props.updatePosition({sessionId: this.props.sessionId, pos: JSON.stringify(pos)});
