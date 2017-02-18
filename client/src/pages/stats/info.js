@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import InfiniteScroll from 'redux-infinite-scroll';
 
 import {retrieveStatsData} from '../../store/actions';
-import {server as serverConfig} from '../../../config';
 
-import Loader from '../../components/loader';
 import SportStats from './sportStats';
 import RoutineStats from './routineStats';
+import {ButtonObjective, ButtonObjectiveRoutine, InfoStatsBar} from '../../components/stats';
 
 const mapDispatchToProps = dispatch => ({
   fetchStatsData: payload => dispatch(retrieveStatsData(payload)),
@@ -20,160 +18,47 @@ const mapStateToProps = state => ({
   sportStats: state.stats.sportStats,
 });
 
-const style = {
-  navbarNav: {
-    width: '100%',
-    textAlign: 'center',
-  },
-  li: {
-    float: 'none',
-    display: 'inline-block',
-  },
-};
-
 class StatsInfo extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       tab: 'Info',
-      run: false,
-      cycle: false,
-      walk: false,
-      routine: false,
     };
     this.handleClick = this.handleClick.bind(this);
-    this.handleCollapse = this.handleCollapse.bind(this);
   }
 
-  componentDidUpdate() {
-
-  }
-
-  // componentWillMount() {
-  //   this.props.fetchRoutines();
-  // }
-
-  // componentDidMount() {
-  //   if (this.state.round === this.state.routine.rounds) {
-  //     this.setState({round: 'FINAL'});
-  //   }
-  // }
-
-  handleClick = (e) => {
-    e.preventDefault();
+  handleClick = (tab) => {
+    // e.preventDefault();
     this.setState(
       {
-        tab: e.target.textContent,
+        tab,
       }
     );
-    if (e.target.textContent !== 'Info') {
+    if (tab !== 'Info') {
       this.props.fetchStatsData(
         {
-          type: e.target.textContent,
+          type: tab,
           userId: this.props.user,
           actualDate: new Date(),
-          sport: e.target.textContent === 'Routines' ? 'routine' : 'sport',
+          sport: tab === 'Routines' ? 'routine' : 'sport',
         });
     }
-  };
-
-  handleCollapse = (e) => {
-    e.preventDefault();
-    this.setState(
-      {
-        [e.target.id]: !this.state[e.target.id],
-      }
-    );
   };
 
   render() {
     return (
       <div className="card-block z-depth-1 grey lighten-5">
         <h2 className="card card-block text-xs-center">Stats/objectives</h2>
-        <nav className="card navbar navbar-dark stats-bar-gradient">
-          <ul className="nav navbar-nav" style={style.navbarNav}>
-            <li className={`nav-item ${this.state.tab === 'Info' && 'active'}`} style={style.li}>
-              <a href="#2" className="nav-link" onClick={this.handleClick}>Info</a>
-            </li>
-            <li className={`nav-item ${this.state.tab === 'Running' && 'active'}`} style={style.li}>
-              <a href="#2" className="nav-link" onClick={this.handleClick}>Running</a>
-            </li>
-            <li className={`nav-item ${this.state.tab === 'Cycling' && 'active'}`} style={style.li}>
-              <a href="#2" className="nav-link" onClick={this.handleClick}>Cycling</a>
-            </li>
-            <li className={`nav-item ${this.state.tab === 'Walking' && 'active'}`} style={style.li}>
-              <a href="#2" className="nav-link" onClick={this.handleClick}>Walking</a>
-            </li>
-            <li className={`nav-item ${this.state.tab === 'Routines' && 'active'}`} style={style.li}>
-              <a href="#2" className="nav-link" onClick={this.handleClick}>Routines</a>
-            </li>
-          </ul>
-        </nav>
+        <InfoStatsBar tab={this.state.tab} handleTab={this.handleClick} />
         {this.state.tab === 'Info' ?
           <div className="card-block text-xs-center">
             {this.props.userObjectives ?
               <div className="jumbotron light-gradient container">
-                <div>
-                <button className="btn light-grey-gradient white-text" id="run" onClick={this.handleCollapse}>
-                  Running Objectives
-                </button>
-                </div>
-                {this.state.run ? <div className="card-block text-xs-center animated flipInX">
-                  <h4 className="card-title">
-                    Weekly <span className="tag badge grey">{Number(this.props.userObjectives.weekRunningKm).toFixed(1)} km</span>
-                  </h4>
-                  <h4 className="card-title">
-                    Monthly <span className="tag badge grey">{(Number(this.props.userObjectives.weekRunningKm) * 4.33).toFixed(1)} km</span>
-                  </h4>
-                  <h4 className="card-title">
-                    Annual <span className="tag badge grey">{(Number(this.props.userObjectives.weekRunningKm) * 52).toFixed(1)} km</span>
-                  </h4>
-                </div> : null}
-                <div>
-                <button className="btn light-grey-gradient white-text" id="cycle" onClick={this.handleCollapse}>
-                  Cycling Objectives
-                </button>
-                </div>
-                {this.state.cycle ? <div className="card-block text-xs-center animated flipInX">
-                  <h4 className="card-title">
-                    Weekly <span className="tag badge grey">{Number(this.props.userObjectives.weekCyclingKm).toFixed(1)} km</span>
-                  </h4>
-                  <h4 className="card-title">
-                    Monthly <span className="tag badge grey">{(Number(this.props.userObjectives.weekCyclingKm) * 4.33).toFixed(1)} km</span>
-                  </h4>
-                  <h4 className="card-title">
-                    Annual <span className="tag badge grey">{(Number(this.props.userObjectives.weekCyclingKm) * 52).toFixed(1)} km</span>
-                  </h4>
-                </div> : null}
-                <div>
-                <button className="btn light-grey-gradient white-text" id="walk" onClick={this.handleCollapse}>
-                  Walking Objectives
-                </button>
-                </div>
-                {this.state.walk ? <div className="card-block text-xs-center animated flipInX">
-                  <h4 className="card-title">
-                    Weekly <span className="tag badge grey">{Number(this.props.userObjectives.weekWalkingKm).toFixed(1)} km</span>
-                  </h4>
-                  <h4 className="card-title">
-                    Monthly <span className="tag badge grey">{(Number(this.props.userObjectives.weekWalkingKm) * 4.33).toFixed(1)} km</span>
-                  </h4>
-                  <h4 className="card-title">
-                    Annual <span className="tag badge grey">{(Number(this.props.userObjectives.weekWalkingKm) * 52).toFixed(1)} km</span>
-                  </h4>
-                </div> : null}
-                <div>
-                <button className="btn light-grey-gradient white-text" id="routine" onClick={this.handleCollapse}>
-                  Routine Objectives
-                </button>
-                </div>
-                {this.state.routine ? <div className="card-block text-xs-center animated flipInX">
-                  <h4 className="card-title">
-                    Weekly time <span className="tag badge grey">
-                      {Math.floor(this.props.userObjectives.weekTimeExercises / 3600) + ' h ' +
-                      Math.floor((this.props.userObjectives.weekTimeExercises % 3600) / 60) + ' m'}
-                    </span></h4>
-                </div> : null}
+                <ButtonObjective userObjectives={this.props.userObjectives.weekRunningKm} sport={'Running'} />
+                <ButtonObjective userObjectives={this.props.userObjectives.weekCyclingKm} sport={'Cycling'} />
+                <ButtonObjective userObjectives={this.props.userObjectives.weekWalkingKm} sport={'Walking'} />
+                <ButtonObjectiveRoutine userObjectives={this.props.userObjectives.weekTimeExercises} sport={'Routine'} />
                 <Link to="/objectives" className="btn btn-default">Add objectives!</Link>
               </div>
             : 'No objectives yet'}
