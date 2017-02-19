@@ -63,6 +63,7 @@ ReactDOM.render((
         <Route path="updateUser" component={UpdateUser} />
         <Route path="updateProfile" component={UpdateProfile} />
         <Route path="objectives" component={Objectives} />
+        <Route path="redirect.html" />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
