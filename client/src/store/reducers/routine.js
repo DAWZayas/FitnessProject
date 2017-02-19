@@ -10,7 +10,7 @@ export const routine = (state = initialState, action) => {
     case ActionTypes.CREATE_ROUTINE:
       return state;
     case ActionTypes.CREATE_ROUTINE_SUCCESS:
-      return {...state, routines: [...state.routines, action.payload]};
+      return state;
     case ActionTypes.GET_EXERCISES:
       return {...state, exerciseStatus: 'loading'};
     case ActionTypes.GET_EXERCISES_SUCCESS:

@@ -169,9 +169,9 @@ class DoRoutine extends Component {
           }
           {this.state.state === 2 ?
             <div>
-              <div className="card-block">
+              <div className="card-block text-xs-center">
                 <h1 className="">{this.state.routine.exercises[this.state.exercise].name}</h1>
-                <img src={this.state.routine.exercises[this.state.exercise].image} className="img-fluid" alt="" />
+                <img src={this.state.routine.exercises[this.state.exercise].image} className="" alt="" />
                 <div className="z-depth-1 white">
                 <CountDown time={this.state.routine.exercises[this.state.exercise].time} action={this.nextAction} data="rest" />
                 </div>
@@ -182,9 +182,9 @@ class DoRoutine extends Component {
           }
           {this.state.state === 3 ?
             <div>
-              <div className="card-block">
+              <div className="card-block text-xs-center">
                 <h1>Exercise rest</h1>
-                <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/rest.png`} className="img-fluid" alt="" />
+                <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/rest.png`} className="" alt="" />
                 <div className="z-depth-1">
                   <CountDown time={this.state.routine.rest} action={this.nextAction} data="go" />
                 </div>
@@ -195,9 +195,9 @@ class DoRoutine extends Component {
           }
           {this.state.state === 4 ?
             <div>
-              <div className="card-block">
+              <div className="card-block text-xs-center">
                 <h1>Round rest</h1>
-                <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/rest.png`} className="img-fluid" alt="" />
+                <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/exercises/rest.png`} className="" alt="" />
                 <div className="z-depth-1">
                   <CountDown
                     time={this.state.routine.restRounds}
@@ -212,8 +212,8 @@ class DoRoutine extends Component {
           }
           {this.state.state === 5 ?
             <div>
-              <div className="card-block animated zoomIn">
-                <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/medal.png`} className="img-fluid" alt="" />
+              <div className="card-block animated zoomIn text-xs-center">
+                <img src={`${serverConfig.protocol}://${serverConfig.host}:${serverConfig.port}/static/images/medal.png`} className="" alt="" />
                 <h2>Congratulations, you finished the workout!!</h2>
                 <Link to="/routine" className="btn btn-default">Back</Link>
               </div>
