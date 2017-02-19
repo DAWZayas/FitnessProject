@@ -36,11 +36,13 @@ class StatsInfo extends Component {
       }
     );
     if (tab !== 'Info') {
+      const actualDate = new Date();
+      actualDate.setMinutes(actualDate.getMinutes() + actualDate.getTimezoneOffset());
       this.props.fetchStatsData(
         {
           type: tab,
           userId: this.props.user,
-          actualDate: new Date(),
+          actualDate,
           sport: tab === 'Routines' ? 'routine' : 'sport',
         });
     }

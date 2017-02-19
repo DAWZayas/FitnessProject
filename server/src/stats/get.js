@@ -280,10 +280,12 @@ export default (app) => {
 
       const startEndYear = startEndDaysYear(actualDate);
       const yearSessions = routineSessions.filter(s => isDateBetween(s.endTime, startEndYear[0], startEndYear[1]));
-      if (yearSessions.length <= 0) {
-        res.send(statsData);
-        return;
-      } else {
+      if (yearSessions.length > 0) {
+        console.log('sendDate ' + req.body.actualDate);
+        console.log('<<<<<<<<<<<<');
+        console.log('year-s ' + startEndYear[0]);
+        console.log('year-f ' + startEndYear[1]);
+        console.log('<<<<<<<<<<<<');
         statsData.year.numberRoutines = yearSessions.length;
         statsData.year.numberExercises = yearSessions.map(s => s.exercises.length * s.rounds).reduce((a, b) => a + b);
         statsData.year.time = yearSessions.reduce(
@@ -328,11 +330,12 @@ export default (app) => {
       }
 
       const startEndMonth = startEndDaysMonth(actualDate);
+      console.log('actualDate ' + actualDate);
+      console.log('month-s ' + startEndMonth[0]);
+      console.log('month-f ' + startEndMonth[1]);
+      console.log('<<<<<<<<<<<<');
       const monthSessions = routineSessions.filter(s => isDateBetween(s.endTime, startEndMonth[0], startEndMonth[1]));
-      if (monthSessions.length <= 0) {
-        res.send(statsData);
-        return;
-      } else {
+      if (monthSessions.length > 0) {
         statsData.month.numberRoutines = monthSessions.length;
         statsData.month.numberExercises = monthSessions.map(s => s.exercises.length * s.rounds).reduce((a, b) => a + b);
         statsData.month.time = monthSessions.reduce(
@@ -377,11 +380,12 @@ export default (app) => {
       }
 
       const startEndWeek = startEndDaysWeek(actualDate);
+      console.log('actualDate ' + actualDate);
+      console.log('week-s ' + startEndWeek[0]);
+      console.log('week-f ' + startEndWeek[1]);
+      console.log('<<<<<<<<<<<<');
       const weekSessions = routineSessions.filter(s => isDateBetween(s.endTime, startEndWeek[0], startEndWeek[1]));
-      if (weekSessions.length <= 0) {
-        res.send(statsData);
-        return;
-      } else {
+      if (weekSessions.length > 0) {
         statsData.week.numberRoutines = weekSessions.length;
         statsData.week.numberExercises = weekSessions.map(s => s.exercises.length * s.rounds).reduce((a, b) => a + b);
         statsData.week.time = weekSessions.reduce(
