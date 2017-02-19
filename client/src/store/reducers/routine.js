@@ -21,6 +21,8 @@ export const routine = (state = initialState, action) => {
       const hasMoreRoutines = action.payload.routines.length === 6;
       return {...state, routines: state.routines.concat(action.payload.routines), routineStatus: 'done', hasMoreRoutines};
     }
+    case ActionTypes.CLEAR_ROUTINES:
+      return initialState;
     default:
       return state;
   }

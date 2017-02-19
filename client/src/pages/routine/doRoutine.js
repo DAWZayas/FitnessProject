@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import InfiniteScroll from 'redux-infinite-scroll';
 
-import {getAllRoutines, finishRoutine} from '../../store/actions';
+import {getAllRoutines, finishRoutine, clearRoutines} from '../../store/actions';
 import {CountDown, SearchBar, Routine} from '../../components/routine';
 import {server as serverConfig} from '../../../config';
 
@@ -12,6 +12,7 @@ import Loader from '../../components/loader';
 const mapDispatchToProps = dispatch => ({
   fetchRoutines: payload => dispatch(getAllRoutines(payload)),
   saveFinishRoutine: payload => dispatch(finishRoutine(payload)),
+  doClearRoutines: () => dispatch(clearRoutines()),
 });
 
 const mapStateToProps = state => ({
@@ -47,6 +48,10 @@ class DoRoutine extends Component {
         rounds: this.state.routine.rounds,
       });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.doClearRoutines();
   }
 
   handleClick = (e) => {
