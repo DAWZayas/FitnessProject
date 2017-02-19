@@ -17,3 +17,21 @@
 body {
   background-color: #eeeeee;
 }
+
+*[class~="alert-danger"] {
+  background-color: #bd362f;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+  color: #fff;
+}
+
+*[class~="alert-warning"] {
+  background-color: #f89406;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+  color: #fff;
+}
+
+*[class~="alert-info"] {
+  background-color: #2f96b4;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+  color: #fff;
+}

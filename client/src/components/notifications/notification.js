@@ -9,6 +9,10 @@ const mapDispatchToProps = dispatch => ({
 
 const Notification = ({onRemoveNotificationClick, notification}) => (
   <div className={`alert alert-dismissible alert-${notification.alertType}`} role="alert">
+    {notification.alertType === 'info' ?
+      <i className="fa fa-check" aria-hidden="true" style={{marginRight: '1em'}}></i> :
+      <i className="fa fa-warning" aria-hidden="true" style={{marginRight: '1em'}}></i>
+    }
     <button
       type="button"
       className="close"
