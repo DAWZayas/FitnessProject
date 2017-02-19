@@ -4,12 +4,10 @@ import {Link} from 'react-router';
 import InfiniteScroll from 'redux-infinite-scroll';
 
 import {getAllRoutines, finishRoutine} from '../../store/actions';
-import {CountDown, SearchBar} from '../../components/routine';
+import {CountDown, SearchBar, Routine} from '../../components/routine';
 import {server as serverConfig} from '../../../config';
 
 import Loader from '../../components/loader';
-
-import modal from './modal.css';
 
 const mapDispatchToProps = dispatch => ({
   fetchRoutines: payload => dispatch(getAllRoutines(payload)),
@@ -50,16 +48,6 @@ class DoRoutine extends Component {
       });
     }
   }
-
-  // componentWillMount() {
-  //   this.props.fetchRoutines();
-  // }
-
-  // componentDidMount() {
-  //   if (this.state.round === this.state.routine.rounds) {
-  //     this.setState({round: 'FINAL'});
-  //   }
-  // }
 
   handleClick = (e) => {
     e.preventDefault();
@@ -149,41 +137,12 @@ class DoRoutine extends Component {
               loadingMore={this.props.loadingMore}
               loader={<Loader />}
             >
-              {routines.map(routine =>
-                <div key={routine.id + Math.random()}>
-                  <div className="card col-xs-6">
-                    <div className="view overlay hm-white-slight">
-                      <img src={routine.image} className="img-fluid" alt="" />
-                      <a className="mask" href={`#${routine.id}`} />
-                    </div>
-                    <div className="card-block">
-                      <h4 className="card-title">{routine.name}</h4>
-                      <hr />
-                      <p className="card-text">{routine.description}</p>
-                    </div>
-                  </div>
-                  <div id={routine.id} className={modal.overlay}>
-                    <a className={modal.cancel} href="#a"></a>
-                    <div className={modal.popup}>
-                      <h2>{routine.name}</h2>
-                      <a className={modal.close} href="#a">&times;</a>
-                      <div className={modal.content}>
-                        <hr />
-                        <ul className="list-group">
-                          <li className="list-group-item"><h4>Creator: <span className="tag badge grey">{routine.user}</span></h4></li>
-                          <li className="list-group-item"><h4>Level: <span className="tag badge grey">{routine.level}</span></h4></li>
-                          <li className="list-group-item"><h4>Rounds: <span className="tag badge grey">{routine.rounds}</span></h4></li>
-                          <li className="list-group-item"><h4>Rest: <span className="tag badge grey">{routine.rest} s.</span></h4></li>
-                          <li className="list-group-item"><h4>Round rest: <span className="tag badge grey">{routine.restRounds} s.</span></h4></li>
-                          <li className="list-group-item blue-grey lighten-4"><h4>Exercises: <span className="tag badge grey">{routine.exercises.length}</span></h4></li>
-                          {routine.exercises.map((ex, key) =>
-                            (<li className="list-group-item blue-grey lighten-5" key={key + 'R-ex'}><h4>{ex.name}: <span className="tag badge grey">{ex.time} s.</span></h4></li>))}
-                        </ul>
-                        <button type="submit" className="btn btn-default" onClick={this.handleClick} value={routine.id} >Do it!</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>)
+              {routines.map((routine, key) =>
+                <Routine
+                  key={key + '-showExercises'}
+                  routine={routine}
+                  handleClick={this.handleClick}
+                />)
               }
             </InfiniteScroll>
             </div>

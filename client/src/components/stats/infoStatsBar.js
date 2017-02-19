@@ -13,6 +13,7 @@ const style = {
 
 const InfoStatsBar = ({tab, handleTab}) => {
   const handleClick = (e) => {
+    e.preventDefault();
     handleTab(e.target.textContent);
   };
 

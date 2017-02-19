@@ -5,6 +5,7 @@ import {createRoutine, getExercises, getImages} from '../../store/actions';
 import {server as serverConfig} from '../../../config';
 
 import Loader from '../../components/loader';
+import {Exercise} from '../../components/routine';
 
 import styles from './radio.css';
 import modal from './modal.css';
@@ -34,6 +35,10 @@ class Create extends Component {
       routineExercises: [],
       exerciseTime: 30,
       showExercises: false,
+      levelArray: [1, 2, 3, 4, 5],
+      restArray: [5, 10, 15, 20, 25],
+      roundsArray: [1, 2, 3, 4, 5],
+      restRoundsArray: [10, 30, 60, 90, 120],
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleClickExercise = this.handleClickExercise.bind(this);
@@ -116,6 +121,7 @@ class Create extends Component {
   };
 
   setExerciseTime = (e) => {
+    console.log(e.target.value)
     this.setState({exerciseTime: e.target.value});
   };
 
@@ -171,26 +177,13 @@ class Create extends Component {
             <div className="">
               <h5>Level</h5>
               <div id="inputLevel" onChange={this.setLevel}>
-                <label className={styles.radio} htmlFor="g11"><input type="radio" name="group1" value="1" id="g11" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  1
-                </label>
-                <label className={styles.radio} htmlFor="g12"><input type="radio" name="group1" value="2" id="g12" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  2
-                </label>
-                <label className={styles.radio} htmlFor="g13"><input type="radio" name="group1" value="3" id="g13" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  3
-                </label>
-                <label className={styles.radio} htmlFor="g14"><input type="radio" name="group1" value="4" id="g14" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  4
-                </label>
-                <label className={styles.radio} htmlFor="g15"><input type="radio" name="group1" value="5" id="g15" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  5
-                </label>
+                {this.state.levelArray.map(lv => (
+                  <label key={'g1-' + lv} className={styles.radio} htmlFor={'g1' + lv}>
+                    <input type="radio" name="group1" value={lv} id={'g1' + lv} />
+                    <span className={styles.outer}><span className={styles.inner} /></span>
+                    {lv}
+                  </label>
+                ))}
               </div>
             </div>
             <hr />
@@ -199,26 +192,13 @@ class Create extends Component {
             <div className="">
               <h5>Rest</h5>
               <div id="inputRest" onChange={this.setRest}>
-                <label className={styles.radio} htmlFor="g21"><input type="radio" name="group2" value="5" id="g21" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  5
-                </label>
-                <label className={styles.radio} htmlFor="g22"><input type="radio" name="group2" value="10" id="g22" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  10
-                </label>
-                <label className={styles.radio} htmlFor="g23"><input type="radio" name="group2" value="15" id="g23" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  15
-                </label>
-                <label className={styles.radio} htmlFor="g24"><input type="radio" name="group2" value="20" id="g24" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  20
-                </label>
-                <label className={styles.radio} htmlFor="g25"><input type="radio" name="group2" value="25" id="g25" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  25
-                </label>
+                {this.state.restArray.map(rest => (
+                  <label key={'g2-' + rest} className={styles.radio} htmlFor={'g2' + rest}>
+                    <input type="radio" name="group2" value={rest} id={'g2' + rest} />
+                    <span className={styles.outer}><span className={styles.inner} /></span>
+                    {rest}
+                  </label>
+                ))}
               </div>
             </div>
             <hr />
@@ -227,26 +207,13 @@ class Create extends Component {
             <div className="">
               <h5>Rounds</h5>
               <div id="inputRounds" onChange={this.setRounds}>
-                <label className={styles.radio} htmlFor="g31"><input type="radio" name="group3" value="1" id="g31" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  1
-                </label>
-                <label className={styles.radio} htmlFor="g32"><input type="radio" name="group3" value="2" id="g32" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  2
-                </label>
-                <label className={styles.radio} htmlFor="g33"><input type="radio" name="group3" value="3" id="g33" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  3
-                </label>
-                <label className={styles.radio} htmlFor="g34"><input type="radio" name="group3" value="4" id="g34" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  4
-                </label>
-                <label className={styles.radio} htmlFor="g35"><input type="radio" name="group3" value="5" id="g35" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  5
-                </label>
+                {this.state.roundsArray.map(round => (
+                  <label key={'g3-' + round} className={styles.radio} htmlFor={'g3' + round}>
+                    <input type="radio" name="group3" value={round} id={'g3' + round} />
+                    <span className={styles.outer}><span className={styles.inner} /></span>
+                    {round}
+                  </label>
+                ))}
               </div>
             </div>
             <hr />
@@ -255,26 +222,13 @@ class Create extends Component {
             <div className="">
               <h5>Rounds Rest</h5>
               <div id="inputRestRounds" onChange={this.setRestRounds}>
-                <label className={styles.radio} htmlFor="g41"><input type="radio" name="group4" value="30" id="g41" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  30
-                </label>
-                <label className={styles.radio} htmlFor="g42"><input type="radio" name="group4" value="60" id="g42" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  60
-                </label>
-                <label className={styles.radio} htmlFor="g43"><input type="radio" name="group4" value="90" id="g43" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  90
-                </label>
-                <label className={styles.radio} htmlFor="g44"><input type="radio" name="group4" value="120" id="g44" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  120
-                </label>
-                <label className={styles.radio} htmlFor="g45"><input type="radio" name="group4" value="150" id="g45" />
-                  <span className={styles.outer}><span className={styles.inner} /></span>
-                  150
-                </label>
+                {this.state.restRoundsArray.map(restRound => (
+                  <label key={'g4-' + restRound} className={styles.radio} htmlFor={'g4' + restRound}>
+                    <input type="radio" name="group4" value={restRound} id={'g4' + restRound} />
+                    <span className={styles.outer}><span className={styles.inner} /></span>
+                    {restRound}
+                  </label>
+                ))}
               </div>
             </div>
           </div>
@@ -300,60 +254,13 @@ class Create extends Component {
             {this.state.showExercises ?
               this.props.status === 'loading' ? <div className="text-xs-center"><Loader /></div> :
                 this.props.exercises.map((ex, key) =>
-                  <div className="card col-xs-6" key={key + '-showExercises'}>
-                    <div className="view overlay hm-white-slight">
-                      <img src={ex.image} className="img-fluid" alt="" />
-                      <a className="mask" href={`#ex${ex.id}`} />
-                    </div>
-                    <div className="card-block">
-                      <h4 className="card-title text-xs-center">{ex.name}</h4>
-                    </div>
-                    <div id={`ex${ex.id}`} className={modal.overlay}>
-                      <a className={modal.cancel} href="#a" onClick={this.resetExerciseTime}></a>
-                      <div className={modal.popup}>
-                        <h2>{ex.name}</h2>
-                        <a className={modal.close} href="#a" onClick={this.resetExerciseTime}>&times;</a>
-                        <div className={modal.content}>
-                          <hr />
-                          <h4 className="card-text">Kind: {ex.kind}</h4>
-                          <h4 className="card-text">Calories: {ex.calories} kcal/h</h4>
-                          <h4 className="card-text">Description: {ex.description}</h4>
-                          <hr />
-                          <div className="form-inline">
-                            <div className="">
-                              <h5>Exercise time in seconds (30 by default)</h5>
-                              <div id="exerciseTime" onChange={this.setExerciseTime}>
-                                <label className={styles.radio} htmlFor={`t1-${ex.id}`}><input type="radio" name="time4" value="30" id={`t1-${ex.id}`} checked={false} />
-                                  <span className={styles.outer}><span className={styles.inner} /></span>
-                                  30
-                                </label>
-                                <label className={styles.radio} htmlFor={`t2-${ex.id}`}><input type="radio" name="time4" value="45" id={`t2-${ex.id}`} checked={false} />
-                                  <span className={styles.outer}><span className={styles.inner} /></span>
-                                  45
-                                </label>
-                                <label className={styles.radio} htmlFor={`t3-${ex.id}`}><input type="radio" name="time4" value="60" id={`t3-${ex.id}`} checked={false} />
-                                  <span className={styles.outer}><span className={styles.inner} /></span>
-                                  60
-                                </label>
-                                <label className={styles.radio} htmlFor={`t4-${ex.id}`}><input type="radio" name="time4" value="90" id={`t4-${ex.id}`} checked={false} />
-                                  <span className={styles.outer}><span className={styles.inner} /></span>
-                                  90
-                                </label>
-                                <label className={styles.radio} htmlFor={`t5-${ex.id}`}><input type="radio" name="time4" value="120" id={`t5-${ex.id}`} checked={false} />
-                                  <span className={styles.outer}><span className={styles.inner} /></span>
-                                  120
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                          <hr />
-                          <div className="text-xs-center">
-                            <a id={ex.id} href="#a" className="btn btn-default" onClick={this.handleAddExercise}>Add</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <Exercise
+                    key={key + '-showExercises'}
+                    exercise={ex}
+                    resetExerciseTime={this.resetExerciseTime}
+                    setExerciseTime={this.setExerciseTime}
+                    handleAddExercise={this.handleAddExercise}
+                  />
                 )
                 : ''}
           </div>
