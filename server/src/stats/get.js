@@ -327,6 +327,9 @@ export default (app) => {
             }
           }
         }
+      } else if (statsData.year.objective > 0) {
+        statsData.year.objectiveVariance = toTimeObject(statsData.year.objective);
+        statsData.year.objectiveVariance.surplus = false;
       }
 
       const startEndMonth = startEndDaysMonth(actualDate);
@@ -377,6 +380,9 @@ export default (app) => {
             }
           }
         }
+      } else if (statsData.month.objective > 0) {
+        statsData.month.objectiveVariance = toTimeObject(statsData.month.objective);
+        statsData.month.objectiveVariance.surplus = false;
       }
 
       const startEndWeek = startEndDaysWeek(actualDate);
@@ -427,6 +433,9 @@ export default (app) => {
             }
           }
         }
+      } else if (statsData.week.objective > 0) {
+        statsData.week.objectiveVariance = toTimeObject(statsData.week.objective);
+        statsData.week.objectiveVariance.surplus = false;
       }
       res.send(statsData);
 
